@@ -20,4 +20,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 //题库页面路由
-Route::get('/problems', 'Problems\ProblemsController@index');
+Route::get('/problems', 'Problems\ProblemsController@index')->name('problems');

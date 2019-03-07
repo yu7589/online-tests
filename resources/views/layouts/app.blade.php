@@ -34,7 +34,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                             <li class="nav-item">
-                                <a class="nav-link" href="">学生题库</a>
+                                <a class="nav-link" href="{{ route('problems') }}">学生题库</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="">题目编辑</a>
