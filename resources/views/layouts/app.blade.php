@@ -18,6 +18,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- 导入font-awesome字体图标 --> 
+    <link rel="stylesheet" href="fonts/vendor/font-awesome-4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <div id="app">

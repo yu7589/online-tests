@@ -27,13 +27,13 @@
                 <span class="mt-1 ml-3" style="font-size:19px"> 
                     难度排序
                 </span>
-                <span class="glyphicon glyphicon-sort-by-attributes">
-                    
-                </span>
+
+                <i class="fa fa-american-sign-language-interpreting" aria-hidden="true"></i>
+
             </div>
         </div>
     </div>
-    
+
     <div class="row mt-3">
         <!-- 题目 -->
         <div class="card col-md-8">
