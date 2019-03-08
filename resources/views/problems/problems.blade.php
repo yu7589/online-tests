@@ -5,7 +5,8 @@
     <div class="row">
         <div class="card col-md-12">
             <div class="card-body row">
-                    <span class="dropdown">
+                <div class="col-md-8">
+                    <span class="dropdown mr-2">
                         <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
                             全部题目 
                         </button>
@@ -16,8 +17,8 @@
                         </div>
                     </span>
                     <!-- | 分隔符 -->
-                    <div class="border-right mr-2">
-                    </div>
+                    <span class="border-right mr-2">
+                    </span>
 
                     <span class="text-success mt-1 " style="font-size:19px"> 
                         默认排序
@@ -26,7 +27,7 @@
                         难度排序
                         <i class="fa fa-angle-double-down" aria-hidden="true"></i>
                     </span>
-
+                </div>
 
                 <div class="col-md-4">
                     <div class="input-group ">
