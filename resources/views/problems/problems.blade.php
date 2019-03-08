@@ -5,30 +5,39 @@
     <div class="row">
         <div class="card col-md-12">
             <div class="card-body row">
-                <div class="dropdown mr-2">
-                    <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
-                        全部题目 
-                    </button>
+                    <span class="dropdown">
+                        <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+                            全部题目 
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">全部题目</a>
+                            <a class="dropdown-item" href="#">已通过题目</a>
+                            <a class="dropdown-item" href="#">未通过题目</a>
+                        </div>
+                    </span>
+                    <!-- | 分隔符 -->
+                    <div class="border-right mr-2">
+                    </div>
 
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">全部题目</a>
-                        <a class="dropdown-item" href="#">已通过题目</a>
-                        <a class="dropdown-item" href="#">未通过题目</a>
+                    <span class="text-success mt-1 " style="font-size:19px"> 
+                        默认排序
+                    </span>
+                    <span class="mt-1 ml-3" style="font-size:19px"> 
+                        难度排序
+                        <i class="fa fa-angle-double-down" aria-hidden="true"></i>
+                    </span>
+
+
+                <div class="col-md-4">
+                    <div class="input-group ">
+                        <input type="text" class="form-control" placeholder="请输入题目标题">
+                        <span class="input-group-btn">
+                            <button class="btn btn-success" type="button">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </button>
+                        </span>
                     </div>
                 </div>
-                
-                <!-- | 分隔符 -->
-                <div class="border-right mr-2">
-                </div>
-
-                <span class="text-success mt-1 ml-1" style="font-size:19px"> 
-                    默认排序
-                </span>
-                <span class="mt-1 ml-3" style="font-size:19px"> 
-                    难度排序
-                </span>
-
-                <i class="fa fa-american-sign-language-interpreting" aria-hidden="true"></i>
 
             </div>
         </div>
