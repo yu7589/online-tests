@@ -39,7 +39,6 @@
                         </span>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -48,12 +47,16 @@
         <!-- 题目 -->
         <div class="card col-md-8">
             <div class="card-body">
-                题目位置
+                <span>（第一章第一节，章节）</span><span>（题干）</span> 
+                <br>
+                <span>题目图片</span>
+                <br>
+                <span>提交答案</span>
+                <br>
             </div>
         </div>
 
         <!-- 筛选 -->
-
         <div class="card col-md-3" style="margin-left:95px">
             <div class="card-body">
                 筛选位置
