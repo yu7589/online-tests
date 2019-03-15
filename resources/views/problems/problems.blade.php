@@ -51,11 +51,15 @@
                 <br>
                 <span>题目图片</span>
                 <br>
-                <span>提交答案</span>
+                <span>提交答案
+                @foreach ($problems as $problem)
+                    {{ $problem->stem }}
+                    <br>
+                @endforeach
+                </span>
                 <br>
             </div>
         </div>
-
         <!-- 筛选 -->
         <div class="card col-md-3" style="margin-left:95px">
             <div class="card-body">
