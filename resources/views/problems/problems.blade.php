@@ -49,18 +49,20 @@
             @foreach ($problems as $problem)
             <div class="card mb-3">
                 <div class="card-body">
-                    <span>第{{ $problem->chapter }}章第{{ $problem->section }}节</span>
-                    &nbsp;
-                    &nbsp;
-                    <span>{{ $problem->stem }}</span> 
-                    <br>
-                    <br>
+                    <h5>第{{ $problem->chapter }}章第{{ $problem->section }}节</h5>
+                    <h5>题干: {{ $problem->stem }}</h5> 
+                    <h5>题目图片：</h5>
                     <span>
-                        <img class="img-fluid"  src="../{{ $problem->picture_url }}">
+                        <img class="img-fluid"  src="../{{ $problem->picture_url1 }}">
                     </span>
                     <br>
                     <br>
-                    <span>提交答案</span>
+                    <h5>提交答案:</h5>
+                    <form>
+                        <div class="input-group col-md-6">
+                            <input type="text" class="form-control">
+                        </div>
+                    </form>
                 </div>
             </div>
             @endforeach
