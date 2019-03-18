@@ -17,7 +17,8 @@ class ProblemsController extends Controller
     public function index()
     {
         //跳转到题库页面
-        $problems = DB::table('problems')->paginate(10);
+        //$problems = DB::table('problems')->paginate(10);
+        $problems = Problem::paginate(10);
         return view('problems\problems', ['problems'=>$problems]);
     }
 
