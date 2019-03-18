@@ -45,25 +45,46 @@
 
     <div class="row mt-3">
         <!-- 题目 -->
-        <div class="card col-md-8">
-            <div class="card-body">
-                <span>（第一章第一节，章节）</span><span>（题干）</span> 
-                <br>
-                <span>题目图片</span>
-                <br>
-                <span>提交答案
-                @foreach ($problems as $problem)
-                    {{ $problem->stem }}
+        <div style="width:860px;float:left;">
+            @foreach ($problems as $problem)
+            <div class="card mb-3">
+                <div class="card-body">
+                    <span>第{{ $problem->chapter }}章第{{ $problem->section }}节</span>
+                    &nbsp;
+                    &nbsp;
+                    <span>{{ $problem->stem }}</span> 
                     <br>
-                @endforeach
-                </span>
-                <br>
+                    <br>
+                    <span>
+                        <img src="{{ $problem->picture_url }}"/>
+                        <img src="‪http://pic3.nipic.com/20090527/1242397_102231006_2.jpg"/>
+                    </span>
+                    <br>
+                    <br>
+                    <span>提交答案</span>
+                </div>
             </div>
+            @endforeach
         </div>
         <!-- 筛选 -->
-        <div class="card col-md-3" style="margin-left:95px">
-            <div class="card-body">
-                筛选位置
+        <div style="hight:1000px">
+            <div class="card" style="width:240px;float:right;margin-left:40px">
+                <div class="card-body">
+                    筛选位置
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>                    <br>
+                    <br>
+                    占位
+                </div>
             </div>
         </div>
     <div>
