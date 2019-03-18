@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Problems;
 
 use App\Problem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class ProblemsController extends Controller
@@ -16,7 +17,7 @@ class ProblemsController extends Controller
     public function index()
     {
         //跳转到题库页面
-        $problems = Problem::all();
+        $problems = DB::table('problems')->paginate(10);
         return view('problems\problems', ['problems'=>$problems]);
     }
 

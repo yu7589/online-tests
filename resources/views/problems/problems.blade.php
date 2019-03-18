@@ -64,6 +64,8 @@
                 </div>
             </div>
             @endforeach
+            <!-- pagination -->
+            {{ $problems->links() }}
         </div>
         <!-- 筛选 -->
         <div style="hight:1000px">
