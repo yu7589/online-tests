@@ -56,8 +56,7 @@
                     <br>
                     <br>
                     <span>
-                        <img src="{{ $problem->picture_url }}"/>
-                        <img src="‪http://pic3.nipic.com/20090527/1242397_102231006_2.jpg"/>
+                        <img class="img-fluid"  src="../{{ $problem->picture_url }}">
                     </span>
                     <br>
                     <br>
