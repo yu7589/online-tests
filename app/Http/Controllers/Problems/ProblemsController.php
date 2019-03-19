@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Problems;
 
 use App\Problem;
+use App\ProblemState;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -19,7 +20,8 @@ class ProblemsController extends Controller
         //跳转到题库页面
         //$problems = DB::table('problems')->paginate(10);
         $problems = Problem::paginate(10);
-        return view('problems\problems', ['problems'=>$problems]);
+        $problemstates = ProblemState::all();
+        return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates]);
     }
 
     /**
