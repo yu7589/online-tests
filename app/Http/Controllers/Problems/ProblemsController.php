@@ -19,7 +19,7 @@ class ProblemsController extends Controller
     {
         //跳转到题库页面
         //$problems = DB::table('problems')->paginate(10);
-        $problems = Problem::paginate(10);
+        $problems = Problem::paginate(5);
         $problemstates = ProblemState::all();
         return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates]);
     }

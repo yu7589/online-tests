@@ -47,27 +47,35 @@
         <!-- 题目 -->
         <div style="width:860px;float:left;">
             @foreach ($problems as $problem)
-            @foreach ($problemstates as $problemstate)
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5>第{{ $problem->chapter }}章第{{ $problem->section }}节</h5>
-                    <h5>题干: {{ $problem->stem }}</h5> 
-                    <h5>题目图片：</h5>
-                    <span>
-                        <img class="img-fluid"  src="../{{ $problem->picture_url1 }}">
-                    </span>
-                    <br>
-                    <br>
-                    <h5>提交答案:</h5>
-                    <form>
-                        <div class="input-group col-md-6">
-                            <input type="text" class="form-control">
+                @foreach ($problemstates as $problemstate)
+                @if($problem->id == $problemstate->problem_id)
+                <div class="card mb-3">
+                    <div class="card-body">
+                        计数：：：：：{{ $problemstate->id }}
+                        <h5>第{{ $problem->chapter }}章第{{ $problem->section }}节</h5>
+                        <h5>题干: {{ $problem->stem }}</h5> 
+                        <h5>题目图片：</h5>
+                        <span>
+                            <img class="img-fluid"  src="../{{ $problem->picture_url1 }}">
+                        </span>
+                        <br>
+                        <br>
+                        <h5>提交答案:</h5>
+                        <form>
+                            <div class="input-group col-md-6">
+                                <input type="text" class="form-control">
+                            </div>
+                        </form>
+                        <br>
+                        <div>
+                        通过率：{{ $problemstate->passing_rate }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        正确提交：{{ $problemstate->correct_submit }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        总提交：{{ $problemstate->all_submit }}
                         </div>
-                        {{ $problemstate->id }}
-                    </form>
+                    </div>
                 </div>
-            </div>
-            @endforeach
+                @endif
+                @endforeach
             @endforeach
             <!-- pagination -->
             {{ $problems->links() }}
