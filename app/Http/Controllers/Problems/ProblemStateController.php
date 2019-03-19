@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Problems;
 
+use App\ProblemState;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class ProblemStateController extends Controller
@@ -14,7 +16,9 @@ class ProblemStateController extends Controller
      */
     public function index()
     {
-        //
+        //$problemstates =DB::table('problemstates');
+        $problemstates = ProblemState::all();
+        return view('problems\problems', ['problemstates'=>$problemstates]);
     }
 
     /**

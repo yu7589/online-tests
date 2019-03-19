@@ -47,6 +47,7 @@
         <!-- 题目 -->
         <div style="width:860px;float:left;">
             @foreach ($problems as $problem)
+            @foreach ($problemstates as $problemstate)
             <div class="card mb-3">
                 <div class="card-body">
                     <h5>第{{ $problem->chapter }}章第{{ $problem->section }}节</h5>
@@ -62,9 +63,11 @@
                         <div class="input-group col-md-6">
                             <input type="text" class="form-control">
                         </div>
+                        {{ $problemstate->id }}
                     </form>
                 </div>
             </div>
+            @endforeach
             @endforeach
             <!-- pagination -->
             {{ $problems->links() }}
