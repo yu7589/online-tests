@@ -32,6 +32,7 @@ class ProblemsController extends Controller
     public function create()
     {
         //
+
     }
 
     /**
@@ -43,6 +44,25 @@ class ProblemsController extends Controller
     public function store(Request $request)
     {
         //
+        //dd($request->problem_id);
+        $problems = Problem::paginate(5);
+        $problemstates = ProblemState::all();
+
+        foreach($problems as $problem){
+            foreach($problemstates as $problemstate){
+                if($problem->id == $problemstate->problem_id && $problemstate->problem_id == $request->problem_id){
+                    if($problem->answer == $request->answer){
+                        $problemstate -> correct_submit = $problemstate -> correct_submit + 1;
+                    }
+                    if($request->answer != null){
+                        $problemstate->all_submit = $problemstate->all_submit + 1;
+                    }
+                    $problemstate->save();
+                    //echo $request->problem_id;
+                }
+            }
+        }
+        return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates]);
     }
 
     /**
@@ -54,6 +74,7 @@ class ProblemsController extends Controller
     public function show($id)
     {
         //
+        
     }
 
     /**
@@ -77,6 +98,7 @@ class ProblemsController extends Controller
     public function update(Request $request, $id)
     {
         //
+
     }
 
     /**

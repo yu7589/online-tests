@@ -51,19 +51,24 @@
                 @if($problem->id == $problemstate->problem_id)
                 <div class="card mb-3">
                     <div class="card-body">
-                        计数：：：：：{{ $problemstate->id }}
-                        <h5>第{{ $problem->chapter }}章第{{ $problem->section }}节</h5>
-                        <h5>题干: {{ $problem->stem }}</h5> 
-                        <h5>题目图片：</h5>
-                        <span>
-                            <img class="img-fluid"  src="../{{ $problem->picture_url1 }}">
-                        </span>
+                        <ul class="list-group">
+                            <li class="list-group-item">第{{ $problem->chapter }}章第{{ $problem->section }}节</li>
+                            <li class="list-group-item">题干: {{ $problem->stem }}</li>
+                            <li class="list-group-item">                        
+                                题目图片：
+                                <br>
+                                <span>
+                                    <img class="img-fluid"  src="../{{ $problem->picture_url1 }}">
+                                </span>
+                            </li>
+                        </ul>
                         <br>
-                        <br>
-                        <h5>提交答案:</h5>
-                        <form>
+                        提交答案:
+                        <form method="post" action="/online-tests/public/problems">
+                        {{ csrf_field() }}
                             <div class="input-group col-md-6">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name="answer">
+                                <button type="submit" class="btn btn-success" name="problem_id" value="{{ $problemstate->problem_id }}">提交</button>
                             </div>
                         </form>
                         <br>
