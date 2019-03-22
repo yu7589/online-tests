@@ -52,10 +52,12 @@ class ProblemsController extends Controller
             foreach($problemstates as $problemstate){
                 if($problem->id == $problemstate->problem_id && $problemstate->problem_id == $request->problem_id){
                     if($problem->answer == $request->answer){
-                        $problemstate -> correct_submit = $problemstate -> correct_submit + 1;
+                        $problemstate->correct_submit = $problemstate->correct_submit + 1;
+                        $problemstate->passing_rate = $problemstate->correct_submit/$problemstate->all_submit;
                     }
                     if($request->answer != null){
                         $problemstate->all_submit = $problemstate->all_submit + 1;
+                        $problemstate->passing_rate = round($problemstate->correct_submit/$problemstate->all_submit, 3);
                     }
                     $problemstate->save();
                     //echo $request->problem_id;
