@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Problems;
 
 use App\Problem;
 use App\ProblemState;
+use App\ProblemComplete;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -21,7 +22,8 @@ class ProblemsController extends Controller
         //$problems = DB::table('problems')->paginate(10);
         $problems = Problem::paginate(5);
         $problemstates = ProblemState::all();
-        return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates]);
+        $problemcompletes = ProblemComplete::all();
+        return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates, 'problemcomplete'=>$problemcompletes]);
     }
 
     /**
@@ -76,7 +78,11 @@ class ProblemsController extends Controller
     public function show($id)
     {
         //
-        
+        dd($id);
+        $problems = Problem::paginate(5);
+        $problemstates = ProblemState::all();
+        $problemcompletes = ProblemComplete::all();
+        return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates, 'problemcomplete'=>$problemcompletes]);
     }
 
     /**

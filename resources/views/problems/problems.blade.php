@@ -11,9 +11,9 @@
                             全部题目 
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">全部题目</a>
-                            <a class="dropdown-item" href="#">已通过题目</a>
-                            <a class="dropdown-item" href="#">未通过题目</a>
+                            <a class="dropdown-item" href="/online-tests/public/problems/1">全部题目</a>
+                            <a class="dropdown-item" href="/online-tests/public/problems/2">已通过题目</a>
+                            <a class="dropdown-item" href="/online-tests/public/problems/3">未通过题目</a>
                         </div>
                     </span>
                     <!-- | 分隔符 -->
