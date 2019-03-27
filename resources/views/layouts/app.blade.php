@@ -43,7 +43,7 @@
                                 <a class="nav-link" href="">题目编辑</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="">题库导入</a>
+                                <a class="nav-link" href="{{ route('problemImport') }}">题库导入</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="">自动组卷</a>
