@@ -26,3 +26,4 @@ Route::get('/problems/{id}','Problems\ProblemsController@show');
 
 //题库导入界面路由
 Route::get('/problemImport', 'ProblemImport\ProblemImportController@index')->name('problemImport');
+Route::post('/problemImport', 'ProblemImport\ProblemImportController@store')->name('problemImport');
