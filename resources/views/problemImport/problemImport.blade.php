@@ -31,37 +31,37 @@
                                 <div class="form-group">
                                     <label for="firstname" class="col-sm-2 control-label">QU</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="QU" placeholder="请输入QU">
+                                        <input type="text" class="form-control" name="QU" placeholder="请输入QU" required="required">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="lastname" class="col-sm-2 control-label">SO</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="SO" placeholder="请输入SO">
+                                        <input type="text" class="form-control" name="SO" placeholder="请输入SO" required="required">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="lastname" class="col-sm-2 control-label">QF</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="lastname" placeholder="请输入QF">
+                                        <input type="text" class="form-control" name="lastname" placeholder="请输入QF" required="required">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="lastname" class="col-sm-2 control-label">SF</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="SF" placeholder="请输入SF">
+                                        <input type="text" class="form-control" name="SF" placeholder="请输入SF" required="required">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="lastname" class="col-sm-2 control-label">AN</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="AN" placeholder="请输入AN">
+                                        <input type="text" class="form-control" name="AN" placeholder="请输入AN" required="required">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="lastname" class="col-sm-2 control-label">CO</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="CO" placeholder="请输入CO">
+                                        <input type="text" class="form-control" name="CO" placeholder="请输入CO" required="required">
                                     </div>
                                 </div>
                                 <div class="form-group" style="float:right;margin-right:185px">
