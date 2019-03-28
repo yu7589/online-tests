@@ -75,6 +75,6 @@ class ProblemImportController extends Controller
     			Storage::disk('public')->put($filename, file_get_contents($path));
             }
         }
-        return view('problemImport\problemImport');
+        return redirect('problemImport');
     }
 }
