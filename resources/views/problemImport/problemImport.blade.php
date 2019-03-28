@@ -10,9 +10,19 @@
                 <div class="card-body">
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <button type="button" class="btn btn-primary">
-                                从.md格式文件导入题库
-                            </button>
+                            <form class="form-horizontal" method="POST" action="/online-tests/public/problemImport/upload" enctype="multipart/form-data">
+                                {{ csrf_field() }}           
+                                <label for="file">从.md格式文件导入题库</label>
+                                <div class="col-sm-10">
+                                    <input id="file" type="file" class="form-control" name="source" required>    
+                                </div>
+                                <br>
+                                <div class="form-group" style="float:right;margin-right:185px">
+                                    <button type="submit" class="btn btn-primary">
+                                        上传
+                                    </button>
+                                </div>
+                            </form>
                         </li>
                         <li class="list-group-item">
                             <label class="text-center">添加试题</label>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\ProblemImport;
 
 use App\Problem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 
 class ProblemImportController extends Controller
@@ -17,16 +18,6 @@ class ProblemImportController extends Controller
     {
         //
         return view('problemImport\problemImport');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -62,47 +53,28 @@ class ProblemImportController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * file upload
      */
-    public function show($id)
-    {
-        //
-    }
+    public function upload(Request $request){
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    	if ($request->isMethod('POST')) { //判断是否是POST上传，应该不会有人用get吧，恩，不会的
+    		//查看上传文件的属性
+    		$fileCharater = $request->file('source');
+ 
+    		if ($fileCharater->isValid()) { 
+    			//获取文件的扩展名 
+    			$ext = $fileCharater->getClientOriginalExtension();
+ 
+    			//获取文件的绝对路径
+    			$path = $fileCharater->getRealPath();
+ 
+    			//定义文件名
+    			$filename = date('Y-m-d-h-i-s').'.'.$ext;
+ 
+    			//存储文件。disk里面的public。总的来说，就是调用disk模块里的public配置
+    			Storage::disk('public')->put($filename, file_get_contents($path));
+            }
+        }
+        return view('problemImport\problemImport');
     }
 }
