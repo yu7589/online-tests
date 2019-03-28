@@ -37,18 +37,27 @@ class ProblemImportController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->QU);
-        $problem = new Problem;
-        $problem->chapter = $request->QU;
-        $problem->section = $request->QU;
-        $problem->stem = $request->QU;
-        $problem->picture_url1 = $request->QU;
-        $problem->picture_url2 = '';
-        $problem->answer = $request->QU;
-        $problem->type = $request->QU;
-        $problem->difficulty = 1;
-        $problem->author = $request->QU;
-        $problem->save();
+        //dd($request->QU);
+        $count = 0;
+        $problems = Problem::all();
+        foreach($problems as $data){
+            if($data->stem == $request->QU){
+                $count = 1;
+            }
+        }
+        if($count = 0){
+            $problem = new Problem;
+            $problem->chapter = $request->QU;
+            $problem->section = $request->QU;
+            $problem->stem = $request->QU;
+            $problem->picture_url1 = $request->QU;
+            $problem->picture_url2 = '';
+            $problem->answer = $request->QU;
+            $problem->type = $request->QU;
+            $problem->difficulty = 1;
+            $problem->author = $request->QU;
+            $problem->save();
+        }
         return view('problemImport\problemImport');
     }
 
