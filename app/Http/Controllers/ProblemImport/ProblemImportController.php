@@ -59,17 +59,17 @@ class ProblemImportController extends Controller
 
     	if ($request->isMethod('POST')) { //判断是否是POST上传，应该不会有人用get吧，恩，不会的
     		//查看上传文件的属性
-    		$fileCharater = $request->file('source');
+    		$fileCharacter = $request->file('source');
  
-    		if ($fileCharater->isValid()) { 
+    		if ($fileCharacter->isValid()) { 
     			//获取文件的扩展名 
-    			$ext = $fileCharater->getClientOriginalExtension();
+    			$ext = $fileCharacter->getClientOriginalExtension();
  
     			//获取文件的绝对路径
-    			$path = $fileCharater->getRealPath();
+    			$path = $fileCharacter->getRealPath();
  
     			//定义文件名
-    			$filename = date('Y-m-d-h-i-s').'.'.$ext;
+    			$filename = $fileCharacter->getClientOriginalName();
  
     			//存储文件。disk里面的public。总的来说，就是调用disk模块里的public配置
     			Storage::disk('public')->put($filename, file_get_contents($path));
