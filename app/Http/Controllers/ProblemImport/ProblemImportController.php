@@ -56,11 +56,13 @@ class ProblemImportController extends Controller
      * file upload
      */
     public function upload(Request $request){
-
+        
+        //dd("a");
     	if ($request->isMethod('POST')) { //判断是否是POST上传，应该不会有人用get吧，恩，不会的
     		//查看上传文件的属性
-    		$fileCharacter = $request->file('source');
- 
+            $fileCharacter = $request->file('source');
+            
+            dd();
     		if ($fileCharacter->isValid()) { 
     			//获取文件的扩展名 
     			$ext = $fileCharacter->getClientOriginalExtension();
@@ -75,6 +77,12 @@ class ProblemImportController extends Controller
     			Storage::disk('public')->put($filename, file_get_contents($path));
             }
         }
+
+
         return redirect('problemImport');
+    }
+
+    public function stringHandle($string){
+
     }
 }
