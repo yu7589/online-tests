@@ -62,7 +62,50 @@ class ProblemImportController extends Controller
     		//查看上传文件的属性
             $fileCharacter = $request->file('source');
             
-            dd();
+
+            //dd(explode("\n",$fileCharacter->get()));
+            //将题库文件按分行符划分为数组保存到problems中
+            $problems = explode("\n",$fileCharacter->get());
+            $QU = null;
+            $SO = null;
+            $QF = null;
+            $SF = null;
+            $AN = null;
+            $CO = null;
+            $count = 0;
+            for($i=0; $i<count($problems); $i++){
+                switch($count){
+                    case 0:
+                        $QU = $problems[$i];
+                        $count++;
+                        break;
+                    case 1:
+                        $SQ = $problems[$i];
+                        $count++;
+                        break;
+                    case 2:
+                        $QF = $problems[$i];
+                        $count++;
+                        break;
+                    case 3:
+                        $SF = $problems[$i];
+                        $count++;
+                        break;
+                    case 4:
+                        $AN = $problems[$i];
+                        $count++;
+                        break;
+                    case 5:
+                        $CO = $problems[$i];
+                        dd($CO);
+                        $count++;
+                        break;
+                    case 6:
+                        $count = 0;
+                        break;
+                }
+            }
+
     		if ($fileCharacter->isValid()) { 
     			//获取文件的扩展名 
     			$ext = $fileCharacter->getClientOriginalExtension();
@@ -80,9 +123,5 @@ class ProblemImportController extends Controller
 
 
         return redirect('problemImport');
-    }
-
-    public function stringHandle($string){
-
     }
 }
