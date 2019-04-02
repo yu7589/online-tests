@@ -65,43 +65,78 @@ class ProblemImportController extends Controller
 
             //dd(explode("\n",$fileCharacter->get()));
             //将题库文件按分行符划分为数组保存到problems中
-            $problems = explode("\n",$fileCharacter->get());
-            $QU = null;
-            $SO = null;
-            $QF = null;
-            $SF = null;
-            $AN = null;
+            $newProblems = explode("\n",$fileCharacter->get());
+            //dd($newProblems);
+            $chapter = null;
+            $section = null;
+            $stem = null;
+            $picture_url1 = null;
+            $picture_url2 = null;
+            $answer = null;
+            $explanation = null;
+            $type = null;
+            $difficulty = null;
+            $author = null;
             $CO = null;
+
             $count = 0;
-            for($i=0; $i<count($problems); $i++){
+            for($i=0; $i<count($newProblems)-1; $i++){
                 switch($count){
                     case 0:
-                        $QU = $problems[$i];
+                        $stem = ltrim($newProblems[$i], "QU - ");
+                        //dd($stem);
                         $count++;
                         break;
                     case 1:
-                        $SQ = $problems[$i];
+                        $answer = ltrim($newProblems[$i], "SO - ");
+                        //dd($answer);
                         $count++;
                         break;
                     case 2:
-                        $QF = $problems[$i];
+                        $picture_url1 = ltrim($newProblems[$i], "QF - ");
+                        //dd($picture_url1);
                         $count++;
                         break;
                     case 3:
-                        $SF = $problems[$i];
+                        $picture_url2 = ltrim($newProblems[$i], "SF - ");
+                        //dd($picture_url2);
                         $count++;
                         break;
                     case 4:
-                        $AN = $problems[$i];
+                        $explanation = ltrim($newProblems[$i], "AN - ");
                         $count++;
                         break;
                     case 5:
-                        $CO = $problems[$i];
-                        dd($CO);
+                        $CO = $newProblems[$i];
+                        //dd($CO);
                         $count++;
+
+                        $cut = explode("-", $CO);
+                        //dd($cut);
+                        $chapter = $cut[1];
+                        $section = $cut[2];
+                        $type = $cut[4];
+                        $difficulty = $cut[5];
+                        $author = $cut[6];
+
+                        $problem = new Problem;
+                        $problem->chapter = $chapter;
+                        $problem->section = $section;
+                        $problem->stem = $stem;
+                        $problem->picture_url1 = $picture_url1;
+                        $problem->picture_url2 = $picture_url2;
+                        $problem->answer = $answer;
+                        $problem->explanation = $explanation;
+                        $problem->type = $type;
+                        $problem->difficulty = $difficulty;
+                        $problem->author = $author;
+                        $problem->save();
+
                         break;
                     case 6:
                         $count = 0;
+                        break;
+                    default:
                         break;
                 }
             }
