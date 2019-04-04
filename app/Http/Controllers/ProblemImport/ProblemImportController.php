@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\ProblemImport;
 
 use App\Problem;
+use App\ProblemState;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 
+error_reporting(2);
 class ProblemImportController extends Controller
 {
     /**
@@ -113,12 +115,13 @@ class ProblemImportController extends Controller
 
                         $cut = explode("-", $CO);
                         //dd($cut);
-                        $chapter = $cut[1];
+                        $chapter = ltrim($cut[1]);
                         $section = $cut[2];
                         $type = $cut[4];
                         $difficulty = $cut[5];
                         $author = $cut[6];
 
+                        //插入新题目
                         $problem = new Problem;
                         $problem->chapter = $chapter;
                         $problem->section = $section;
@@ -131,6 +134,20 @@ class ProblemImportController extends Controller
                         $problem->difficulty = $difficulty;
                         $problem->author = $author;
                         $problem->save();
+
+                        //
+                        $problems = Problem::where('stem',$stem)->get();
+                        //dd(count($problems));
+                        foreach($problems as $problem){
+                            //dd($problem->stem);
+                            $problemState = new ProblemState;
+                            $problemState->problem_id = $problem->id;
+                            //dd($problemState->problem_id);
+                            $problemState->correct_submit = 0;
+                            $problemState->passing_rate = 0;
+                            $problemState->all_submit = 1;
+                            $problemState->save();
+                        }
 
                         break;
                     case 6:
