@@ -133,9 +133,11 @@
                                 @endif
                             </ul>
                             <br>
-                            提交答案:
                             <form method="post" action="/online-tests/public/problems">
                             {{ csrf_field() }}
+                                <div class="col-md-2">
+                                提交答案:
+                                </div>
                                 <div class="input-group col-md-6">
                                     <input type="text" class="form-control" name="answer">
                                     <button type="submit" class="btn btn-success" name="problem_id" value="{{ $problemstate->problem_id }}">提交</button>
@@ -158,8 +160,6 @@
                                 <li class="list-group-item">第{{ $problem->chapter }}章第{{ $problem->section }}节</li>
                                 <li class="list-group-item">
                                     题干: {{ $problem->stem }}
-                                    <br>
-                                    {{ $problem->answer}}
                                 </li>
                                 @if($problem->picture_url1 == '')
                                 @elseif($problem->picture_url2 == '')
@@ -184,9 +184,11 @@
                                 @endif
                             </ul>
                             <br>
-                            提交答案:
                             <form method="post" action="/online-tests/public/problems">
                             {{ csrf_field() }}
+                                <div class="col-md-2">
+                                提交答案:
+                                </div>
                                 <div class="input-group col-md-6">
                                     <input type="text" class="form-control" name="answer">
                                     <button type="submit" class="btn btn-success" name="problem_id" value="{{ $problemstate->problem_id }}">提交</button>
@@ -209,8 +211,6 @@
                                 <li class="list-group-item">第{{ $problem->chapter }}章第{{ $problem->section }}节</li>
                                 <li class="list-group-item">
                                     题干: {{ $problem->stem }}
-                                    <br>
-                                    {{ $problem->answer}}
                                 </li>
                                 @if($problem->picture_url1 == '')
                                 @elseif($problem->picture_url2 == '')
@@ -235,11 +235,13 @@
                                 @endif
                             </ul>
                             <br>
-                            提交答案:
                             <form method="post" action="/online-tests/public/problems">
                             {{ csrf_field() }}
-                                <div class="input-group col-md-6">
-                                    <input type="text" class="form-control" name="answer">
+                                <div class="col-md-2">
+                                提交答案:
+                                </div>
+                                <div class="input-group col-md-10">
+                                    <textarea class="form-control" rows="3" type="text" name="answer"></textarea>
                                     <button type="submit" class="btn btn-success" name="problem_id" value="{{ $problemstate->problem_id }}">提交</button>
                                 </div>
                             </form>
