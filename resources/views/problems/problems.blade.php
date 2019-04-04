@@ -49,36 +49,209 @@
             @foreach ($problems as $problem)
                 @foreach ($problemstates as $problemstate)
                 @if($problem->id == $problemstate->problem_id)
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <ul class="list-group">
-                            <li class="list-group-item">第{{ $problem->chapter }}章第{{ $problem->section }}节</li>
-                            <li class="list-group-item">题干: {{ $problem->stem }}</li>
-                            <li class="list-group-item">                        
-                                题目图片：
-                                <br>
-                                <span>
-                                    <img class="img-fluid"  src="../{{ $problem->picture_url1 }}">
-                                </span>
-                            </li>
-                        </ul>
-                        <br>
-                        提交答案:
-                        <form method="post" action="/online-tests/public/problems">
-                        {{ csrf_field() }}
-                            <div class="input-group col-md-6">
-                                <input type="text" class="form-control" name="answer">
-                                <button type="submit" class="btn btn-success" name="problem_id" value="{{ $problemstate->problem_id }}">提交</button>
+                    <!-- type=1 为判断题 -->
+                    @if($problem->type == 1)
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <ul class="list-group">
+                                <li class="list-group-item">判断题，输入“T”代表正确或“F”代表错误</li>
+                                <li class="list-group-item">第{{ $problem->chapter }}章第{{ $problem->section }}节</li>
+                                <li class="list-group-item">题干: {{ $problem->stem }}</li>
+                                @if($problem->picture_url1 == '')
+                                @elseif($problem->picture_url2 == '')
+                                <li class="list-group-item">                        
+                                    题目图片：
+                                    <br>
+                                    <span>
+                                        <img class="img-fluid"  src="../{{ $problem->picture_url1 }}">
+                                    </span>
+                                </li>
+                                @else
+                                <li class="list-group-item">                        
+                                    题目图片：
+                                    <br>
+                                    <span>
+                                        <img class="img-fluid"  src="../{{ $problem->picture_url1 }}">
+                                    </span>
+                                    <span>
+                                        <img class="img-fluid"  src="../{{ $problem->picture_url1 }}">
+                                    </span>
+                                </li>
+                                @endif
+                            </ul>
+                            <br>
+                            <form method="post" action="/online-tests/public/problems">
+                            {{ csrf_field() }}
+                                <div class="col-md-2">
+                                提交答案:
+                                </div>
+                                <div class="input-group col-md-6">
+                                    <input type="text" class="form-control" name="answer">
+                                    <button type="submit" class="btn btn-success" name="problem_id" value="{{ $problemstate->problem_id }}">提交</button>
+                                </div>
+                            </form>
+                            <br>
+                            <div>
+                            通过率：{{ $problemstate->passing_rate }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            正确提交：{{ $problemstate->correct_submit }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            总提交：{{ $problemstate->all_submit }}
                             </div>
-                        </form>
-                        <br>
-                        <div>
-                        通过率：{{ $problemstate->passing_rate }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        正确提交：{{ $problemstate->correct_submit }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        总提交：{{ $problemstate->all_submit }}
                         </div>
                     </div>
-                </div>
+                    <!-- type=2 为单选题 -->
+                    @elseif($problem->type == 2)
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <ul class="list-group">
+                                <li class="list-group-item">单选题，输入下面答案中你认为正确的答案</li>
+                                <li class="list-group-item">第{{ $problem->chapter }}章第{{ $problem->section }}节</li>
+                                <li class="list-group-item">
+                                    题干: {{ $problem->stem }}
+                                    <br>
+                                    {{ $problem->answer}}
+                                </li>
+                                @if($problem->picture_url1 == '')
+                                @elseif($problem->picture_url2 == '')
+                                <li class="list-group-item">                        
+                                    题目图片：
+                                    <br>
+                                    <span>
+                                        <img class="img-fluid"  src="../{{ $problem->picture_url1 }}">
+                                    </span>
+                                </li>
+                                @else
+                                <li class="list-group-item">                        
+                                    题目图片：
+                                    <br>
+                                    <span>
+                                        <img class="img-fluid"  src="../{{ $problem->picture_url1 }}">
+                                    </span>
+                                    <span>
+                                        <img class="img-fluid"  src="../{{ $problem->picture_url1 }}">
+                                    </span>
+                                </li>
+                                @endif
+                            </ul>
+                            <br>
+                            提交答案:
+                            <form method="post" action="/online-tests/public/problems">
+                            {{ csrf_field() }}
+                                <div class="input-group col-md-6">
+                                    <input type="text" class="form-control" name="answer">
+                                    <button type="submit" class="btn btn-success" name="problem_id" value="{{ $problemstate->problem_id }}">提交</button>
+                                </div>
+                            </form>
+                            <br>
+                            <div>
+                            通过率：{{ $problemstate->passing_rate }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            正确提交：{{ $problemstate->correct_submit }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            总提交：{{ $problemstate->all_submit }}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- type=3 为填空题 -->
+                    @elseif($problem->type == 3)
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <ul class="list-group">
+                                <li class="list-group-item">填空题</li>
+                                <li class="list-group-item">第{{ $problem->chapter }}章第{{ $problem->section }}节</li>
+                                <li class="list-group-item">
+                                    题干: {{ $problem->stem }}
+                                    <br>
+                                    {{ $problem->answer}}
+                                </li>
+                                @if($problem->picture_url1 == '')
+                                @elseif($problem->picture_url2 == '')
+                                <li class="list-group-item">                        
+                                    题目图片：
+                                    <br>
+                                    <span>
+                                        <img class="img-fluid"  src="../{{ $problem->picture_url1 }}">
+                                    </span>
+                                </li>
+                                @else
+                                <li class="list-group-item">                        
+                                    题目图片：
+                                    <br>
+                                    <span>
+                                        <img class="img-fluid"  src="../{{ $problem->picture_url1 }}">
+                                    </span>
+                                    <span>
+                                        <img class="img-fluid"  src="../{{ $problem->picture_url1 }}">
+                                    </span>
+                                </li>
+                                @endif
+                            </ul>
+                            <br>
+                            提交答案:
+                            <form method="post" action="/online-tests/public/problems">
+                            {{ csrf_field() }}
+                                <div class="input-group col-md-6">
+                                    <input type="text" class="form-control" name="answer">
+                                    <button type="submit" class="btn btn-success" name="problem_id" value="{{ $problemstate->problem_id }}">提交</button>
+                                </div>
+                            </form>
+                            <br>
+                            <div>
+                            通过率：{{ $problemstate->passing_rate }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            正确提交：{{ $problemstate->correct_submit }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            总提交：{{ $problemstate->all_submit }}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- type=4 为问答题 -->
+                    @else
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <ul class="list-group">
+                                <li class="list-group-item">问答题</li>
+                                <li class="list-group-item">第{{ $problem->chapter }}章第{{ $problem->section }}节</li>
+                                <li class="list-group-item">
+                                    题干: {{ $problem->stem }}
+                                    <br>
+                                    {{ $problem->answer}}
+                                </li>
+                                @if($problem->picture_url1 == '')
+                                @elseif($problem->picture_url2 == '')
+                                <li class="list-group-item">                        
+                                    题目图片：
+                                    <br>
+                                    <span>
+                                        <img class="img-fluid"  src="../{{ $problem->picture_url1 }}">
+                                    </span>
+                                </li>
+                                @else
+                                <li class="list-group-item">                        
+                                    题目图片：
+                                    <br>
+                                    <span>
+                                        <img class="img-fluid"  src="../{{ $problem->picture_url1 }}">
+                                    </span>
+                                    <span>
+                                        <img class="img-fluid"  src="../{{ $problem->picture_url1 }}">
+                                    </span>
+                                </li>
+                                @endif
+                            </ul>
+                            <br>
+                            提交答案:
+                            <form method="post" action="/online-tests/public/problems">
+                            {{ csrf_field() }}
+                                <div class="input-group col-md-6">
+                                    <input type="text" class="form-control" name="answer">
+                                    <button type="submit" class="btn btn-success" name="problem_id" value="{{ $problemstate->problem_id }}">提交</button>
+                                </div>
+                            </form>
+                            <br>
+                            <div>
+                            通过率：{{ $problemstate->passing_rate }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            正确提交：{{ $problemstate->correct_submit }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            总提交：{{ $problemstate->all_submit }}
+                            </div>
+                        </div>
+                    </div>
+                    @endif
                 @endif
                 @endforeach
             @endforeach

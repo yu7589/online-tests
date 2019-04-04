@@ -20,7 +20,7 @@ class ProblemsController extends Controller
     {
         //跳转到题库页面
         //$problems = DB::table('problems')->paginate(10);
-        $problems = Problem::paginate(5);
+        $problems = Problem::paginate(8);
         $problemstates = ProblemState::all();
         $problemcompletes = ProblemComplete::all();
         return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates, 'problemcomplete'=>$problemcompletes]);
@@ -47,7 +47,7 @@ class ProblemsController extends Controller
     {
         //
         //dd($request->problem_id);
-        $problems = Problem::paginate(5);
+        $problems = Problem::paginate(8);
         $problemstates = ProblemState::all();
 
         foreach($problems as $problem){
@@ -80,7 +80,7 @@ class ProblemsController extends Controller
     {
         //
         dd($id);
-        $problems = Problem::paginate(5);
+        $problems = Problem::paginate(8);
         $problemstates = ProblemState::all();
         $problemcompletes = ProblemComplete::all();
         return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates, 'problemcomplete'=>$problemcompletes]);
