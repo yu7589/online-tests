@@ -20,7 +20,7 @@ class ProblemsController extends Controller
     {
         //跳转到题库页面
         //$problems = DB::table('problems')->paginate(10);
-        $problems = Problem::paginate(8);
+        $problems = DB::table('problems')->paginate(10);
         $problemstates = ProblemState::all();
         $problemcompletes = ProblemComplete::all();
         return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates, 'problemcomplete'=>$problemcompletes]);
@@ -47,12 +47,13 @@ class ProblemsController extends Controller
     {
         //
         //dd($request->problem_id);
-        $problems = Problem::paginate(8);
+        $problems = Problem::all();
         $problemstates = ProblemState::all();
 
         foreach($problems as $problem){
             foreach($problemstates as $problemstate){
                 if($problem->id == $problemstate->problem_id && $problemstate->problem_id == $request->problem_id){
+                    //dd($request->problem_id);
                     if($request->answer != null){
                         $problemstate->all_submit = $problemstate->all_submit + 1;
                     }
@@ -67,6 +68,7 @@ class ProblemsController extends Controller
                 }
             }
         }
+        $problems = DB::table('problems')->paginate(10);
         return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates]);
     }
 
@@ -80,7 +82,7 @@ class ProblemsController extends Controller
     {
         //
         dd($id);
-        $problems = Problem::paginate(8);
+        $problems = DB::table('problems')->paginate(10);
         $problemstates = ProblemState::all();
         $problemcompletes = ProblemComplete::all();
         return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates, 'problemcomplete'=>$problemcompletes]);
