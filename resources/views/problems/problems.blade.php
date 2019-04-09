@@ -108,7 +108,7 @@
                                 <li class="list-group-item">
                                     题干: {{ $problem->stem }}
                                     <br>
-                                    {{ $problem->answer}}
+                                    {{ str_replace('*', '', $problem->answer) }}
                                 </li>
                                 @if($problem->picture_url1 == '')
                                 @elseif($problem->picture_url2 == '')
