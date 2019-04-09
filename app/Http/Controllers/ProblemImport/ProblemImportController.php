@@ -154,7 +154,7 @@ class ProblemImportController extends Controller
                             //dd($problemState->problem_id);
                             $problemState->correct_submit = 0;
                             $problemState->passing_rate = 0;
-                            $problemState->all_submit = 1;
+                            $problemState->all_submit = 0;
                             $problemState->save();
                         }
 
