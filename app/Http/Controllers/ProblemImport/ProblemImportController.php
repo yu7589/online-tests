@@ -79,6 +79,7 @@ class ProblemImportController extends Controller
             $type = null;
             $difficulty = null;
             $author = null;
+            $used = null;
             $CO = null;
 
             $count = 0;
@@ -120,6 +121,13 @@ class ProblemImportController extends Controller
                         $type = $cut[4];
                         $difficulty = $cut[5];
                         $author = $cut[6];
+                        $used = $cut[8];
+                        if($used == 'usd'){
+                            $used = 1;
+                        }else {
+                            $used = 0;
+                        }
+                        
 
                         //插入新题目
                         $problem = new Problem;
@@ -133,6 +141,7 @@ class ProblemImportController extends Controller
                         $problem->type = $type;
                         $problem->difficulty = $difficulty;
                         $problem->author = $author;
+                        $problem->used = $used;
                         $problem->save();
 
                         //
