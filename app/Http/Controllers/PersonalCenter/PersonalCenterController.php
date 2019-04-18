@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers\PersonalCenter;
 
+
+use App\Problem;
+use App\ProblemState;
+use App\ProblemComplete;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

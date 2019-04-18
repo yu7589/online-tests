@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers\ProblemEdit;
 
+use App\Problem;
+use App\ProblemState;
+use App\ProblemComplete;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,7 +19,10 @@ class ProblemEditController extends Controller
     public function index()
     {
         //
-        return view('problemEdit\problemEdit');
+        $problems = DB::table('problems')->paginate(10);
+        $problemstates = ProblemState::all();
+        $problemcompletes = ProblemComplete::all();
+        return view('problemEdit\problemEdit', ['problems'=>$problems, 'problemstates'=>$problemstates, 'problemcomplete'=>$problemcompletes]);
     }
 
     /**

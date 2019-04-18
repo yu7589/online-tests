@@ -38,11 +38,10 @@
         </div>
     </div>
 
-    <div class="row mt-3">
+    <div class="row">
         <!-- 题目 -->
         <div style="width:860px;float:left;">
-        <div class="card mb-3">
-            <table id="Tab" class="table table-bordered">
+            <table id="Tab" class="table table-bordered table-hover">
                 <thead>
                         <th>                                
                             <div class="checkbox">
@@ -58,7 +57,7 @@
             @foreach ($problems as $problem)
                 @foreach ($problemstates as $problemstate)
                     @if($problem->id == $problemstate->problem_id)
-                    <tbody>
+                    <tbody style="background-color:#fff;">
                          <tr>
                             <td>
                                 <div class="checkbox">
@@ -92,7 +91,7 @@
                                                 F
                                             </label>
                                         </div>
-		                            </div>
+                                    </div>
                                 </form>
                             </td>
                             <!-- 类型2为选择题 -->
@@ -117,6 +116,8 @@
                                     第{{ $problem->chapter }}章第{{ $problem->section }}节
                                     <br>
                                     填空题:{{ $problem->stem }}
+                                    <br>
+                                    {{ $problem->answer }}
                                 <br>
                                 <br>
                                 <form method="post" action="/online-tests/public/problems">
@@ -159,14 +160,13 @@
                 @endforeach
             @endforeach
             </table>
-        <!-- pagination -->
-        {{ $problems->links() }}
-        </div>
+            <!-- pagination -->
+            {{ $problems->links() }}
         </div>
 
         <!-- 筛选 -->
         <div style="hight:1000px">
-            <div class="card" style="width:240px;float:right;margin-left:40px">
+            <div class="card" style="width:240px;float:right;margin-left:40px;margin-top:45px;">
                 <div class="card-body">
                     筛选
                     <br>

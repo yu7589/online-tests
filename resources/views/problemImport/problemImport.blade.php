@@ -29,39 +29,39 @@
                             <form class="form-horizontal" method="post" action="/online-tests/public/problemImport" autocomplete="off">
                                 {{ csrf_field() }}
                                 <div class="form-group">
-                                    <label for="firstname" class="col-sm-2 control-label">QU</label>
+                                    <label for="firstname" class="col-sm-2 control-label">题干</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="QU" placeholder="请输入QU" required="required">
+                                        <input type="text" class="form-control" name="QU" placeholder="请输入题干" required="required">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="lastname" class="col-sm-2 control-label">SO</label>
+                                    <label for="lastname" class="col-sm-2 control-label">答案</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="SO" placeholder="请输入SO" required="required">
+                                        <input type="text" class="form-control" name="SO" placeholder="请输入答案" required="required">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="lastname" class="col-sm-2 control-label">QF</label>
+                                    <label for="lastname" class="col-sm-2 control-label">题目图片</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="lastname" placeholder="请输入QF" required="required">
+                                        <input type="text" class="form-control" name="lastname" placeholder="请输入题目图片" required="required">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="lastname" class="col-sm-2 control-label">SF</label>
+                                    <label for="lastname" class="col-sm-2 control-label">答案图片</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="SF" placeholder="请输入SF" required="required">
+                                        <input type="text" class="form-control" name="SF" placeholder="请输入答案图片" required="required">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="lastname" class="col-sm-2 control-label">AN</label>
+                                    <label for="lastname" class="col-sm-2 control-label">解答</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="AN" placeholder="请输入AN" required="required">
+                                        <input type="text" class="form-control" name="AN" placeholder="请输入解答" required="required">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="lastname" class="col-sm-2 control-label">CO</label>
+                                    <label for="lastname" class="col-sm-2 control-label">题目编号</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="CO" placeholder="请输入CO" required="required">
+                                        <input type="text" class="form-control" name="CO" placeholder="请输入题目编号" required="required">
                                     </div>
                                 </div>
                                 <div class="form-group" style="float:right;margin-right:185px">
