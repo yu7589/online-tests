@@ -21,9 +21,7 @@
 
     <!-- 导入font-awesome字体图标 --> 
     <link rel="stylesheet" href="fonts/vendor/font-awesome-4.7.0/css/font-awesome.min.css">
-
-	<link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/bootstrap-3.3.4.css">
-	<link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
+    <!-- 导入css文件，关于复选框和单选框的格式 -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/build.css') }}">
 </head>
 <body>

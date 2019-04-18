@@ -46,12 +46,12 @@
                 <thead>
                         <th>                                
                             <div class="checkbox">
-                                <input id="checkbox1" class="styled" type="checkbox">
+                                <input id="checkbox1" type="checkbox">
                                 <label for="checkbox1">
                                 </label>
                             </div>
                         </th>
-                        <th style="width:50px;">序号</th>
+                        <th style="width:60px;">序号</th>
                         <th>题目</th>
                         <th style="width:120px;"></th>
                 </thead>
@@ -62,15 +62,15 @@
                          <tr>
                             <td>
                                 <div class="checkbox">
-                                    <input id="checkbox1" class="styled" type="checkbox">
+                                    <input id="checkbox1" type="checkbox">
                                     <label for="checkbox1">
                                     </label>
-		                        </div>
+                                </div>
                             </td>
                             <!-- type=1 为判断题 -->
                             @if($problem->type==1)
-                            <td  name="Sid" style="padding-top:16px;">{{ $problem->id }}</td>
-                            <td  name="Sname" style="padding-top:16px;">                   
+                            <td  name="Sid">{{ $problem->id }}</td>
+                            <td  name="Sname">                   
                                     第{{ $problem->chapter }}章第{{ $problem->section }}节
                                     <br>
                                     判断题:{{ $problem->stem }}
@@ -79,42 +79,41 @@
                                 <form method="post" action="/online-tests/public/problems">
                                 {{ csrf_field() }}
                                     答案:
-		                            <div class="radio radio-inline">
-		                                <input type="radio" name="radio1" id="radio1" value="option1">
-		                                <label for="radio1">
-		                                    T
-		                                </label>
-		                            </div>
-		                            <div class="radio radio-inline">
-		                                <input type="radio" name="radio1" id="radio2" value="option2">
-		                                <label for="radio2">
-		                                    F
-		                                </label>
+                                    <div class="row">
+                                        <div class="radio radio-inline">
+                                            <input type="radio" name="radio1" id="radio1" value="option1">
+                                            <label for="radio1">
+                                                T
+                                            </label>
+                                        </div>
+                                        <div class="radio radio-inline">
+                                            <input type="radio" name="radio1" id="radio2" value="option2">
+                                            <label for="radio2">
+                                                F
+                                            </label>
+                                        </div>
 		                            </div>
                                 </form>
                             </td>
                             <!-- 类型2为选择题 -->
                             @elseif($problem->type==2)
-                            <td  name="Sid" style="padding-top:16px;">{{ $problem->id }}</td>
-                            <td  name="Sname" style="padding-top:16px;">                   
+                            <td  name="Sid">{{ $problem->id }}</td>
+                            <td  name="Sname">                   
                                     第{{ $problem->chapter }}章第{{ $problem->section }}节
                                     <br>
                                     选择题:{{ $problem->stem }}
-                                    {{ $problem->answer }}
                                 <br>
                                 <br>
                                 <form method="post" action="/online-tests/public/problems">
                                 {{ csrf_field() }}
                                     答案:
-                                    <div class="input-group" style="width:280px;">
-                                        <input type="text" class="form-control" name="answer">
-                                    </div>
+                                    {{ str_replace('*', '', $problem->answer) }}
                                 </form>
                             </td>
                             <!-- 类型3为填空题 -->
                             @elseif($problem->type==3)
-                            <td  name="Sid" style="padding-top:16px;">{{ $problem->id }}</td>
-                            <td  name="Sname" style="padding-top:16px;">                   
+                            <td  name="Sid">{{ $problem->id }}</td>
+                            <td  name="Sname">                   
                                     第{{ $problem->chapter }}章第{{ $problem->section }}节
                                     <br>
                                     填空题:{{ $problem->stem }}
@@ -130,8 +129,8 @@
                             </td>
                             <!-- 类型4 为简答题 -->
                             @else
-                            <td  name="Sid" style="padding-top:16px;">{{ $problem->id }}</td>
-                            <td  name="Sname" style="padding-top:16px;">                   
+                            <td  name="Sid">{{ $problem->id }}</td>
+                            <td  name="Sname">                   
                                     第{{ $problem->chapter }}章第{{ $problem->section }}节
                                     <br>
                                     简答题:{{ $problem->stem }}
@@ -139,10 +138,11 @@
                                 <br>
                                 <form method="post" action="/online-tests/public/problems">
                                 {{ csrf_field() }}
-                                    答案:
-                                    <div class="input-group" style="width:280px;">
-                                        <input type="text" class="form-control" name="answer">
-                                    </div>
+                                答案:            
+                                <div class="input-group col-md-10">
+                                    <textarea class="form-control" rows="3" type="text" name="answer"></textarea>
+    
+                                </div>
                                 </form>
                             </td>
                             @endif
@@ -188,11 +188,3 @@
     <div>
 </div>
 @endsection
-
-
-<script type="text/javascript">
-	    function changeState(el) {
-	        if (el.readOnly) el.checked=el.readOnly=false;
-	        else if (!el.checked) el.readOnly=el.indeterminate=true;
-	    }
-</script>
