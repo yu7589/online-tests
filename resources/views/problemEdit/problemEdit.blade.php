@@ -3,6 +3,28 @@
 @section('content')
 <div class="container">
     <!-- 题目 -->
+  
+    <div class="row">
+        <div class="col-md-8">
+        <form>
+            <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">输入章节进行筛选</span>
+            </div>
+            <input type="text" class="form-control" placeholder="章">
+            <input type="text" class="form-control" placeholder="节">
+            </div>
+        </form>
+        </div>
+        <div class="col-md-2">
+        <button class="btn btn-success">
+                确定
+        </button>  
+        </div>
+    </div>
+  
+
+ 
     <table id="Tab" class="table table-bordered table-hover">
         <thead>
             <th style="width:60px;">序号</th>
