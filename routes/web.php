@@ -15,8 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//用户注册登陆系统路由
 Auth::routes();
 
+//主页路由
 Route::get('/home', 'HomeController@index')->name('home');
 
 //题库页面路由
@@ -28,3 +30,15 @@ Route::get('/problems/{id}','Problems\ProblemsController@show');
 Route::get('/problemImport', 'ProblemImport\ProblemImportController@index')->name('problemImport');
 Route::post('/problemImport', 'ProblemImport\ProblemImportController@store')->name('problemImport');
 Route::post('/problemImport/upload', 'ProblemImport\ProblemImportController@upload');
+
+//题目编辑界面路由
+Route::get('/problemEdit', 'ProblemEdit\ProblemEditController@index')->name('problemEdit');
+
+//自动组卷界面路由
+Route::get('/autoTestPaper', 'AutoTestPaper\AutoTestPaperController@index')->name('autoTestPaper');
+
+//个人中心界面路由
+Route::get('/personalCenter', 'PersonalCenter\PersonalCenterController@index')->name('personalCenter');
+
+//作业布置界面路由
+Route::get('/homeworkAssignment', 'HomeworkAssignment\HomeworkAssignmentController@index')->name('homeworkAssignment');
