@@ -51,9 +51,9 @@
                                 </label>
                             </div>
                         </th>
-                        <th>序号</th>
+                        <th style="width:50px;">序号</th>
                         <th>题目</th>
-                        <th></th>
+                        <th style="width:120px;"></th>
                 </thead>
             @foreach ($problems as $problem)
                 @foreach ($problemstates as $problemstate)
@@ -100,6 +100,7 @@
                                     第{{ $problem->chapter }}章第{{ $problem->section }}节
                                     <br>
                                     选择题:{{ $problem->stem }}
+                                    {{ $problem->answer }}
                                 <br>
                                 <br>
                                 <form method="post" action="/online-tests/public/problems">
