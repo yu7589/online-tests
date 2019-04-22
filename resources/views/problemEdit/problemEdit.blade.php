@@ -22,8 +22,6 @@
         </div>
     </form>
 
-    <form method="post" action="/online-tests/public/problemEdit/delete">
-    {{ csrf_field() }}
     <table id="Tab" class="table table-bordered table-hover">
         <thead>
             <th style="width:60px;">序号</th>
@@ -49,40 +47,6 @@
                         <br>难度：{{ $problem->difficulty }}
                         <br>作者：{{ $problem->author }}
                     </td>
-                    <td>
-                        <div class="container">
-                            <div class="row">
-                                <button type="button" class="btn btn-success btn-sm">编辑</button>
-                                &nbsp;&nbsp;
-                                <!-- delete -->
-                            
-                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">删除</button>
-                             
-                                <!-- 模态框 -->
-                                <div class="modal fade" id="myModal">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <!-- 模态框头部 -->
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">请确认</h4>
-                                            </div>
-                                        
-                                            <!-- 模态框主体 -->
-                                            <div class="modal-body">
-                                                确定要删除这个问题？
-                                            </div>
-                                        
-                                            <!-- 模态框底部 -->
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-success" name="problem_id" value="{{ $problem->id }}" >确定</button>
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
                     <!-- 类型2为选择题 -->
                     @elseif($problem->type==2)
                     <td  name="Sid">{{ $problem->id }}</td>
@@ -105,10 +69,9 @@
                                 &nbsp;&nbsp;
                                 <!-- delete -->
                             
-                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">删除</button>
-                             
+                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete" onclick="values({{ $problem->id }})">删除</button>
                                 <!-- 模态框 -->
-                                <div class="modal fade" id="myModal">
+                                <div class="modal fade" id="delete">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <!-- 模态框头部 -->
@@ -123,7 +86,7 @@
                                         
                                             <!-- 模态框底部 -->
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-success" name="problem_id" value="{{ $problem->id }}" >确定</button>
+                                                <button type="submit" class="btn btn-success" id="value" name="problem_id" value="" >确定</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
                                             </div>
                                         </div>
@@ -149,40 +112,6 @@
                         <br>难度：{{ $problem->difficulty }}
                         <br>作者：{{ $problem->author }}
                     </td>
-                    <td>
-                        <div class="container">
-                            <div class="row">
-                                <button type="button" class="btn btn-success btn-sm">编辑</button>
-                                &nbsp;&nbsp;
-                                <!-- delete -->
-                            
-                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">删除</button>
-                             
-                                <!-- 模态框 -->
-                                <div class="modal fade" id="myModal">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <!-- 模态框头部 -->
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">请确认</h4>
-                                            </div>
-                                        
-                                            <!-- 模态框主体 -->
-                                            <div class="modal-body">
-                                                确定要删除这个问题？
-                                            </div>
-                                        
-                                            <!-- 模态框底部 -->
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-success" name="problem_id" value="{{ $problem->id }}" >确定</button>
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
                     <!-- 类型4 为简答题 -->
                     @else
                     <td  name="Sid">{{ $problem->id }}</td>
@@ -198,6 +127,7 @@
                         <br>难度：{{ $problem->difficulty }}
                         <br>作者：{{ $problem->author }}
                     </td>
+                    @endif
                     <td>
                         <div class="container">
                             <div class="row">
@@ -205,10 +135,11 @@
                                 &nbsp;&nbsp;
                                 <!-- delete -->
                             
-                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">删除</button>
-                             
+                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete" onclick="values({{ $problem->id }})">删除</button>
                                 <!-- 模态框 -->
-                                <div class="modal fade" id="myModal">
+                                <form method="post" action="/online-tests/public/problemEdit/delete">
+                                {{ csrf_field() }}
+                                <div class="modal fade" id="delete">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <!-- 模态框头部 -->
@@ -223,24 +154,30 @@
                                         
                                             <!-- 模态框底部 -->
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-success" name="problem_id" value="{{ $problem->id }}" >确定</button>
+                                                <button type="submit" class="btn btn-success" id="value" name="problem_id" value="" >确定</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                </form>
                             </div>
                         </div>
                     </td>
-                    @endif
                  </tr>
             </tbody>
             @endif
         @endforeach
     @endforeach
     </table>
-    </form>
     <!-- pagination -->
     {{ $problems->links() }} 
 </div>
 @endsection
+
+<script>
+//将id的值保存在 id="value" 的按钮中，然后传给后台
+function values(id){
+    $("#value").val(id);
+}
+</script>

@@ -84,10 +84,10 @@ class ProblemEditController extends Controller
     {
         //dd($request->problem_id);
         //DB::table('problems')->where('id', '=', $request->problem_id)->delete();
-        $data = Problem::find($request->problem_id)->forceDelete();
+        $data = Problem::find($request->problem_id)->Delete();
         $problems = DB::table('problems')->paginate(10);
         $problemstates = ProblemState::all();
         $problemcompletes = ProblemComplete::all();
-        return view('problemEdit\problemEdit', ['problems'=>$problems, 'problemstates'=>$problemstates, 'problemcomplete'=>$problemcompletes]);
+        return redirect('problemEdit');
     }
 }
