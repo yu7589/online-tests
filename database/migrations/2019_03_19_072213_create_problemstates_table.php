@@ -15,11 +15,11 @@ class CreateProblemstatesTable extends Migration
     {
         Schema::create('problemstates', function (Blueprint $table) {
             $table->bigIncrements('id')->unique();
-            $table->string('collect_submit');
+            $table->string('correct_submit');
             $table->string('all_submit');
             $table->string('passing_rate');
-            $table->integer('problem_id')->unsigned();
-            $table->foreign('problem_id')->references('id')->on('problems');
+            $table->bigInteger('problem_id')->unsigned();
+            $table->foreign('problem_id')->references('id')->on('problems')->onDelete('cascade');
             $table->timestamps();
         });
     }

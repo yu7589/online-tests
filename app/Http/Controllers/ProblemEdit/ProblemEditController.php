@@ -80,14 +80,14 @@ class ProblemEditController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function delete(Request $request)
     {
-        //
+        //dd($request->problem_id);
+        //DB::table('problems')->where('id', '=', $request->problem_id)->delete();
+        $data = Problem::find($request->problem_id)->forceDelete();
+        $problems = DB::table('problems')->paginate(10);
+        $problemstates = ProblemState::all();
+        $problemcompletes = ProblemComplete::all();
+        return view('problemEdit\problemEdit', ['problems'=>$problems, 'problemstates'=>$problemstates, 'problemcomplete'=>$problemcompletes]);
     }
 }
