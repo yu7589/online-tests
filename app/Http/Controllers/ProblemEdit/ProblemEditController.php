@@ -75,9 +75,17 @@ class ProblemEditController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
+        dd($request->stem);
+        
+
+
+        $problems = DB::table('problems')->paginate(10);
+        $problemstates = ProblemState::all();
+        $problemcompletes = ProblemComplete::all();
+        return redirect('problemEdit');
     }
 
     public function delete(Request $request)
