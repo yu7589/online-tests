@@ -48,13 +48,13 @@
                                 <a class="nav-link" href="{{ route('problemImport') }}">题库导入</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="">自动组卷</a>
+                                <a class="nav-link" href="{{ route('autoTestPaper') }}">自动组卷</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('problemEdit') }}">个人中心</a>
+                                <a class="nav-link" href="{{ route('homeworkAssignment') }}">作业布置</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('problemEdit') }}">作业布置</a>
+                                <a class="nav-link" href="{{ route('personalCenter') }}">个人中心</a>
                             </li>
                     </ul>
 
