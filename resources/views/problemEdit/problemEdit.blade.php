@@ -3,15 +3,16 @@
 @section('content')
 <div class="container">
     <!-- 题目 -->
-    <form method="post" action="/online-tests/public/problemEdit/delete">
+    <form method="post" action="/online-tests/public/problemEdit/display">
+    {{ csrf_field() }}
         <div class="row">
             <div class="col-md-8">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">输入章节进行筛选</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="章">
-                    <input type="text" class="form-control" placeholder="节">
+                    <input type="text" name=selectChapter class="form-control" placeholder="章">
+                    <input type="text" name=selectSection class="form-control" placeholder="节">
                 </div>
             </div>
             <div class="col-md-2">
@@ -226,6 +227,11 @@
         @endforeach
     @endforeach
     </table>
+    @if(session('status'))
+        <script>
+            alert('{{session('status')}}');
+        </script>
+    @endif
     <!-- pagination -->
     {{ $problems->links() }} 
 </div>

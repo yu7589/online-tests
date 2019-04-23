@@ -21,51 +21,30 @@ class ProblemEditController extends Controller
         //
         $problems = DB::table('problems')->paginate(10);
         $problemstates = ProblemState::all();
-        $problemcompletes = ProblemComplete::all();
-        return view('problemEdit\problemEdit', ['problems'=>$problems, 'problemstates'=>$problemstates, 'problemcomplete'=>$problemcompletes]);
+        return view('problemEdit\problemEdit', ['problems'=>$problems, 'problemstates'=>$problemstates]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function display(Request $request)
     {
-        //
-    }
+        //dd($request->selectChapter);
+        if($request->selectChapter != null && $request->selectSection != null){
+            $problems = Problem::where([['chapter', '=', $request->selectChapter], ['section', '=', $request->selectSection]])->paginate(10);
+            $problemstates = ProblemState::all();
+            return view('problemEdit\problemEdit', ['problems'=>$problems, 'problemstates'=>$problemstates]);
+        }else if($request->selectChapter != null && $request->selectSection == null){
+            $problems = Problem::where([['chapter', '=', $request->selectChapter]])->paginate(10);
+            $problemstates = ProblemState::all();
+            return view('problemEdit\problemEdit', ['problems'=>$problems, 'problemstates'=>$problemstates]);
+        }else if($request->selectChapter == null && $request->selectSection != null){
+            $problems = Problem::where([['section', '=', $request->selectSection]])->paginate(10);
+            $problemstates = ProblemState::all();
+            return view('problemEdit\problemEdit', ['problems'=>$problems, 'problemstates'=>$problemstates]);
+        }else {
+            $problems = Problem::paginate(10);
+            $problemstates = ProblemState::all();
+            return view('problemEdit\problemEdit', ['problems'=>$problems, 'problemstates'=>$problemstates]);
+        }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -90,7 +69,7 @@ class ProblemEditController extends Controller
         $problem->author = $request->author;
         $problem->difficulty = $request->difficulty;
         $problem->save();
-        return redirect('problemEdit');
+        return redirect('problemEdit')->with('status', '修改成功');
     }
 
     public function delete(Request $request)
@@ -98,6 +77,6 @@ class ProblemEditController extends Controller
         //dd($request->problem_id);
         //DB::table('problems')->where('id', '=', $request->problem_id)->delete();
         $data = Problem::find($request->problem_id)->Delete();
-        return redirect('problemEdit');
+        return redirect('problemEdit')->with('status', '删除成功');
     }
 }

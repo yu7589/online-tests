@@ -35,6 +35,7 @@ Route::post('/problemImport/upload', 'ProblemImport\ProblemImportController@uplo
 Route::get('/problemEdit', 'ProblemEdit\ProblemEditController@index')->name('problemEdit');
 Route::post('/problemEdit/delete', 'ProblemEdit\ProblemEditController@delete');
 Route::post('problemEdit/update', 'ProblemEdit\ProblemEditController@update');
+Route::post('problemEdit/display', 'ProblemEdit\ProblemEditController@display');
 
 //自动组卷界面路由
 Route::get('/autoTestPaper', 'AutoTestPaper\AutoTestPaperController@index')->name('autoTestPaper');
