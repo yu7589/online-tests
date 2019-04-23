@@ -28,30 +28,39 @@ class ProblemImportController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function creating(Request $request)
     {
         //dd($request->QU);
-        $count = 0;
         $problems = Problem::all();
         foreach($problems as $data){
-            if($data->stem == $request->QU){
-                $count = 1;
+            if($data->stem == $request->stem){
+                return view('problemImport\problemImport');
+            }else {
+                $problem = new Problem;
+                $problem->chapter = $request->chapter;
+                $problem->section = $request->section;
+                $problem->stem = $request->stem;
+                if($request->picture_url1 == null){
+                    $request->picture_url1='';
+                }
+                if($request->picture_url2 == null){
+                    $request->picture_url2='';
+                }
+                if($request->author == null){
+                    $request->author='';
+                }
+                $problem->picture_url1 = $request->picture_url1;
+                $problem->picture_url2 = $request->picture_url2;
+                $problem->explanation = $request->explanation;
+                $problem->answer = $request->answer;
+                $problem->type = $request->type;
+                $problem->difficulty = $request->difficulty;
+                $problem->author = $request->author;
+                $problem->used = $request->USD;
+                $problem->save();
+                return view('problemImport\problemImport');
             }
         }
-        if($count = 0){
-            $problem = new Problem;
-            $problem->chapter = $request->QU;
-            $problem->section = $request->QU;
-            $problem->stem = $request->QU;
-            $problem->picture_url1 = $request->QU;
-            $problem->picture_url2 = '';
-            $problem->answer = $request->QU;
-            $problem->type = $request->QU;
-            $problem->difficulty = 1;
-            $problem->author = $request->QU;
-            $problem->save();
-        }
-        return view('problemImport\problemImport');
     }
 
     /**
