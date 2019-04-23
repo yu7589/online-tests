@@ -77,14 +77,19 @@ class ProblemEditController extends Controller
      */
     public function update(Request $request)
     {
-        //
-        dd($request->stem);
-        
-
-
-        $problems = DB::table('problems')->paginate(10);
-        $problemstates = ProblemState::all();
-        $problemcompletes = ProblemComplete::all();
+        //dd($request->problem_id);
+        $problem = Problem::find($request->problem_id);
+        $problem->chapter = $request->chapter;
+        $problem->section = $request->section;
+        $problem->stem = $request->stem;
+        $problem->answer = $request->answer;
+        $problem->picture_url1 = $request->picture_url1;
+        $problem->picture_url2 = $request->picture_url2;
+        $problem->explanation = $request->explanation;
+        $problem->type = $request->type;
+        $problem->author = $request->author;
+        $problem->difficulty = $request->difficulty;
+        $problem->save();
         return redirect('problemEdit');
     }
 
@@ -93,9 +98,6 @@ class ProblemEditController extends Controller
         //dd($request->problem_id);
         //DB::table('problems')->where('id', '=', $request->problem_id)->delete();
         $data = Problem::find($request->problem_id)->Delete();
-        $problems = DB::table('problems')->paginate(10);
-        $problemstates = ProblemState::all();
-        $problemcompletes = ProblemComplete::all();
         return redirect('problemEdit');
     }
 }

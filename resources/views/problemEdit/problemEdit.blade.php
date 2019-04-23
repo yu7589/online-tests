@@ -182,7 +182,7 @@
 
                                             <!-- 模态框底部 -->
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-success" id="value" name="problem_id" value="" >确定</button>
+                                                <button type="submit" class="btn btn-success" id="editID" name="problem_id" value="" >确定</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
                                             </div>
                                         </div>
