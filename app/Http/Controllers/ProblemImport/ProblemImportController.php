@@ -34,33 +34,32 @@ class ProblemImportController extends Controller
         $problems = Problem::all();
         foreach($problems as $data){
             if($data->stem == $request->stem){
-                return view('problemImport\problemImport');
-            }else {
-                $problem = new Problem;
-                $problem->chapter = $request->chapter;
-                $problem->section = $request->section;
-                $problem->stem = $request->stem;
-                if($request->picture_url1 == null){
-                    $request->picture_url1='';
-                }
-                if($request->picture_url2 == null){
-                    $request->picture_url2='';
-                }
-                if($request->author == null){
-                    $request->author='';
-                }
-                $problem->picture_url1 = $request->picture_url1;
-                $problem->picture_url2 = $request->picture_url2;
-                $problem->explanation = $request->explanation;
-                $problem->answer = $request->answer;
-                $problem->type = $request->type;
-                $problem->difficulty = $request->difficulty;
-                $problem->author = $request->author;
-                $problem->used = $request->USD;
-                $problem->save();
-                return view('problemImport\problemImport');
+                return redirect('problemImport')->with('status', '题库中已有此题目');
             }
         }
+        $problem = new Problem;
+        $problem->chapter = $request->chapter;
+        $problem->section = $request->section;
+        $problem->stem = $request->stem;
+        if($request->picture_url1 == null){
+            $request->picture_url1='';
+        }
+        if($request->picture_url2 == null){
+            $request->picture_url2='';
+        }
+        if($request->author == null){
+            $request->author='';
+        }
+        $problem->picture_url1 = $request->picture_url1;
+        $problem->picture_url2 = $request->picture_url2;
+        $problem->explanation = $request->explanation;
+        $problem->answer = $request->answer;
+        $problem->type = $request->type;
+        $problem->difficulty = $request->difficulty;
+        $problem->author = $request->author;
+        $problem->used = $request->USD;
+        $problem->save();
+        return redirect('problemImport')->with('status', '添加成功');
     }
 
     /**
@@ -192,6 +191,6 @@ class ProblemImportController extends Controller
         }
 
 
-        return redirect('problemImport');
+        return redirect('problemImport')->with('status', '添加成功');
     }
 }
