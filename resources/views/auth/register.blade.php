@@ -83,6 +83,11 @@
                             </div>
                         </div>
                     </form>
+                    @if(session('status'))
+                        <script>
+                            alert('{{session('status')}}');
+                        </script>
+                    @endif
                 </div>
             </div>
         </div>
