@@ -39,7 +39,7 @@ return [
 'dimensions'           => ':attribute具有无效的图片尺寸',
 'distinct'             => ':attribute字段具有重复值',
 'email'                => ':attribute必须是一个合法的电子邮件地址',
-'exists'               => '选定的 :attribute 是无效的.',
+'exists'               => '输入的 :attribute 不存在.',
 'file'                 => ':attribute必须是一个文件',
 'filled'               => ':attribute的字段是必填的',
 'image'                => ':attribute必须是 jpeg, png, bmp 或者 gif 格式的图片',
