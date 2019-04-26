@@ -57,7 +57,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', '865268095@qq.com'),
-        'name' => env('MAIL_FROM_NAME', 'liangyu'),
+        'name' => env('MAIL_FROM_NAME', 'ly'),
     ],
 
     /*
@@ -86,7 +86,7 @@ return [
 
     'username' => env('865268095@qq.com'),
 
-    'password' => env('rqjwoystezmzbcfg'),
+    'password' => env('ovrynhytabutbcfh'),
 
     /*
     |--------------------------------------------------------------------------
