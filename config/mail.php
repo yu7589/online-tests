@@ -86,7 +86,7 @@ return [
 
     'username' => env('865268095@qq.com'),
 
-    'password' => env('ovrynhytabutbcfh'),
+    'password' => env('fngpydfgngczbfjc'),
 
     /*
     |--------------------------------------------------------------------------
@@ -99,7 +99,7 @@ return [
     |
     */
 
-    'sendmail' => '/usr/sbin/sendmail -bs',
+    'sendmail' => 'E:\XAMPP\sendmail\sendmail.exe -t',
 
     /*
     |--------------------------------------------------------------------------
