@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\MarkDowner;
 use EndaEditor;
 
 class PersonalCenterController extends Controller
@@ -22,8 +23,14 @@ class PersonalCenterController extends Controller
     public function index()
     {
         //
-        $str = EndaEditor::MarkDecode("\$i=\frac{n_2}{n_1}= \frac{z_1}{z_2}   $");
-        
+        $str = EndaEditor::MarkDecode("$\underline{x+y}$");
+
+        $markdown = new MarkDowner; //实例化
+        $htmler = "$\underline{x+y}$";
+        echo $markdowner = $markdown->convertHtmlToMarkdown($htmler); //html转换markdown  
+        echo $htmler = $markdown->convertMarkdownToHtml("# a"); //markdown转换html 
+
+
         return view('personalCenter\personalCenter', ['str'=>$str]);
     }
 
