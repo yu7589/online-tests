@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use EndaEditor;
+
 class PersonalCenterController extends Controller
 {
     /**
@@ -20,7 +22,9 @@ class PersonalCenterController extends Controller
     public function index()
     {
         //
-        return view('personalCenter\personalCenter');
+        $str = EndaEditor::MarkDecode("\$i=\frac{n_2}{n_1}= \frac{z_1}{z_2}   $");
+        
+        return view('personalCenter\personalCenter', ['str'=>$str]);
     }
 
     /**

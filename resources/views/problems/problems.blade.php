@@ -73,6 +73,7 @@
                                     第{{ $problem->chapter }}章第{{ $problem->section }}节
                                     <br>
                                     判断题:{{ $problem->stem }}
+                                    <?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
                                 <br>
                                 <br>
                                 <form method="post" action="/online-tests/public/problems">
@@ -101,6 +102,7 @@
                                     第{{ $problem->chapter }}章第{{ $problem->section }}节
                                     <br>
                                     选择题:{{ $problem->stem }}
+                                    <?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
                                 <br>
                                 <br>
                                 <form method="post" action="/online-tests/public/problems">
@@ -116,6 +118,7 @@
                                     第{{ $problem->chapter }}章第{{ $problem->section }}节
                                     <br>
                                     填空题:{{ $problem->stem }}
+                                    <?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
                                     <br>
                                     {{ $problem->answer }}
                                 <br>
@@ -135,11 +138,12 @@
                                     第{{ $problem->chapter }}章第{{ $problem->section }}节
                                     <br>
                                     简答题:{{ $problem->stem }}
+                                    <?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
                                 <br>
                                 <br>
                                 <form method="post" action="/online-tests/public/problems">
                                 {{ csrf_field() }}
-                                答案:            
+                                答案:                  
                                 <div class="input-group col-md-10">
                                     <textarea class="form-control" rows="3" type="text" name="answer"></textarea>
     

@@ -43,6 +43,8 @@
                             判断题:{{ $problem->stem }}
                         <br>
                             答案: {{ $problem->answer }}  
+                        <br>题目图片：<?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
+                        <br>答案图片：<?php echo EndaEditor::MarkDecode($problem->picture_url2)  ?>
                         <br>解释：{{ $problem->explanation }}
                         <br>类型：{{ $problem->type }}
                         <br>难度：{{ $problem->difficulty }}
@@ -58,6 +60,8 @@
                         <br>
                         <br>
                             答案: {{ str_replace('*', '', $problem->answer) }}
+                        <br>题目图片：<?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
+                        <br>答案图片：<?php echo EndaEditor::MarkDecode($problem->picture_url2)  ?>
                         <br>解释：{{ $problem->explanation }}
                         <br>类型：{{ $problem->type }}
                         <br>难度：{{ $problem->difficulty }}
@@ -70,11 +74,11 @@
                             第{{ $problem->chapter }}章第{{ $problem->section }}节
                             <br>
                             填空题:{{ $problem->stem }}
-                            <br>
-                            {{ $problem->answer }}
                         <br>
                         <br>
                             答案: {{ $problem->answer }}  
+                        <br>题目图片：<?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
+                        <br>答案图片：<?php echo EndaEditor::MarkDecode($problem->picture_url2)  ?>
                         <br>解释：{{ $problem->explanation }}
                         <br>类型：{{ $problem->type }}
                         <br>难度：{{ $problem->difficulty }}
@@ -90,8 +94,8 @@
                         <br>
                         <br>
                             答案: {{ $problem->answer }}    
-                        <br>题目图片：{{ $problem->picture_url1 }}
-                        <br>答案图片：{{ $problem->picture_url2 }}
+                        <br>题目图片：<?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
+                        <br>答案图片：<?php echo EndaEditor::MarkDecode($problem->picture_url2)  ?>
                         <br>解释：{{ $problem->explanation }}
                         <br>类型：{{ $problem->type }}
                         <br>难度：{{ $problem->difficulty }}

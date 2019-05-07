@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use EndaEditor;
+
 class ProblemEditController extends Controller
 {
     /**
@@ -20,6 +22,7 @@ class ProblemEditController extends Controller
     {
         //
         $problems = DB::table('problems')->paginate(10);
+
         $problemstates = ProblemState::all();
         return view('problemEdit\problemEdit', ['problems'=>$problems, 'problemstates'=>$problemstates]);
     }
