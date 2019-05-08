@@ -63,8 +63,7 @@
                                 <input type="checkbox" class="cb" style="width: 20px;
                                 height: 20px;
                                 border: 1px solid #c9c9c9;
-                                border-radius: 2px;
-                                ">
+                                border-radius: 2px;">
                             </td>
                             <!-- type=1 为判断题 -->
                             @if($problem->type==1)
