@@ -81,13 +81,13 @@
                                     答案:
                                     <div class="row">
                                         <div style="padding-left:20px; padding-top:5px">
-                                            <input type="radio" name="radio1">
+                                            <input type="radio" name="radio1" id="true">
                                             <label style="padding-left:8px">
                                                 T
                                             </label>
                                         </div>
                                         <div style="padding-left:15px; padding-top:5px">
-                                            <input type="radio" name="radio1">
+                                            <input type="radio" name="radio1" id="false">
                                             <label style="padding-left:8px">
                                                 F
                                             </label>
