@@ -1,0 +1,190 @@
+* 分析
+        1.全选
+                  1.绑定点击事件
+                  2.通过document.getElementByClassName("cb")来获取所有的check一列的对象
+                  3.遍历数组,对td进行checked的属性的更改(全部都选择) 
+        2.全不选
+                  1.绑定点击事件
+                  2.通过document.getElementByClassName("cb")来获取所有的check一列的对象
+                  3.遍历数组,对td进行checked的属性的更改(全部都不选择)
+        3.反选  
+                  1.绑定点击事件
+                  2.通过document.getElementByClassName("cb")来获取所有的check一列的对象
+                  3.遍历数组,对td进行checked的属性的更改(改为原来的取反)
+    * 代码
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>表格全选</title>
+            <style>
+                table {
+                    border: 1px solid;
+                    width: 500px;
+                    margin-left: 30%;
+                }
+ 
+                td, th {
+                    text-align: center;
+                    border: 1px solid;
+                }
+ 
+                div {
+                    margin-top: 10px;
+                    margin-left: 30%;
+                }
+ 
+                .in {
+                    background-color: pink;
+                }
+ 
+                .out {
+                    background-color: white;
+                }
+            </style>
+ 
+            <script>
+                //定义窗口加载完毕的事件
+                window.onload = function () {
+                    //全选
+                    /*
+                        分析: 1.绑定点击事件
+                            2.通过document.getElementByClassName("cb")来获取所有的check一列的对象
+                            3.遍历数组,对td进行checked的属性的更改(全部都选择)
+                    */
+                    // 1.绑定点击事件
+                    var selectAll = document.getElementById("selectAll");
+                    selectAll.onclick = function () {
+                        //2.通过document.getElementByClassName("cb")来获取所有的check一列的对象
+                        var trs = document.getElementsByClassName("cb");
+                        //3.遍历数组,对td进行checked的属性的更改(全部都选择)
+                        for (var i = 0; i < trs.length; i++) {
+                            trs[i].checked = true;
+                        }
+                    };
+ 
+                    //全不选
+                    /*
+                        分析: 1.绑定点击事件
+                            2.通过document.getElementByClassName("cb")来获取所有的check一列的对象
+                            3.遍历数组,对td进行checked的属性的更改(全部都不选择)
+                    */
+                    // 1.绑定点击事件
+                    var unselectAll = document.getElementById("unSelectAll");
+                    unselectAll.onclick = function () {
+                        //2.通过document.getElementByClassName("cb")来获取所有的check一列的对象
+                        var trs = document.getElementsByClassName("cb");
+                        //3.遍历数组,对td进行checked的属性的更改(全部都不选择)
+                        for (var i = 0; i < trs.length; i++) {
+                            trs[i].checked = false;
+                        }
+                    };
+ 
+                    //反选
+                    /*
+                        分析: 1.绑定点击事件
+                            2.通过document.getElementByClassName("cb")来获取所有的check一列的对象
+                            3.遍历数组,对td进行checked的属性的更改(改为原来的取反)
+                    */
+                    // 1.绑定点击事件
+                    var selectRev = document.getElementById("selectRev");
+                    selectRev.onclick = function () {
+                        //2.通过document.getElementByClassName("cb")来获取所有的check一列的对象
+                        var trs = document.getElementsByClassName("cb");
+                        //3.遍历数组,对td进行checked的属性的更改(全部都取反)
+                        for (var i = 0; i < trs.length; i++) {
+                            trs[i].checked = !trs[i].checked;
+                        }
+                    };
+ 
+                    //第一个选择,其他的也会跟着选择
+                    /*
+                        分析:
+                            1.获取 firstCb
+                            2.绑定点击事件
+                            2.通过document.getElementByClassName("cb")来获取所有的check一列的对象
+                            3.遍历数组,对td进行checked的属性的更改(参考第一个的cb值)
+                    */
+                    // 1.绑定点击事件
+                    var firstCb = document.getElementById("firstCb");
+                    //firstCb.onchange = function () {
+                    firstCb.onclick = function () {
+                        //2.通过document.getElementByClassName("cb")来获取所有的check一列的对象
+                        var trs = document.getElementsByClassName("cb");
+                        //3.遍历数组,对td进行checked的属性的更改(参考第一个checked的状态)
+                        for (var i = 1; i < trs.length; i++) {
+                            trs[i].checked = firstCb.checked;
+                        }
+                    };
+ 
+ 
+                    //定义鼠标的进入和出去事件
+                    /*
+                        分析:
+                            1.通过document.getElementByTagName("cb")来获取所有的tr对象数组
+                            2.遍历数组
+                            3.对每一个tr进行鼠标事件的绑定
+                    */
+ 
+                    //1.通过document.getElementByTagName("tr")来获取所有的tr对象数组
+                    var trs = document.getElementsByTagName("tr");
+                    //2.遍历数组
+                    for (var i = 0; i < trs.length; i++) {
+                        //3.对每一个tr进行鼠标事件的绑定
+                        trs[i].onmouseover = function () {
+                            this.className = "in";
+                        };
+                        trs[i].onmouseout = function () {
+                            this.className = "out";
+                        };
+ 
+                    }
+ 
+                }
+            </script>
+ 
+        </head>
+        <body>
+ 
+        <table>
+            <caption>学生信息表</caption>
+            <tr>
+                <th><input type="checkbox" class="cb" id="firstCb">全选</th>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>操作</th>
+            </tr>
+ 
+            <tr>
+                <td><input type="checkbox" class="cb"></td>
+                <td>1</td>
+                <td>令狐冲</td>
+                <td>男</td>
+                <td><a href="javascript:void(0);">删除</a></td>
+            </tr>
+ 
+            <tr>
+                <td><input type="checkbox" class="cb"></td>
+                <td>2</td>
+                <td>任我行</td>
+                <td>男</td>
+                <td><a href="javascript:void(0);">删除</a></td>
+            </tr>
+ 
+            <tr>
+                <td><input type="checkbox" class="cb"></td>
+                <td>3</td>
+                <td>岳不群</td>
+                <td>?</td>
+                <td><a href="javascript:void(0);">删除</a></td>
+            </tr>
+ 
+        </table>
+        <div>
+            <input type="button" id="selectAll" value="全选">
+            <input type="button" id="unSelectAll" value="全不选">
+            <input type="button" id="selectRev" value="反选">
+        </div>
+        </body>
+        </html>
