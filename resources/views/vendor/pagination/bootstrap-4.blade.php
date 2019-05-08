@@ -43,8 +43,5 @@
     </ul>
 @endif
 
-<script>
-function info(){
-    alert("当前页面所作答题目将会被提交到已选中题目表单中");
-}
-</script>
+
+

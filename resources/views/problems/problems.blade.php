@@ -171,6 +171,14 @@
         <div style="hight:1000px">
             <div class="card" style="width:240px;float:right;margin-left:40px;margin-top:45px;">
                 <div class="card-body">
+                    <label>每页显示
+                        <select size="1" name="data-table_length" aria-controls="data-table">
+                            <option value="10" selected="selected">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                        </select> 题目
+                    </label>
+                    <br>
                     筛选
                     <br>
                     <br>
@@ -199,5 +207,9 @@ function selectAll() {
     for (var i = 1; i < trs.length; i++) {
         trs[i].checked = selectAll.checked;
     }
+}
+
+function info(){
+    alert("当前页面所作答题目将会被提交到已选中题目表单中");
 }
 </script>
