@@ -31,7 +31,7 @@
 
                 <div class="col-md-4">
                     <div class="input-group ">
-                        <button type="button" class="btn btn-success">已选中题目</button>
+                        <a href="http://localhost/online-tests/public/submit"><button type="button" class="btn btn-success">已选中题目</button></a>
                     </div>
                 </div>
             </div>
@@ -204,6 +204,10 @@
     <div>
 </div>
 
+<form action="/online-tests/public/problems/test" method="post" id="answer_submit">
+    {{ csrf_field() }}
+    <input type="text" value="" name="answer" id="answer">
+</form>
 
 <input type='button' value='提交' onclick="show()"/>
 @endsection
@@ -263,6 +267,18 @@ function show(){
             }
         }
     }
+
+    $("#answer").val(str);
+    var form = document.getElementById('answer_submit');
+    console.log(form);
+    form.submit();
+    /*
+    $.post('http://localhost/online-tests/public/submit/answer',{'_token':'{{csrf_token()}}','answer': str},function(data){
+        //验证成功后实现跳转
+        console.log(str);
+        window.location.href = 'http://localhost/online-tests/public/submit';
+    }),
+    */
     alert(str);
 }
 /*
