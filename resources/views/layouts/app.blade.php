@@ -9,6 +9,8 @@
 
     <title>{{ config('app.name', 'Online-Tests') }}</title>
 
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script>
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 

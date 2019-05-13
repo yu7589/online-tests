@@ -29,26 +29,10 @@ class ProblemsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function submit(Request $request)
     {
-        //
-
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-        //dd($request->problem_id);
+        dd(123);
         $problems = Problem::all();
         $problemstates = ProblemState::all();
 

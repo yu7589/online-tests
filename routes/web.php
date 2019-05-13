@@ -23,7 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //题库页面路由
 Route::get('/problems', 'Problems\ProblemsController@index')->name('problems');
-Route::post('/problems', 'Problems\ProblemsController@store')->name('problems');
+Route::post('/problems/submit', 'Problems\ProblemsController@submit')->name('submit');
 Route::get('/problems/{id}','Problems\ProblemsController@show');
 
 //题库导入界面路由

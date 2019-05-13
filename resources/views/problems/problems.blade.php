@@ -43,13 +43,16 @@
         <div style="width:860px;float:left;">
             <table id="Tab" class="table table-bordered table-hover">
                 <thead>
-                        <th>                                
+                <!--暂时把全选的功能取消掉
+                                                      
                             <input id="selectAll" type="checkbox" class="cb" onclick="selectAll()" style="width: 20px;
                                 height: 20px;
                                 border: 1px solid #c9c9c9;
                                 border-radius: 2px;
                                 ">
-                        </th>
+                        
+                -->
+                        <th></th>
                         <th style="width:60px;">序号</th>
                         <th>题目</th>
                         <th style="width:120px;"></th>
@@ -60,10 +63,11 @@
                     <tbody style="background-color:#fff;">
                          <tr>
                             <td>
-                                <input type="checkbox" class="cb" style="width: 20px;
+                                <input id="answer_check" name="answer_check" type="checkbox" class="cb" style="width: 20px;
                                 height: 20px;
                                 border: 1px solid #c9c9c9;
-                                border-radius: 2px;">
+                                border-radius: 2px;"
+                                value='{{$problem->id}}'>
                             </td>
                             <!-- type=1 为判断题 -->
                             @if($problem->type==1)
@@ -80,12 +84,12 @@
                                     答案:
                                     <div class="row">
                                         <div style="padding-left:20px; padding-top:5px">
-                                            <input type="radio" name="radio1" id="true">
+                                            <input type="radio" name="radio1" id="true" onclick="record({{ $problem->id }}, 'T')">
                                             <label style="padding-left:8px">
                                                 T
                                             </label>
                                         </div>
-                                        <div style="padding-left:15px; padding-top:5px">
+                                        <div style="padding-left:15px; padding-top:5px" onclick="record({{ $problem->id }}, 'F')">
                                             <input type="radio" name="radio1" id="false">
                                             <label style="padding-left:8px">
                                                 F
@@ -107,7 +111,14 @@
                                 <form method="post" action="/online-tests/public/problems">
                                 {{ csrf_field() }}
                                     答案:
-                                    {{ str_replace('*', '', $problem->answer) }}
+                                    <input name="selectradio" type="radio" class="cb" onclick="record({{ $problem->id }}, 'A')">
+                                    &nbsp;A.{{ explode(";", str_replace('*', '', $problem->answer), 4)[0] }}
+                                    <input name="selectradio" type="radio" class="cb" onclick="record({{ $problem->id }}, 'B')">
+                                    &nbsp;B.{{ explode(";", str_replace('*', '', $problem->answer), 4)[1] }}
+                                    <input name="selectradio" type="radio" class="cb" onclick="record({{ $problem->id }}, 'C')">
+                                    &nbsp;C.{{ explode(";", str_replace('*', '', $problem->answer), 4)[2] }}
+                                    <input name="selectradio" type="radio" class="cb" onclick="record({{ $problem->id }}, 'D')">
+                                    &nbsp;D.{{ explode(";", str_replace('*', '', $problem->answer), 4)[3] }}
                                 </form>
                             </td>
                             <!-- 类型3为填空题 -->
@@ -126,7 +137,7 @@
                                 {{ csrf_field() }}
                                     答案:
                                     <div class="input-group" style="width:280px;">
-                                        <input type="text" class="form-control" name="answer">
+                                        <input type="text" class="form-control" id="answer_text" name="answer_text">
                                     </div>
                                 </form>
                             </td>
@@ -144,8 +155,7 @@
                                 {{ csrf_field() }}
                                 答案:                  
                                 <div class="input-group col-md-10">
-                                    <textarea class="form-control" rows="3" type="text" name="answer"></textarea>
-    
+                                    <textarea class="form-control" rows="3" type="text" id="answer_textarea" name="answer_textarea"></textarea>
                                 </div>
                                 </form>
                             </td>
@@ -179,37 +189,98 @@
                         </select> 题目
                     </label>
                     <br>
-                    筛选
                     <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>                    <br>
-                    <br>
-                    占位
+                    输入章节进行筛选
+                    <div class="input-group mb-3">
+                        <input type="text" name=selectChapter class="form-control" placeholder="章">
+                        <input type="text" name=selectSection class="form-control" placeholder="节">
+                    </div>
+                    <button type="submit" class="btn btn-success">
+                    确定
+                    </button>  
                 </div>
             </div>
         </div>
     <div>
 </div>
-@endsection
 
-<script>
+
+<input type='button' value='提交' onclick="show()"/>
+@endsection
+<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script>
+
+<script>    
+var answered = new Array(2);
+answered[0] = new Array();
+answered[0][0] = 'id';
+for(var i=1; i<=50; i++){
+    answered[0][i] = 999999;
+}
+answered[1] = new Array();
+answered[1][0] = 'stem';
+for(var i=1; i<=50; i++){
+    answered[1][i] = 'null';
+}
+var count = 1;
+/*
+记录选中的问题
+*/
+function record(id, str){
+    var i=1
+    for(; i<=50; i++){
+        if(answered[0][i] == id){
+            answered[1][i] = str;
+            break;
+        }
+        else{
+            answered[0][count] = id;
+            answered[1][count] = str;
+            count++;
+            break;
+        }
+    }
+    
+    console.log(answered);
+}
+
+function show(){
+    var str='';
+    obj = document.getElementsByName("answer_check");
+    check_val = [];
+    //记录选中的chekbox
+    for(k in obj){
+        if(obj[k].checked)
+            check_val.push(obj[k].value);
+    }
+    //交叉查询checkbox和之前记录的答案数组，如果id相同，则需要提交，将其id和答案一起记录在字符串中
+    for(k in check_val){
+        for(let i=1; i<=50; i++){
+            if(check_val[k] == answered[0][i]){
+                str = str + answered[0][i] + ',' + answered[1][i] + ';';
+            }
+            else{
+                continue;
+            }
+        }
+    }
+    alert(str);
+}
+/*
+全选,暂时取消
+
 function selectAll() {
     var selectAll = document.getElementById("selectAll");
     var trs = document.getElementsByClassName("cb");
     for (var i = 1; i < trs.length; i++) {
         trs[i].checked = selectAll.checked;
     }
+    console.log(answered[1][2])
 }
-
+*/
+/*
 function info(){
     alert("当前页面所作答题目将会被提交到已选中题目表单中");
 }
+*/
+
 </script>
