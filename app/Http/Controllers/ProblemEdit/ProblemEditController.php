@@ -47,7 +47,6 @@ class ProblemEditController extends Controller
             $problemstates = ProblemState::all();
             return view('problemEdit\problemEdit', ['problems'=>$problems, 'problemstates'=>$problemstates]);
         }
-
     }
 
     /**

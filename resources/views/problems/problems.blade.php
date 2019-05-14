@@ -31,7 +31,7 @@
 
                 <div class="col-md-4">
                     <div class="input-group ">
-                        <a href="http://localhost/online-tests/public/submit"><button type="button" class="btn btn-success">已选中题目</button></a>
+                        <a href="http://localhost/online-tests/public/submit"><button type="button" class="btn btn-info">查看提交表单中题目</button></a>
                     </div>
                 </div>
             </div>
@@ -191,13 +191,19 @@
                     <br>
                     <br>
                     输入章节进行筛选
-                    <div class="input-group mb-3">
-                        <input type="text" name=selectChapter class="form-control" placeholder="章">
-                        <input type="text" name=selectSection class="form-control" placeholder="节">
-                    </div>
-                    <button type="submit" class="btn btn-success">
-                    确定
-                    </button>  
+                    <form method="get" action="/online-tests/public/problems/display">
+                        <div class="input-group mb-3">
+                            <input type="text" name=selectChapter class="form-control" placeholder="章">
+                            <input type="text" name=selectSection class="form-control" placeholder="节">
+                            &nbsp;
+                            <button type="submit" class="btn btn-success">
+                            确定
+                            </button>  
+                        </div>
+                    </form>
+                    <br>
+                    <br>
+                    <button type="submit" class="btn btn-info" onclick="show()">提交已作答题目</button>
                 </div>
             </div>
         </div>
@@ -209,9 +215,13 @@
     <input type="hidden" value="{{ Auth::user()->student_number }}" name="student_number" id="student_number">
     <input type="hidden" value="" name="answer" id="answer">
 </form>
-
-<input type='button' value='提交' onclick="show()"/>
+@if(session('status'))
+    <script>
+        alert('{{session('status')}}');
+    </script>
+@endif
 @endsection
+
 <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script>
 
 <script>    

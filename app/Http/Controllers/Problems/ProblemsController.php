@@ -55,11 +55,8 @@ class ProblemsController extends Controller
                 }
             }
         };
-        
-        $problems = DB::table('problems')->paginate(10);
-        $problemstates = ProblemState::all();
-        $problemcompletes = ProblemComplete::all();
-        return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates, 'problemcomplete'=>$problemcompletes]);
+
+        return redirect('problems')->with('status', '已提交');
     }
 
     /**
@@ -76,5 +73,27 @@ class ProblemsController extends Controller
         $problemstates = ProblemState::all();
         $problemcompletes = ProblemComplete::all();
         return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates, 'problemcomplete'=>$problemcompletes]);
+    }
+
+    public function display(Request $request)
+    {
+        //dd($request->selectChapter);
+        if($request->selectChapter != null && $request->selectSection != null){
+            $problems = Problem::where([['chapter', '=', $request->selectChapter], ['section', '=', $request->selectSection]])->paginate(10);
+            $problemstates = ProblemState::all();
+            return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates]);
+        }else if($request->selectChapter != null && $request->selectSection == null){
+            $problems = Problem::where([['chapter', '=', $request->selectChapter]])->paginate(10);
+            $problemstates = ProblemState::all();
+            return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates]);
+        }else if($request->selectChapter == null && $request->selectSection != null){
+            $problems = Problem::where([['section', '=', $request->selectSection]])->paginate(10);
+            $problemstates = ProblemState::all();
+            return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates]);
+        }else {
+            $problems = Problem::paginate(10);
+            $problemstates = ProblemState::all();
+            return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates]);
+        }
     }
 }
