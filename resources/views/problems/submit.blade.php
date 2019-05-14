@@ -20,57 +20,28 @@
         <thead>
             <th style="width:60px;">序号</th>
             <th>题目</th>
-            <th style="width:80px;">操作</th>
+            <th style="width:120px;">操作</th>
         </thead>
-    @foreach ($problems as $problem)
-        @foreach ($problemstates as $problemstate)
-            @if($problem->id == $problemstate->problem_id)
+    @foreach ($problemsubmit as $submit)
+        @foreach($problems as $problem)
+            @if($submit->problem_id == $problem->id)
             <tbody style="background-color:white">
                  <tr>
-                    <!-- type=1 为判断题 -->
-                    @if($problem->type==1)
-                    <td  name="Sid">{{ $problem->id }}</td>
+                    <td  name="Sid">{{ $submit->problem_id }}</td>
                     <td  name="Sname">                   
-                            第{{ $problem->chapter }}章第{{ $problem->section }}节
-                            <br>
-                            判断题:{{ $problem->stem }}
+                        第{{ $problem->chapter }}章第{{ $problem->section }}节
                         <br>
-                    </td>
-                    <!-- 类型2为选择题 -->
-                    @elseif($problem->type==2)
-                    <td  name="Sid">{{ $problem->id }}</td>
-                    <td  name="Sname">                   
-                            第{{ $problem->chapter }}章第{{ $problem->section }}节
-                            <br>
-                            选择题:{{ $problem->stem }}
+                        题目:{{ $problem->stem }}
                         <br>
+                        所填答案:{{ $submit->student_answer }}
                     </td>
-                    <!-- 类型3为填空题 -->
-                    @elseif($problem->type==3)
-                    <td  name="Sid">{{ $problem->id }}</td>
-                    <td  name="Sname">                   
-                            第{{ $problem->chapter }}章第{{ $problem->section }}节
-                            <br>
-                            填空题:{{ $problem->stem }}
-                        <br>
-                    </td>
-                    <!-- 类型4 为简答题 -->
-                    @else
-                    <td  name="Sid">{{ $problem->id }}</td>
-                    <td  name="Sname">                   
-                            第{{ $problem->chapter }}章第{{ $problem->section }}节
-                            <br>
-                            简答题:{{ $problem->stem }}
-                        <br>
-                    </td>
-                    @endif
                     <td>
                         <div class="container">
                             <div class="row">
                                 <!-- delete model -->
-                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete" onclick="values({{ $problem->id }})">删除</button>
+                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete" onclick="deleteAnswer({{ $submit->id }})">取消提交</button>
                                 <!-- 模态框 -->
-                                <form method="post" action="/online-tests/public/problemEdit/delete">
+                                <form method="post" action="/online-tests/public/submit/delete">
                                 {{ csrf_field() }}
                                 <div class="modal fade" id="delete">
                                     <div class="modal-dialog">
@@ -82,12 +53,12 @@
                                         
                                             <!-- 模态框主体 -->
                                             <div class="modal-body">
-                                                确定要删除这个问题？
+                                                确定要取消提交这个问题的答案？
                                             </div>
                                         
                                             <!-- 模态框底部 -->
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-success" id="deleteID" name="problem_id" value="" >确定</button>
+                                                <button type="submit" class="btn btn-success" id="deleteID" name="problem_id" value="">确定</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
                                             </div>
                                         </div>
@@ -103,13 +74,22 @@
         @endforeach
     @endforeach
     </table>
-    @if(session('status'))
-        <script>
-            alert('{{session('status')}}');
-        </script>
-    @endif
+    {{ $problemsubmit->links() }} 
+
+@if(session('status'))
+    <script>
+        alert('{{session('status')}}');
+    </script>
+@endif
 </div>
 @endsection
+
+<script>
+//将id的值保存在 id="deleteID" 的按钮中，然后传给后台
+function deleteAnswer(id){
+    $("#deleteID").val(id);
+}
+</script>
 
 
 

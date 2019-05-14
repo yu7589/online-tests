@@ -36,7 +36,25 @@ class ProblemsController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->student_number);
+        ///dd($request->student_number);
+        $problems = Problem::all();
+
+        $answers = explode('_', $request->answer);
+
+        for($i=0; $i<count($answers)-2; $i=$i+2){
+            $problemsubmit = new ProblemSubmit;
+            foreach($problems as $problem){
+                if($problem->id == $answers[$i]){
+                    $problemsubmit->problem_id = $answers[$i];
+                    $problemsubmit->student_number = $request->student_number;
+                    $problemsubmit->student_answer = $answers[$i+1];
+                    $problemsubmit->save();
+                }
+                else{
+                    continue;
+                }
+            }
+        };
         //dd($request->answer);
         /*
         $problems = Problem::all();

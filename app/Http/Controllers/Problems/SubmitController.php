@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Problem;
 use App\ProblemState;
 use App\ProblemComplete;
+use App\ProblemSubmit;
 use Illuminate\Support\Facades\DB;
 
 
@@ -20,10 +21,9 @@ class SubmitController extends Controller
     public function index()
     {
         //
-        $problems = DB::table('problems')->paginate(10);
-        $problemstates = ProblemState::all();
-        $problemcompletes = ProblemComplete::all();
-        return view('problems\submit', ['problems'=>$problems, 'problemstates'=>$problemstates, 'problemcomplete'=>$problemcompletes]);
+        $problemsubmit = DB::table('problemsubmit')->paginate(10);
+        $problems = Problem::all();
+        return view('problems\submit', ['problemsubmit'=>$problemsubmit, 'problems'=>$problems]);
     }
 
     /**
@@ -81,14 +81,10 @@ class SubmitController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function delete(Request $request)
     {
-        //
+        //DB::table('problems')->where('id', '=', $request->problem_id)->delete();
+        $data = ProblemSubmit::find($request->problem_id)->Delete();
+        return redirect('submit')->with('status', '取消成功');
     }
 }

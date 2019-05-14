@@ -261,7 +261,7 @@ function show(){
     for(k in check_val){
         for(let i=1; i<=50; i++){
             if(check_val[k] == answered[0][i]){
-                str = str + answered[0][i] + ',' + answered[1][i] + ';';
+                str = str + answered[0][i] + '_' + answered[1][i] + '_';
             }
             else{
                 continue;
