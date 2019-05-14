@@ -25,7 +25,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/problems', 'Problems\ProblemsController@index')->name('problems');
 Route::post('/problems', 'Problems\ProblemsController@store')->name('problems');
 Route::get('/problems/{id}','Problems\ProblemsController@show');
-Route::get('problems/display', 'Problems\ProblemsController@display');
+Route::post('problems/display', 'Problems\ProblemsController@display');
 
 //题目提交界面路由
 Route::get('/submit', 'Problems\SubmitController@index')->name('submit');

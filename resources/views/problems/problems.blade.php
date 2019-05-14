@@ -191,7 +191,7 @@
                     <br>
                     <br>
                     输入章节进行筛选
-                    <form method="get" action="/online-tests/public/problems/display">
+                    <form method="post" action="/online-tests/public/problems/display">
                         <div class="input-group mb-3">
                             <input type="text" name=selectChapter class="form-control" placeholder="章">
                             <input type="text" name=selectSection class="form-control" placeholder="节">
