@@ -85,17 +85,28 @@ class SubmitController extends Controller
                 foreach($problems as $problem){
                     foreach($problemstates as $problemstate){
                         if($submit->problem_id == $problem->id && $problemstate->problem_id == $problem->id){
-                            //dd($request->problem_id);
-                            if($problem->answer == $submit->student_answer){
-                                $problemstate->correct_submit = $problemstate->correct_submit + 1;
-                                $problemstate->all_submit = $problemstate->all_submit + 1;
-                                $problemstate->passing_rate = round($problemstate->correct_submit/$problemstate->all_submit, 3);
-                            }else{
-                                $problemstate->all_submit = $problemstate->all_submit + 1;
-                                $problemstate->passing_rate = round($problemstate->correct_submit/$problemstate->all_submit, 3);
+                            switch($problem->type){
+                                case 1:
+                                    if($problem->answer == $submit->student_answer){
+                                        $problemstate->correct_submit = $problemstate->correct_submit + 1;
+                                        $problemstate->all_submit = $problemstate->all_submit + 1;
+                                        $problemstate->passing_rate = round($problemstate->correct_submit/$problemstate->all_submit, 3);
+                                    }else{
+                                        $problemstate->all_submit = $problemstate->all_submit + 1;
+                                        $problemstate->passing_rate = round($problemstate->correct_submit/$problemstate->all_submit, 3);
+                                    }
+                                    $problemstate->save();
+                                    break;
+                                case 2:
+                                    dd("wu");
+                                    break;
+                                case 3:
+                                    dd("wu");
+                                    break;
+                                case 4:
+                                    dd("wu");
+                                    break;
                             }
-                            $problemstate->save();
-                            //echo $request->problem_id;
                         }
                     }
                 }
