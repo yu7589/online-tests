@@ -69,16 +69,46 @@ class SubmitController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        
+        //dd($request->student_number);
+        
+        $problemsubmit = ProblemSubmit::all();
+        $problems = Problem::all();
+        $problemstates = ProblemState::all();
+
+        $count = 0;
+        foreach($problemsubmit as $submit){
+            if($submit->student_number == $request->student_number){
+                $count = 1;
+                foreach($problems as $problem){
+                    foreach($problemstates as $problemstate){
+                        if($submit->problem_id == $problem->id && $problemstate->problem_id == $problem->id){
+                            //dd($request->problem_id);
+                            if($problem->answer == $submit->student_answer){
+                                $problemstate->correct_submit = $problemstate->correct_submit + 1;
+                                $problemstate->all_submit = $problemstate->all_submit + 1;
+                                $problemstate->passing_rate = round($problemstate->correct_submit/$problemstate->all_submit, 3);
+                            }else{
+                                $problemstate->all_submit = $problemstate->all_submit + 1;
+                                $problemstate->passing_rate = round($problemstate->correct_submit/$problemstate->all_submit, 3);
+                            }
+                            $problemstate->save();
+                            //echo $request->problem_id;
+                        }
+                    }
+                }
+                $submit->delete();
+            }
+        }
+        if($count == 1){
+            return redirect('submit')->with('status', '提交成功');
+        }
+        else{
+            return redirect('submit')->with('status', '没有提交中的回答');
+        }
+        
     }
 
     public function delete(Request $request)

@@ -3,10 +3,11 @@
 @section('content')
 <div class="container">
     <!-- 题目 -->
-    <form method="post" action="/online-tests/public/problemEdit/display">
+    <form method="post" action="/online-tests/public/submit/update">
     {{ csrf_field() }}
         <div class="row">
             <div class="col-md-10">
+                <input type="hidden" name="student_number" value="{{ Auth::user()->student_number }}">
             </div>
             <div class="col-md-2">
             <button type="submit" class="btn btn-success">

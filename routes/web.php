@@ -29,6 +29,7 @@ Route::get('/problems/{id}','Problems\ProblemsController@show');
 //题目提交界面路由
 Route::get('/submit', 'Problems\SubmitController@index')->name('submit');
 Route::post('/submit/delete', 'Problems\SubmitController@delete');
+Route::post('/submit/update', 'Problems\SubmitController@update');
 
 //题库导入界面路由
 Route::get('/problemImport', 'ProblemImport\ProblemImportController@index')->name('problemImport');
