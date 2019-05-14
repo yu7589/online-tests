@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Problems;
 
+use App\User;
 use App\Problem;
 use App\ProblemState;
 use App\ProblemComplete;
+use App\ProblemSubmit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -34,7 +36,9 @@ class ProblemsController extends Controller
      */
     public function store(Request $request)
     {
-        dd(123);
+        dd($request->student_number);
+        //dd($request->answer);
+        /*
         $problems = Problem::all();
         $problemstates = ProblemState::all();
 
@@ -58,6 +62,11 @@ class ProblemsController extends Controller
         }
         $problems = DB::table('problems')->paginate(10);
         return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates]);
+        */
+        $problems = DB::table('problems')->paginate(10);
+        $problemstates = ProblemState::all();
+        $problemcompletes = ProblemComplete::all();
+        return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates, 'problemcomplete'=>$problemcompletes]);
     }
 
     /**
@@ -74,10 +83,5 @@ class ProblemsController extends Controller
         $problemstates = ProblemState::all();
         $problemcompletes = ProblemComplete::all();
         return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates, 'problemcomplete'=>$problemcompletes]);
-    }
-
-    public function test(Request $request)
-    {
-        dd($request->answer);
     }
 }

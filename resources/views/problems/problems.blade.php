@@ -204,9 +204,10 @@
     <div>
 </div>
 
-<form action="/online-tests/public/problems/test" method="post" id="answer_submit">
+<form action="/online-tests/public/problems" method="post" id="answer_submit">
     {{ csrf_field() }}
-    <input type="text" value="" name="answer" id="answer">
+    <input type="hidden" value="{{ Auth::user()->student_number }}" name="student_number" id="student_number">
+    <input type="hidden" value="" name="answer" id="answer">
 </form>
 
 <input type='button' value='提交' onclick="show()"/>
@@ -267,7 +268,6 @@ function show(){
             }
         }
     }
-
     $("#answer").val(str);
     var form = document.getElementById('answer_submit');
     console.log(form);
