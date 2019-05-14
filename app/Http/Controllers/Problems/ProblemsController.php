@@ -18,14 +18,30 @@ class ProblemsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //跳转到题库页面
-        //$problems = DB::table('problems')->paginate(10);
-        $problems = DB::table('problems')->paginate(10);
-        $problemstates = ProblemState::all();
-        $problemcompletes = ProblemComplete::all();
-        return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates, 'problemcomplete'=>$problemcompletes]);
+        $chapter = $request->input('chapter');
+        $section = $request->input('section');
+        $pageNumber = 10;
+
+        if($chapter != null && $section != null){
+            $problems = Problem::where([['chapter', '=', $chapter], ['section', '=', $section]])->paginate($pageNumber);
+            $problemstates = ProblemState::all();
+            return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates, 'chapter'=>$chapter, 'section'=>$section]);
+        }else if($chapter != null && $section == null){
+            $problems = Problem::where([['chapter', '=', $chapter]])->paginate($pageNumber);
+            $problemstates = ProblemState::all();
+            return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates, 'chapter'=>$chapter, 'section'=>$section]);
+        }else if($chapter == null && $section != null){
+            $problems = Problem::where([['section', '=', $section]])->paginate($pageNumber);
+            $problemstates = ProblemState::all();
+            return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates, 'chapter'=>$chapter, 'section'=>$section]);
+        }else {
+            $problems = Problem::paginate($pageNumber);
+            $problemstates = ProblemState::all();
+            return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates, 'chapter'=>$chapter, 'section'=>$section]);
+        }
     }
 
     /**
@@ -73,27 +89,5 @@ class ProblemsController extends Controller
         $problemstates = ProblemState::all();
         $problemcompletes = ProblemComplete::all();
         return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates, 'problemcomplete'=>$problemcompletes]);
-    }
-
-    public function display(Request $request)
-    {
-        //dd($request->selectChapter);
-        if($request->selectChapter != null && $request->selectSection != null){
-            $problems = Problem::where([['chapter', '=', $request->selectChapter], ['section', '=', $request->selectSection]])->paginate(10);
-            $problemstates = ProblemState::all();
-            return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates]);
-        }else if($request->selectChapter != null && $request->selectSection == null){
-            $problems = Problem::where([['chapter', '=', $request->selectChapter]])->paginate(10);
-            $problemstates = ProblemState::all();
-            return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates]);
-        }else if($request->selectChapter == null && $request->selectSection != null){
-            $problems = Problem::where([['section', '=', $request->selectSection]])->paginate(10);
-            $problemstates = ProblemState::all();
-            return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates]);
-        }else {
-            $problems = Problem::paginate(10);
-            $problemstates = ProblemState::all();
-            return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates]);
-        }
     }
 }

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <!-- 题目 -->
-    <form method="post" action="/online-tests/public/problemEdit/display">
+    <form method="get" action="/online-tests/public/problemEdit">
     {{ csrf_field() }}
         <div class="row">
             <div class="col-md-8">
@@ -11,8 +11,8 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">输入章节进行筛选</span>
                     </div>
-                    <input type="text" name=selectChapter class="form-control" placeholder="章">
-                    <input type="text" name=selectSection class="form-control" placeholder="节">
+                    <input type="text" id="chapter" value="{{ $chapter }}" name=chapter class="form-control" placeholder="章">
+                    <input type="text" id="section" value="{{ $section }}" name=section class="form-control" placeholder="节">
                 </div>
             </div>
             <div class="col-md-2">
@@ -237,7 +237,7 @@
         </script>
     @endif
     <!-- pagination -->
-    {{ $problems->links() }} 
+    {!! $problems->appends(['chapter'=>$chapter, 'section'=>$section])->links() !!}
 </div>
 @endsection
 

@@ -25,7 +25,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/problems', 'Problems\ProblemsController@index')->name('problems');
 Route::post('/problems', 'Problems\ProblemsController@store')->name('problems');
 Route::get('/problems/{id}','Problems\ProblemsController@show');
-Route::post('problems/display', 'Problems\ProblemsController@display');
 
 //题目提交界面路由
 Route::get('/submit', 'Problems\SubmitController@index')->name('submit');
@@ -41,7 +40,6 @@ Route::post('/problemImport/upload', 'ProblemImport\ProblemImportController@uplo
 Route::get('/problemEdit', 'ProblemEdit\ProblemEditController@index')->name('problemEdit');
 Route::post('/problemEdit/delete', 'ProblemEdit\ProblemEditController@delete');
 Route::post('problemEdit/update', 'ProblemEdit\ProblemEditController@update');
-Route::post('problemEdit/display', 'ProblemEdit\ProblemEditController@display');
 
 //自动组卷界面路由
 Route::get('/autoTestPaper', 'AutoTestPaper\AutoTestPaperController@index')->name('autoTestPaper');

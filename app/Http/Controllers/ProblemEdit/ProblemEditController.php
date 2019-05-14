@@ -18,34 +18,28 @@ class ProblemEditController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $problems = DB::table('problems')->paginate(10);
+        $chapter = $request->input('chapter');
+        $section = $request->input('section');
 
-        $problemstates = ProblemState::all();
-        return view('problemEdit\problemEdit', ['problems'=>$problems, 'problemstates'=>$problemstates]);
-    }
-
-    public function display(Request $request)
-    {
-        //dd($request->selectChapter);
-        if($request->selectChapter != null && $request->selectSection != null){
-            $problems = Problem::where([['chapter', '=', $request->selectChapter], ['section', '=', $request->selectSection]])->paginate(10);
+        if($chapter != null && $section != null){
+            $problems = Problem::where([['chapter', '=', $chapter], ['section', '=', $section]])->paginate(10);
             $problemstates = ProblemState::all();
-            return view('problemEdit\problemEdit', ['problems'=>$problems, 'problemstates'=>$problemstates]);
-        }else if($request->selectChapter != null && $request->selectSection == null){
-            $problems = Problem::where([['chapter', '=', $request->selectChapter]])->paginate(10);
+            return view('problemEdit\problemEdit', ['problems'=>$problems, 'problemstates'=>$problemstates, 'chapter'=>$chapter, 'section'=>$section]);
+        }else if($chapter != null && $section == null){
+            $problems = Problem::where([['chapter', '=', $chapter]])->paginate(10);
             $problemstates = ProblemState::all();
-            return view('problemEdit\problemEdit', ['problems'=>$problems, 'problemstates'=>$problemstates]);
-        }else if($request->selectChapter == null && $request->selectSection != null){
-            $problems = Problem::where([['section', '=', $request->selectSection]])->paginate(10);
+            return view('problemEdit\problemEdit', ['problems'=>$problems, 'problemstates'=>$problemstates, 'chapter'=>$chapter, 'section'=>$section]);
+        }else if($chapter == null && $section != null){
+            $problems = Problem::where([['section', '=', $section]])->paginate(10);
             $problemstates = ProblemState::all();
-            return view('problemEdit\problemEdit', ['problems'=>$problems, 'problemstates'=>$problemstates]);
+            return view('problemEdit\problemEdit', ['problems'=>$problems, 'problemstates'=>$problemstates, 'chapter'=>$chapter, 'section'=>$section]);
         }else {
             $problems = Problem::paginate(10);
             $problemstates = ProblemState::all();
-            return view('problemEdit\problemEdit', ['problems'=>$problems, 'problemstates'=>$problemstates]);
+            return view('problemEdit\problemEdit', ['problems'=>$problems, 'problemstates'=>$problemstates, 'chapter'=>$chapter, 'section'=>$section]);
         }
     }
 

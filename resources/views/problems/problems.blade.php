@@ -174,7 +174,7 @@
             @endforeach
             </table>
             <!-- pagination -->
-            {{ $problems->links() }}
+            {!! $problems->appends(['chapter'=>$chapter, 'section'=>$section])->links() !!}
         </div>
 
         <!-- 筛选 -->
@@ -191,10 +191,10 @@
                     <br>
                     <br>
                     输入章节进行筛选
-                    <form method="post" action="/online-tests/public/problems/display">
+                    <form method="get" action="/online-tests/public/problems">
                         <div class="input-group mb-3">
-                            <input type="text" name=selectChapter class="form-control" placeholder="章">
-                            <input type="text" name=selectSection class="form-control" placeholder="节">
+                            <input type="text" name=chapter id="chapter" value="{{ $chapter }}" class="form-control" placeholder="章">
+                            <input type="text" name=section id="section" value="{{ $section }}" class="form-control" placeholder="节">
                             &nbsp;
                             <button type="submit" class="btn btn-success">
                             确定
