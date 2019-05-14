@@ -181,17 +181,14 @@
         <div style="hight:1000px">
             <div class="card" style="width:240px;float:right;margin-left:40px;margin-top:45px;">
                 <div class="card-body">
-                    <label>每页显示
-                        <select size="1" name="data-table_length" aria-controls="data-table">
-                            <option value="10" selected="selected">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                        </select> 题目
-                    </label>
-                    <br>
-                    <br>
-                    输入章节进行筛选
-                    <form method="get" action="/online-tests/public/problems">
+                <form method="get" action="/online-tests/public/problems">
+                    <div>
+                        <label>每页显示
+                            <input size="2" type="text" id="pageNumber" name="pageNumber" value="{{ $pageNumber }}" aria-controls="data-table"> 题目
+                        </label>
+                        <br>
+                        <br>
+                        输入章节进行筛选
                         <div class="input-group mb-3">
                             <input type="text" name=chapter id="chapter" value="{{ $chapter }}" class="form-control" placeholder="章">
                             <input type="text" name=section id="section" value="{{ $section }}" class="form-control" placeholder="节">
@@ -200,9 +197,9 @@
                             确定
                             </button>  
                         </div>
+                        <br>
+                    </div>
                     </form>
-                    <br>
-                    <br>
                     <button type="submit" class="btn btn-info" onclick="show()">提交已作答题目</button>
                 </div>
             </div>
@@ -303,10 +300,4 @@ function selectAll() {
     console.log(answered[1][2])
 }
 */
-/*
-function info(){
-    alert("当前页面所作答题目将会被提交到已选中题目表单中");
-}
-*/
-
 </script>
