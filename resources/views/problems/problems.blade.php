@@ -169,7 +169,7 @@
             @endforeach
             </table>
             <!-- pagination -->
-            {!! $problems->appends(['chapter'=>$chapter, 'section'=>$section])->links() !!}
+            {!! $problems->appends(['chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber])->links() !!}
         </div>
 
         <!-- 筛选 -->

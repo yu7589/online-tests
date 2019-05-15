@@ -96,6 +96,8 @@ class SubmitController extends Controller
                                         $problemcomplete->completed = 1;
                                         $problemcomplete->student_number = $submit->student_number;
                                         $problemcomplete->problem_id = $submit->problem_id;
+                                        $problemcomplete->chapter = $problem->chapter;
+                                        $problemcomplete->section = $problem->section;               
                                         $problemcomplete->type = 1;
                                         $problemcomplete->answer_save = $submit->student_answer;
                                         $problemcomplete->rightness = 1;
@@ -108,6 +110,8 @@ class SubmitController extends Controller
                                         $problemcomplete->completed = 1;
                                         $problemcomplete->student_number = $submit->student_number;
                                         $problemcomplete->problem_id = $submit->problem_id;
+                                        $problemcomplete->chapter = $problem->chapter;
+                                        $problemcomplete->section = $problem->section;           
                                         $problemcomplete->type = 1;
                                         $problemcomplete->answer_save = $submit->student_answer;
                                         $problemcomplete->rightness = 1;
