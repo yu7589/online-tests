@@ -75,19 +75,32 @@ class ProblemsController extends Controller
         return redirect('problems')->with('status', '已提交');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
-        dd($id);
-        $problems = DB::table('problems')->paginate(10);
-        $problemstates = ProblemState::all();
-        $problemcompletes = ProblemComplete::all();
-        return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates, 'problemcomplete'=>$problemcompletes]);
+        //跳转到题库页面
+        $chapter = $request->input('chapter');
+        $section = $request->input('section');
+        $pageNumber = 10;
+        if($request->input('pageNumber') != null){
+            $pageNumber = $request->input('pageNumber');
+        }
+
+        if($chapter != null && $section != null){
+            $problems = Problem::where([['chapter', '=', $chapter], ['section', '=', $section]])->paginate($pageNumber);
+            $problemstates = ProblemState::all();
+            return view('problems\answered', ['problems'=>$problems, 'problemstates'=>$problemstates, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
+        }else if($chapter != null && $section == null){
+            $problems = Problem::where([['chapter', '=', $chapter]])->paginate($pageNumber);
+            $problemstates = ProblemState::all();
+            return view('problems\answered', ['problems'=>$problems, 'problemstates'=>$problemstates, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
+        }else if($chapter == null && $section != null){
+            $problems = Problem::where([['section', '=', $section]])->paginate($pageNumber);
+            $problemstates = ProblemState::all();
+            return view('problems\answered', ['problems'=>$problems, 'problemstates'=>$problemstates, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
+        }else {
+            $problems = Problem::paginate($pageNumber);
+            $problemstates = ProblemState::all();
+            return view('problems\answered', ['problems'=>$problems, 'problemstates'=>$problemstates, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
+        }
     }
 }

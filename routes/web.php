@@ -24,7 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 //题库页面路由
 Route::get('/problems', 'Problems\ProblemsController@index')->name('problems');
 Route::post('/problems', 'Problems\ProblemsController@store')->name('problems');
-Route::get('/problems/{id}','Problems\ProblemsController@show');
+Route::get('/problems/answered','Problems\ProblemsController@show');
 
 //题目提交界面路由
 Route::get('/submit', 'Problems\SubmitController@index')->name('submit');

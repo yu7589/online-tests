@@ -199,7 +199,6 @@
                         <br>
                     </div>
                     </form>
-                    <button type="submit" class="btn btn-info" onclick="show()">提交已作答题目</button>
                 </div>
             </div>
         </div>
