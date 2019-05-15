@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\PersonalCenter;
 
-
+use App\User;
 use App\Problem;
 use App\ProblemState;
 use App\ProblemComplete;
@@ -20,18 +20,78 @@ class PersonalCenterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-        $str = EndaEditor::MarkDecode("$\underline{x+y}$");
+        //dd($request->user()->student_number);
 
-        $markdown = new MarkDowner; //实例化
-        $htmler = "$\underline{x+y}$";
-        echo $markdowner = $markdown->convertHtmlToMarkdown($htmler); //html转换markdown  
-        echo $htmler = $markdown->convertMarkdownToHtml("# a"); //markdown转换html 
+        $selectRight = 0;
+        $selectCount = 0;
+        $selectRate = 0;
 
+        $judgmentRight = 0;
+        $judgmentCount = 0;
+        $judgmentRate = 0;
 
-        return view('personalCenter\personalCenter', ['str'=>$str]);
+        $fillblankRight = 0;
+        $fillblankCount = 0;
+        $fillblankRate = 0;
+
+        $shortanswerRight = 0;
+        $shortanswerCount = 0;
+        $shortanswerRate = 0;
+
+        $problemComplete = ProblemComplete::all();
+        foreach($problemComplete as $complete){
+            if($complete->student_number == $request->user()->student_number){
+                switch($complete->type){
+                    case 1:
+                        $judgmentCount = $judgmentCount + 1;
+                        if($complete->rightness == 1){
+                            $judgmentRight = $judgmentRight + 1;
+                            $judgmentRate = round($judgmentRight/$judgmentCount, 3);
+                        }
+                        else{
+                            $judgmentRate = round($judgmentRight/$judgmentCount, 3);
+                        }
+                        break;
+                    case 2:
+                        $selectCount = $selectCount + 1;
+                        if($complete->rightness == 1){
+                            $selectRight = $selectRight + 1;
+                            $selectRate = round($selectRight/$selectCount, 3);
+                        }
+                        else{
+                            $selectRate = round($selectRight/$selectCount, 3);
+                        }
+                    break;
+                    case 3:
+                        $fillblankCount = $fillblankCount + 1;
+                        if($complete->rightness == 1){
+                            $fillblankRight = $fillblankRight + 1;
+                            $fillblankRate = round($fillblankRight/$fillblankCount, 3);
+                        }
+                        else{
+                            $fillblankRate = round($fillblankRight/$fillblankCount, 3);
+                        }
+                        break;
+                    case 4:
+                        $shortanswerCount = $shortanswerCount + 1;
+                        if($complete->rightness == 1){
+                            $shortanswerRight = $shortanswerRight + 1;
+                            $shortanswerRate = round($shortanswerRight/$shortanswerCount, 3);
+                        }
+                        else{
+                            $shortanswerRate = round($shortanswerRight/$shortanswerCount, 3);
+                        }
+                        break;
+                }
+            }
+            else{
+                continue;
+            }
+        }
+        $state = array($judgmentCount, $judgmentRight, $judgmentRate, $selectCount, $selectRight, $selectRate, $fillblankCount, $fillblankRight, $fillblankRate, $shortanswerCount, $shortanswerRight, $shortanswerRate);
+        return view('personalCenter\personalCenter', ['state'=>$state]);
     }
 
     /**

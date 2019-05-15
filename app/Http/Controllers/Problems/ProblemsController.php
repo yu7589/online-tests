@@ -52,7 +52,7 @@ class ProblemsController extends Controller
      */
     public function store(Request $request)
     {
-        ///dd($request->student_number);
+        //dd($request->user()->student_number);
         $problems = Problem::all();
 
         $answers = explode('_', $request->answer);
@@ -62,7 +62,7 @@ class ProblemsController extends Controller
             foreach($problems as $problem){
                 if($problem->id == $answers[$i]){
                     $problemsubmit->problem_id = $answers[$i];
-                    $problemsubmit->student_number = $request->student_number;
+                    $problemsubmit->student_number = $request->user()->student_number;
                     $problemsubmit->student_answer = $answers[$i+1];
                     $problemsubmit->save();
                 }

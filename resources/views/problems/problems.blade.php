@@ -209,7 +209,6 @@
 
 <form action="/online-tests/public/problems" method="post" id="answer_submit">
     {{ csrf_field() }}
-    <input type="hidden" value="{{ Auth::user()->student_number }}" name="student_number" id="student_number">
     <input type="hidden" value="" name="answer" id="answer">
 </form>
 @if(session('status'))

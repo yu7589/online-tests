@@ -91,18 +91,31 @@ class SubmitController extends Controller
                                         $problemstate->correct_submit = $problemstate->correct_submit + 1;
                                         $problemstate->all_submit = $problemstate->all_submit + 1;
                                         $problemstate->passing_rate = round($problemstate->correct_submit/$problemstate->all_submit, 3);
+
+                                        $problemcomplete = new ProblemComplete;
+                                        $problemcomplete->completed = 1;
+                                        $problemcomplete->student_number = $submit->student_number;
+                                        $problemcomplete->problem_id = $submit->problem_id;
+                                        $$problemcomplete->type = 1;
+                                        $problemcomplete->answer_save = $problem->answer;
+                                        $problemcomplete->rightness = 1;
+                                        $problemcomplete->save();
                                     }else{
                                         $problemstate->all_submit = $problemstate->all_submit + 1;
                                         $problemstate->passing_rate = round($problemstate->correct_submit/$problemstate->all_submit, 3);
+
+                                        $problemcomplete = new ProblemComplete;
+                                        $problemcomplete->completed = 1;
+                                        $problemcomplete->student_number = $submit->student_number;
+                                        $problemcomplete->problem_id = $submit->problem_id;
+                                        $$problemcomplete->type = 1;
+                                        $problemcomplete->answer_save = $problem->answer;
+                                        $problemcomplete->rightness = 1;
+                                        $problemcomplete->save();
                                     }
                                     $problemstate->save();
 
-                                    $problemcomplete = new ProblemComplete;
-                                    $problemcomplete->completed = 1;
-                                    $problemcomplete->student_number = $submit->student_number;
-                                    $problemcomplete->problem_id = $submit->problem_id;
-                                    $problemcomplete->answer_save = $problem->answer;
-                                    $problemcomplete->save();
+
                                     break;
                                 case 2:
                                     dd("wu");

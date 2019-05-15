@@ -2,28 +2,61 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="card col-md-12">
-            <div class="card-body row">
-                
-            
-                <div class="col-md-4">
-                    <div class="input-group ">
-                        <button type="button" class="btn btn-success">已选中题目</button>
-                    </div>
-                    {{ $str }}
-                    "<h1>a</h1>"
-                    <?php echo " $str " ?>
-
-                    $\underline{x+y}$
-
-                    <p>
-  When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are
-  $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
-
-  $\underline{x+y}$
-</p>
-                </div>
+    <div class="row col-md-12">
+        <div class="panel panel-default col-md-12">
+            <div class="panel-heading">
+                <div class="card">
+                <div class="card-header">账户信息</div>
+                <div class="card-body">
+                    学号：{{ Auth::user()->student_number }}
+                    <br>
+                    姓名：{{ Auth::user()->name }}
+                    <br>
+                    邮箱：{{ Auth::user()->email }}
+                </div> 
+            </div>
+            <br>
+            <div class="panel-heading">
+                <div class="card">
+                <div class="card-header">答题情况</div>
+                <div class="card-body">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>题型</th>
+                                <th>答题数</th>
+                                <th>正确数</th>
+                                <th>通过率</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>选择题</td>
+                                <td>{{ $state[3] }}</td>
+                                <td>{{ $state[4] }}</td>
+                                <td>{{ $state[5] }}</td>
+                            </tr>
+                            <tr>
+                                <td>填空题</td>
+                                <td>{{ $state[6] }}</td>
+                                <td>{{ $state[7] }}</td>
+                                <td>{{ $state[8] }}</td>
+                            </tr>
+                            <tr>
+                                <td>判断题</td>
+                                <td>{{ $state[0] }}</td>
+                                <td>{{ $state[1] }}</td>
+                                <td>{{ $state[2] }}</td>
+                            </tr>
+                            <tr>
+                                <td>简答题</td>
+                                <td>{{ $state[9] }}</td>
+                                <td>{{ $state[10] }}</td>
+                                <td>{{ $state[11] }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div> 
             </div>
         </div>
     </div>
