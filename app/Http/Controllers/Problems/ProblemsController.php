@@ -48,10 +48,7 @@ class ProblemsController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * 将提交的数据保存到problemsubmit数据库中 
      */
     public function store(Request $request)
     {

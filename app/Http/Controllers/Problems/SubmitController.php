@@ -96,6 +96,13 @@ class SubmitController extends Controller
                                         $problemstate->passing_rate = round($problemstate->correct_submit/$problemstate->all_submit, 3);
                                     }
                                     $problemstate->save();
+
+                                    $problemcomplete = new ProblemComplete;
+                                    $problemcomplete->completed = 1;
+                                    $problemcomplete->student_number = $submit->student_number;
+                                    $problemcomplete->problem_id = $submit->problem_id;
+                                    $problemcomplete->answer_save = $problem->answer;
+                                    $problemcomplete->save();
                                     break;
                                 case 2:
                                     dd("wu");
