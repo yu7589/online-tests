@@ -22,10 +22,6 @@
                     <span class="text-success mt-1 " style="font-size:19px"> 
                         默认排序
                     </span>
-                    <span class="mt-1 ml-3" style="font-size:19px"> 
-                        难度排序
-                        <i class="fa fa-angle-double-down" aria-hidden="true"></i>
-                    </span>
                 </div>
 
                 <div class="col-md-4">
