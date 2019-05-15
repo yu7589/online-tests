@@ -114,7 +114,7 @@ class SubmitController extends Controller
                                         $problemcomplete->section = $problem->section;           
                                         $problemcomplete->type = 1;
                                         $problemcomplete->answer_save = $submit->student_answer;
-                                        $problemcomplete->rightness = 1;
+                                        $problemcomplete->rightness = 0;
                                         $problemcomplete->save();
                                     }
                                     $problemstate->save();

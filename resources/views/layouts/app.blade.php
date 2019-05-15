@@ -69,7 +69,7 @@
                                 <a class="nav-link" href="{{ route('problemImport') }}">题库导入</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('autoTestPaper') }}">自动组卷</a>
+                                <a class="nav-link" href="{{ route('autoTestPaper') }}">组卷</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('homeworkAssignment') }}">作业布置</a>

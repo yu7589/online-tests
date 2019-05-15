@@ -5,13 +5,23 @@
     <div class="row">
         <div class="card col-md-12">
             <div class="card-body row">
-                
-
-                <div class="col-md-4">
-                    <div class="input-group ">
-                        <button type="button" class="btn btn-success">已选中题目</button>
-                    </div>
-                </div>
+                一、判断题<br>
+                    @foreach($counts as $count)
+                    {{ $count + 1 }}.{{ $problems[$count]->stem }}<br>
+                    @endforeach
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                二、选择题
             </div>
         </div>
     </div>
