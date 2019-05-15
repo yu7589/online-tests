@@ -72,10 +72,13 @@ class ProblemImportController extends Controller
     		//查看上传文件的属性
             $fileCharacter = $request->file('source');
             
-
+            $str = " ";
+            $str = str_replace(array("QU -", "SO -", "QF -", "SF -", "AN -", "CO -"), "SPLIT", $fileCharacter->get());
+            //dd($str);
             //dd(explode("\n",$fileCharacter->get()));
             //将题库文件按分行符划分为数组保存到problems中
-            $newProblems = explode("\n",$fileCharacter->get());
+            //$newProblems = explode("\n",$fileCharacter->get());
+            $newProblems = explode("SPLIT",$str);
             //dd($newProblems);
             $chapter = null;
             $section = null;
@@ -90,56 +93,61 @@ class ProblemImportController extends Controller
             $used = null;
             $CO = null;
 
-            $count = 0;
-            for($i=0; $i<count($newProblems)-1; $i++){
+            $count = 1;
+            for($i=1; $i<count($newProblems); $i++){
                 switch($count){
-                    case 0:
-                        $stem = ltrim($newProblems[$i], "QU - ");
+                    case 1:
+                        $stem = trim($newProblems[$i]);
                         //dd($stem);
                         $count++;
                         break;
-                    case 1:
-                        $answer = ltrim($newProblems[$i], "SO - ");
+                    case 2:
+                        $answer = trim($newProblems[$i]);
                         //dd($answer);
                         $count++;
                         break;
-                    case 2:
-                        $picture_url1 = ltrim($newProblems[$i], "QF - ");
+                    case 3:
+                        $picture_url1 = trim($newProblems[$i]);
                         //dd($picture_url1);
                         $count++;
                         break;
-                    case 3:
-                        $picture_url2 = ltrim($newProblems[$i], "SF - ");
+                    case 4:
+                        $picture_url2 = trim($newProblems[$i]);
                         //dd($picture_url2);
                         $count++;
                         break;
-                    case 4:
-                        $explanation = ltrim($newProblems[$i], "AN - ");
+                    case 5:
+                        $explanation = trim($newProblems[$i]);
+                        //dd($explanation);
                         $count++;
                         break;
-                    case 5:
-                        $CO = $newProblems[$i];
+                    case 6:
+                        $CO = trim($newProblems[$i]);
+                        $count = 1;
                         //dd($CO);
-                        $count++;
 
                         $cut = explode("-", $CO);
                         //dd($cut);
-                        $chapter = ltrim($cut[1]);
-                        $section = $cut[2];
-                        $type = $cut[4];
-                        $difficulty = $cut[5];
-                        $author = $cut[6];
-                        $used = $cut[8];
-                        if($used == 'usd'){
+                        $chapter = $cut[0];
+                        //dd($chapter);
+                        $section = $cut[1];
+                        //dd($section);
+                        $type = $cut[3];
+                        $difficulty = $cut[4];
+                        $author = $cut[5];
+                        $used = $cut[7];
+                        if($used){
                             $used = 1;
                         }else {
                             $used = 0;
                         }
+                        //dd($used);
                         
 
                         //插入新题目
                         $problem = new Problem;
                         $problem->chapter = $chapter;
+                        //dd($chapter);
                         $problem->section = $section;
                         $problem->stem = $stem;
                         $problem->picture_url1 = $picture_url1;
@@ -166,9 +174,6 @@ class ProblemImportController extends Controller
                             $problemState->save();
                         }
 
-                        break;
-                    case 6:
-                        $count = 0;
                         break;
                     default:
                         break;
