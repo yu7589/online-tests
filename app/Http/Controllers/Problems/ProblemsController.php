@@ -21,6 +21,7 @@ class ProblemsController extends Controller
     public function index(Request $request)
     {
         //跳转到题库页面
+        $student_number = $request->user()->student_number;
         $chapter = $request->input('chapter');
         $section = $request->input('section');
         $pageNumber = 10;
@@ -28,22 +29,44 @@ class ProblemsController extends Controller
             $pageNumber = $request->input('pageNumber');
         }
 
+        $judg = array();
+        $count = 0;
+        $problemComplete = ProblemComplete::where([['student_number', '=', $student_number]])->get();
+        $problems = Problem::all();
+        foreach($problems as $problem){
+            foreach($problemComplete as $complete){
+                if($problem->id == $complete->problem_id){
+                    $judg[$count] = $problem->id;
+                    $count++;
+                    continue;
+                }
+                else{
+                    continue;
+                }
+            }
+        }
+
         if($chapter != null && $section != null){
+            $problemComplete = ProblemComplete::where([['student_number', '=', $student_number]])->get();
             $problems = Problem::where([['chapter', '=', $chapter], ['section', '=', $section]])->paginate($pageNumber);
             $problemstates = ProblemState::all();
-            return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
+            return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates, 'problemcomplete'=>$problemComplete, 'judg'=>$judg, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
         }else if($chapter != null && $section == null){
+            $problemComplete = ProblemComplete::where([['student_number', '=', $student_number]])->get();
             $problems = Problem::where([['chapter', '=', $chapter]])->paginate($pageNumber);
             $problemstates = ProblemState::all();
-            return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
+            return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates, 'problemcomplete'=>$problemComplete, 'judg'=>$judg, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
         }else if($chapter == null && $section != null){
+            $problemComplete = ProblemComplete::where([['student_number', '=', $student_number]])->get();
             $problems = Problem::where([['section', '=', $section]])->paginate($pageNumber);
             $problemstates = ProblemState::all();
-            return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
+            return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates, 'problemcomplete'=>$problemComplete, 'judg'=>$judg, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
         }else {
+            $problemComplete = ProblemComplete::where([['student_number', '=', $student_number]])->get();
+            //dd($problemComplete[0]->student_number);
             $problems = Problem::paginate($pageNumber);
             $problemstates = ProblemState::all();
-            return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
+            return view('problems\problems', ['problems'=>$problems, 'problemstates'=>$problemstates, 'problemcomplete'=>$problemComplete, 'judg'=>$judg, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
         }
     }
 
