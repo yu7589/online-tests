@@ -69,16 +69,39 @@
                                         <br>
                                         <form method="post" action="/online-tests/public/problems">
                                         {{ csrf_field() }}
-                                            答案:
-                                            <input name="selectradio" type="radio" class="cb" onclick="record({{ $problem->id }}, 'A')">
+                                            选项:
                                             &nbsp;A.{{ explode(";", str_replace('*', '', $problem->answer), 4)[0] }}
-                                            <input name="selectradio" type="radio" class="cb" onclick="record({{ $problem->id }}, 'B')">
                                             &nbsp;B.{{ explode(";", str_replace('*', '', $problem->answer), 4)[1] }}
-                                            <input name="selectradio" type="radio" class="cb" onclick="record({{ $problem->id }}, 'C')">
                                             &nbsp;C.{{ explode(";", str_replace('*', '', $problem->answer), 4)[2] }}
-                                            <input name="selectradio" type="radio" class="cb" onclick="record({{ $problem->id }}, 'D')">
                                             &nbsp;D.{{ explode(";", str_replace('*', '', $problem->answer), 4)[3] }}
-                                        </form>
+                                            <br>
+                                            提交答案：&nbsp;{{ $complete->answer_save }}
+                                            <br>
+                                            正确答案：
+                                            <?php 
+                                                $answers = explode(";", $problem->answer, 4);
+                                                $letter = '';
+                                                //dd(substr_count($answers[2], '**'));
+                                                for($i=0; $i<4; $i++){
+                                                    if(substr_count($answers[$i], '**') == 2){
+                                                        switch($i){
+                                                            case 0:
+                                                                $letter = 'A';
+                                                                break;
+                                                            case 1:
+                                                                $letter = 'B';
+                                                                break;
+                                                            case 2:
+                                                                $letter = 'C';
+                                                                break;
+                                                            case 3:
+                                                                $letter = 'D';
+                                                                break;
+                                                        }
+                                                    }
+                                                }
+                                                echo $letter;
+                                            ?>
                                     </td>
                                     <!-- 类型3为填空题 -->
                                     @elseif($problem->type==3)
@@ -246,16 +269,4 @@ function show(){
     */
     alert("将把已作答的题目提交到已选中题目表单中");
 }
-/*
-全选,暂时取消
-
-function selectAll() {
-    var selectAll = document.getElementById("selectAll");
-    var trs = document.getElementsByClassName("cb");
-    for (var i = 1; i < trs.length; i++) {
-        trs[i].checked = selectAll.checked;
-    }
-    console.log(answered[1][2])
-}
-*/
 </script>
