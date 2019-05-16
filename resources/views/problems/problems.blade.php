@@ -280,7 +280,7 @@ function show(){
         window.location.href = 'http://localhost/online-tests/public/submit';
     }),
     */
-    alert("将把已作答的题目提交到已选中题目表单中");
+    alert("将把已勾选已作答的题目提交到已选中题目表单中");
 }
 /*
 全选,暂时取消

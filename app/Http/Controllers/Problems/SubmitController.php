@@ -120,16 +120,82 @@ class SubmitController extends Controller
                                     }
                                     $problemstate->save();
 
-
                                     break;
                                 case 2:
-                                    dd("wu");
+                                    $answers = explode(";", $problem->answer, 4);
+                                    $letter = '';
+                                    //dd(substr_count($answers[2], '**'));
+                                    for($i=0; $i<4; $i++){
+                                        if(substr_count($answers[$i], '**') == 2){
+                                            switch($i){
+                                                case 0:
+                                                    $letter = 'A';
+                                                    break;
+                                                case 1:
+                                                    $letter = 'B';
+                                                    break;
+                                                case 2:
+                                                    $letter = 'C';
+                                                    break;
+                                                case 3:
+                                                    $letter = 'D';
+                                                    break;
+                                            }
+                                        }
+                                    }
+                                    //dd($letter);
+                                    if($letter == $submit->student_answer){
+                                        $problemstate->correct_submit = $problemstate->correct_submit + 1;
+                                        $problemstate->all_submit = $problemstate->all_submit + 1;
+                                        $problemstate->passing_rate = round($problemstate->correct_submit/$problemstate->all_submit, 3);
+
+                                        $problemcomplete = new ProblemComplete;
+                                        $problemcomplete->completed = 1;
+                                        $problemcomplete->student_number = $submit->student_number;
+                                        $problemcomplete->problem_id = $submit->problem_id;
+                                        $problemcomplete->chapter = $problem->chapter;
+                                        $problemcomplete->section = $problem->section;               
+                                        $problemcomplete->type = 2;
+                                        $problemcomplete->answer_save = $submit->student_answer;
+                                        $problemcomplete->rightness = 1;
+                                        $problemcomplete->save();
+                                    }else{
+                                        $problemstate->all_submit = $problemstate->all_submit + 1;
+                                        $problemstate->passing_rate = round($problemstate->correct_submit/$problemstate->all_submit, 3);
+
+                                        $problemcomplete = new ProblemComplete;
+                                        $problemcomplete->completed = 1;
+                                        $problemcomplete->student_number = $submit->student_number;
+                                        $problemcomplete->problem_id = $submit->problem_id;
+                                        $problemcomplete->chapter = $problem->chapter;
+                                        $problemcomplete->section = $problem->section;           
+                                        $problemcomplete->type = 2;
+                                        $problemcomplete->answer_save = $submit->student_answer;
+                                        $problemcomplete->rightness = 0;
+                                        $problemcomplete->save();
+                                    }
+                                    $problemstate->save();
+
                                     break;
                                 case 3:
                                     dd("wu");
                                     break;
                                 case 4:
-                                    dd("wu");
+                                    $problemstate->all_submit = $problemstate->all_submit + 1;
+
+                                    $problemcomplete = new ProblemComplete;
+                                    $problemcomplete->completed = 1;
+                                    $problemcomplete->student_number = $submit->student_number;
+                                    $problemcomplete->problem_id = $submit->problem_id;
+                                    $problemcomplete->chapter = $problem->chapter;
+                                    $problemcomplete->section = $problem->section;               
+                                    $problemcomplete->type = 4;
+                                    $problemcomplete->answer_save = $submit->student_answer;
+                                    $problemcomplete->rightness = 1;
+                                    $problemcomplete->save();
+
+                                    $problemstate->save();
+
                                     break;
                             }
                         }

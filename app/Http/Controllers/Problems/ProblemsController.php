@@ -76,7 +76,7 @@ class ProblemsController extends Controller
         $submits = ProblemSubmit::all();
 
         $answers = explode('_', $request->answer);
-        //dd($answers[0]);
+        dd($answers[0]);
         for($i=0; $i<count($answers)-2; $i=$i+2){
             foreach($submits as $submit){
                 if($submit->problem_id == $answers[$i]){
