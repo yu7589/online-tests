@@ -73,13 +73,19 @@ class ProblemsController extends Controller
     {
         //dd($request->user()->student_number);
         $problems = Problem::all();
+        $submits = ProblemSubmit::all();
 
         $answers = explode('_', $request->answer);
-
+        //dd($answers[0]);
         for($i=0; $i<count($answers)-2; $i=$i+2){
-            $problemsubmit = new ProblemSubmit;
+            foreach($submits as $submit){
+                if($submit->problem_id == $answers[$i]){
+                    return redirect('problems')->with('status', '部分问题已提交过，不要重复提交');
+                }
+            }
             foreach($problems as $problem){
                 if($problem->id == $answers[$i]){
+                    $problemsubmit = new ProblemSubmit;
                     $problemsubmit->problem_id = $answers[$i];
                     $problemsubmit->student_number = $request->user()->student_number;
                     $problemsubmit->student_answer = $answers[$i+1];
