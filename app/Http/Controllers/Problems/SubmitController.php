@@ -139,10 +139,10 @@ class SubmitController extends Controller
             }
         }
         if($count == 1){
-            return redirect('submit')->with('status', '提交成功');
+            return redirect('problems')->with('status', '提交成功');
         }
         else{
-            return redirect('submit')->with('status', '没有提交中的回答');
+            return redirect('problems')->with('status', '没有提交中的回答');
         }
         
     }

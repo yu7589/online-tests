@@ -44,7 +44,7 @@ Route::post('problemEdit/update', 'ProblemEdit\ProblemEditController@update');
 //自动组卷界面路由
 Route::get('/autoTestPaper', 'AutoTestPaper\AutoTestPaperController@index')->name('autoTestPaper');
 Route::get('/autoTestPaper/testPaper', 'AutoTestPaper\AutoTestPaperController@show');
-Route::post('/problems', 'AutoTestPaper\AutoTestPaperController@store')->name('autoTestPaper');
+Route::post('/autoTestPaper', 'AutoTestPaper\AutoTestPaperController@store')->name('autoTestPaper');
 
 //个人中心界面路由
 Route::get('/personalCenter', 'PersonalCenter\PersonalCenterController@index')->name('personalCenter');
