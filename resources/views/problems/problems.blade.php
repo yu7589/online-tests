@@ -125,14 +125,12 @@
                                 填空题:{{ $problem->stem }}
                                 <?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
                                 <br>
-                                {{ $problem->answer }}
-                                <br>
                                 <br>
                                 <form method="post" action="/online-tests/public/problems">
                                 {{ csrf_field() }}
                                     答案:
                                     <div class="input-group" style="width:280px;">
-                                        <input type="text" class="form-control" id="answer_text" name="answer_text">
+                                        <input type="text" class="form-control" id="answer_text" placeholder="答案请用分号分隔，例：xx;xx;" name="answer_text">
                                     </div>
                                 </form>
                             </td>
