@@ -75,14 +75,15 @@ class SubmitController extends Controller
         //dd($request->student_number);
         
         $problemsubmit = ProblemSubmit::all();
-        $problems = Problem::all();
-        $problemstates = ProblemState::all();
 
         $count = 0;
         foreach($problemsubmit as $submit){
             if($submit->student_number == $request->student_number){
                 $count = 1;
+                //dd($submit->problem_id);
+                $problems = Problem::where('id', '=', $submit->problem_id)->get();
                 foreach($problems as $problem){
+                    $problemstates = ProblemState::where('problem_id', '=', $submit->problem_id)->get();
                     foreach($problemstates as $problemstate){
                         if($submit->problem_id == $problem->id && $problemstate->problem_id == $problem->id){
                             switch($problem->type){
