@@ -20,6 +20,8 @@ class HomeWorkAssignmentController extends Controller
     public function index()
     {
         //
+
+        dd(explode(";", str_replace('*', '', "工件随工作台往复直线运动; 刀架沿横梁或立柱间作间歇; **刨刀的纵向往复直线运动**; 工件随工作台作横向间歇"), 4));
         return view('homeworkAssignment\homeworkAssignment');
     }
 

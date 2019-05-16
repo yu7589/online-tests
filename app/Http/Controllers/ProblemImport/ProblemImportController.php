@@ -159,27 +159,13 @@ class ProblemImportController extends Controller
                         $problem->author = $author;
                         $problem->used = $used;
                         $problem->save();
-
-                        //
-                        $problems = Problem::where('stem',$stem)->get();
-                        //dd(count($problems));
-                        foreach($problems as $problem){
-                            //dd($problem->stem);
-                            $problemState = new ProblemState;
-                            $problemState->problem_id = $problem->id;
-                            //dd($problemState->problem_id);
-                            $problemState->correct_submit = 0;
-                            $problemState->passing_rate = 0;
-                            $problemState->all_submit = 0;
-                            $problemState->save();
-                        }
-
                         break;
                     default:
                         break;
                 }
             }
 
+            /*
     		if ($fileCharacter->isValid()) { 
     			//获取文件的扩展名 
     			$ext = $fileCharacter->getClientOriginalExtension();
@@ -193,9 +179,21 @@ class ProblemImportController extends Controller
     			//存储文件。disk里面的public。总的来说，就是调用disk模块里的public配置
     			Storage::disk('public')->put($filename, file_get_contents($path));
             }
+            */
         }
 
-
+        $problems = Problem::all();
+        //dd(count($problems));
+        foreach($problems as $problem){
+            //dd($problem->stem);
+            $problemState = new ProblemState;
+            $problemState->problem_id = $problem->id;
+            //dd($problemState->problem_id);
+            $problemState->correct_submit = 0;
+            $problemState->passing_rate = 0;
+            $problemState->all_submit = 0;
+            $problemState->save();
+        }
         return redirect('problemImport')->with('status', '添加成功');
     }
 }
