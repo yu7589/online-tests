@@ -54,6 +54,8 @@ Route::get('/homeworkAssignment', 'HomeworkAssignment\HomeworkAssignmentControll
 
 //学生信息导入界面路由
 Route::get('/studentInfoImport', 'StudentInfoImport\StudentInfoImportController@index')->name('studentInfoImport');
+Route::post('/studentInfoImport/creating', 'StudentInfoImport\StudentInfoImportController@creating');
+Route::post('/studentInfoImport/upload', 'StudentInfoImport\StudentInfoImportController@upload');
 
 //作业批改界面路由
 Route::get('/homeworkCorrecting', 'HomeworkCorrecting\HomeworkCorrectingController@index')->name('homeworkCorrecting');
