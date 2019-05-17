@@ -69,10 +69,16 @@
                                 <a class="nav-link" href="{{ route('problemImport') }}">题库导入</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ route('studentInfoImport') }}">学生信息导入</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('autoTestPaper') }}">组卷</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('homeworkAssignment') }}">作业布置</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('homeworkCorrecting') }}">作业批改</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('personalCenter') }}">个人中心</a>

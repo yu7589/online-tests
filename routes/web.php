@@ -51,3 +51,9 @@ Route::get('/personalCenter', 'PersonalCenter\PersonalCenterController@index')->
 
 //作业布置界面路由
 Route::get('/homeworkAssignment', 'HomeworkAssignment\HomeworkAssignmentController@index')->name('homeworkAssignment');
+
+//学生信息导入界面路由
+Route::get('/studentInfoImport', 'StudentInfoImport\StudentInfoImportController@index')->name('studentInfoImport');
+
+//作业批改界面路由
+Route::get('/homeworkCorrecting', 'HomeworkCorrecting\HomeworkCorrectingController@index')->name('homeworkCorrecting');

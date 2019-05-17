@@ -1,16 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\HomeworkAssignment;
+namespace App\Http\Controllers\HomeworkCorrecting;
 
-
-use App\Problem;
-use App\ProblemState;
-use App\ProblemComplete;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class HomeWorkAssignmentController extends Controller
+class HomeworkCorrectingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +15,7 @@ class HomeWorkAssignmentController extends Controller
     public function index()
     {
         //
-        return view('homeworkAssignment\homeworkAssignment');
+        return view('homeworkCorrecting\homeworkCorrecting');
     }
 
     /**
