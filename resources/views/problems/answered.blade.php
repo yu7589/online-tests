@@ -158,7 +158,7 @@
             @endforeach
             </table>
             <!-- pagination -->
-            {!! $problemcomplete->appends(['chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber])->links() !!}
+            {!! $problemcomplete->appends(['chapter'=>$chapter, 'section'=>$section, 'classname'=>$classname, 'pageNumber'=>$pageNumber])->links() !!}
         </div>
 
         <!-- 筛选 -->
@@ -172,7 +172,9 @@
                         </label>
                         <br>
                         <br>
-                        输入章节进行筛选
+                        输入课程信息进行筛选
+                            <input type="text" name=classname id="classname" value="{{ $classname }}" class="form-control" placeholder="课程名">
+                        <br>
                         <div class="input-group mb-3">
                             <input type="text" name=chapter id="chapter" value="{{ $chapter }}" class="form-control" placeholder="章">
                             <input type="text" name=section id="section" value="{{ $section }}" class="form-control" placeholder="节">
