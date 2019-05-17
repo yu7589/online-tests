@@ -30,7 +30,7 @@
                  <tr>
                     <td  name="Sid">{{ $submit->problem_id }}</td>
                     <td  name="Sname">                   
-                        第{{ $problem->chapter }}章第{{ $problem->section }}节
+                        {{ $problem->classname }}：第{{ $problem->chapter }}章第{{ $problem->section }}节
                         <br>
                         题目:{{ $problem->stem }}
                         <br>

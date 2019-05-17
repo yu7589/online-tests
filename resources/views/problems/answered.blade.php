@@ -47,7 +47,7 @@
                                     @if($problem->type==1)
                                     <td>{{ $problem->id }}</td>
                                     <td>                   
-                                        第{{ $problem->chapter }}章第{{ $problem->section }}节
+                                        {{ $problem->classname }}：第{{ $problem->chapter }}章第{{ $problem->section }}节
                                         <br>
                                         判断题:{{ $problem->stem }}
                                         <?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
@@ -61,7 +61,7 @@
                                     @elseif($problem->type==2)
                                     <td>{{ $problem->id }}</td>
                                     <td>                   
-                                        第{{ $problem->chapter }}章第{{ $problem->section }}节
+                                        {{ $problem->classname }}：第{{ $problem->chapter }}章第{{ $problem->section }}节
                                         <br>
                                         选择题:{{ $problem->stem }}
                                         <?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
@@ -107,7 +107,7 @@
                                     @elseif($problem->type==3)
                                     <td>{{ $problem->id }}</td>
                                     <td>                   
-                                        第{{ $problem->chapter }}章第{{ $problem->section }}节
+                                        {{ $problem->classname }}：第{{ $problem->chapter }}章第{{ $problem->section }}节
                                         <br>
                                         填空题:{{ $problem->stem }}
                                         <?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
@@ -127,7 +127,7 @@
                                     @else
                                     <td>{{ $problem->id }}</td>
                                     <td>                   
-                                        第{{ $problem->chapter }}章第{{ $problem->section }}节
+                                        {{ $problem->classname }}：第{{ $problem->chapter }}章第{{ $problem->section }}节
                                         <br>
                                         简答题:{{ $problem->stem }}
                                         <?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
