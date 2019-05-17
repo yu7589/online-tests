@@ -30,7 +30,7 @@ class ProblemImportController extends Controller
      */
     public function creating(Request $request)
     {
-        //dd($request->QU);
+        //dd($request->classname);
         $problems = Problem::all();
         foreach($problems as $data){
             if($data->stem == $request->stem){
@@ -38,6 +38,7 @@ class ProblemImportController extends Controller
             }
         }
         $problem = new Problem;
+        $problem->classname = $request->classname;
         $problem->chapter = $request->chapter;
         $problem->section = $request->section;
         $problem->stem = $request->stem;
@@ -68,6 +69,8 @@ class ProblemImportController extends Controller
     public function upload(Request $request){
         
         //dd("a");
+        $classname = $request->classname;
+
     	if ($request->isMethod('POST')) { //判断是否是POST上传，应该不会有人用get吧，恩，不会的
     		//查看上传文件的属性
             $fileCharacter = $request->file('source');
@@ -146,6 +149,7 @@ class ProblemImportController extends Controller
 
                         //插入新题目
                         $problem = new Problem;
+                        $problem->classname = $request->classname;
                         $problem->chapter = $chapter;
                         //dd($chapter);
                         $problem->section = $section;
@@ -159,6 +163,16 @@ class ProblemImportController extends Controller
                         $problem->author = $author;
                         $problem->used = $used;
                         $problem->save();
+
+                        //dd($problem->id);
+                        $problemState = new ProblemState;
+                        $prolem = Problem::where(['']);
+                        $problemState->problem_id = $problem->id;
+                        $problemState->correct_submit = 0;
+                        $problemState->passing_rate = 0;
+                        $problemState->all_submit = 0;
+                        $problemState->save();
+
                         break;
                     default:
                         break;
@@ -180,19 +194,6 @@ class ProblemImportController extends Controller
     			Storage::disk('public')->put($filename, file_get_contents($path));
             }
             */
-        }
-
-        $problems = Problem::all();
-        //dd(count($problems));
-        foreach($problems as $problem){
-            //dd($problem->stem);
-            $problemState = new ProblemState;
-            $problemState->problem_id = $problem->id;
-            //dd($problemState->problem_id);
-            $problemState->correct_submit = 0;
-            $problemState->passing_rate = 0;
-            $problemState->all_submit = 0;
-            $problemState->save();
         }
         return redirect('problemImport')->with('status', '添加成功');
     }

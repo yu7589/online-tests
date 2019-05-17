@@ -13,6 +13,12 @@
                             <form class="form-horizontal" method="POST" action="/online-tests/public/problemImport/upload" enctype="multipart/form-data">
                                 {{ csrf_field() }}           
                                 <label for="file">从.md格式文件导入题库</label>
+                                <div class="form-group">
+                                    <label for="firstname" class="col-sm-2 control-label">课程名</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="classname" placeholder="请输入课程名" required="required">
+                                    </div>
+                                </div>
                                 <div class="col-sm-10">
                                     <input id="file" type="file" class="form-control" name="source" required>    
                                 </div>
@@ -43,6 +49,12 @@
                             <label class="text-center">添加试题</label>
                             <form class="form-horizontal" method="post" action="/online-tests/public/problemImport/creating" autocomplete="off">
                                 {{ csrf_field() }}
+                                <div class="form-group">
+                                    <label for="firstname" class="col-sm-2 control-label">课程名</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="classname" placeholder="请输入课程名" required="required">
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label for="firstname" class="col-sm-2 control-label">章</label>
                                     <div class="col-sm-10">
