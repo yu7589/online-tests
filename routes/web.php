@@ -41,10 +41,15 @@ Route::get('/problemEdit', 'ProblemEdit\ProblemEditController@index')->name('pro
 Route::post('/problemEdit/delete', 'ProblemEdit\ProblemEditController@delete');
 Route::post('problemEdit/update', 'ProblemEdit\ProblemEditController@update');
 
-//自动组卷界面路由
+//组卷界面路由
 Route::get('/autoTestPaper', 'AutoTestPaper\AutoTestPaperController@index')->name('autoTestPaper');
-Route::get('/autoTestPaper/testPaper', 'AutoTestPaper\AutoTestPaperController@show');
 Route::post('/autoTestPaper', 'AutoTestPaper\AutoTestPaperController@store')->name('autoTestPaper');
+Route::get('/autoTestPaper/usedProblem', 'AutoTestPaper\AutoTestPaperController@show')->name('autoTestPaper\usedProblem');
+
+//组卷提交界面路由
+Route::get('/autoTestPaper/submit', 'AutoTestPaper\PaperSubmitController@index');
+Route::post('/autoTestPaper/submit/delete', 'AutoTestPaper\PaperSubmitController@delete');
+Route::get('/autoTestPaper/testPaper', 'AutoTestPaper\PaperSubmitController@show');
 
 //个人中心界面路由
 Route::get('/personalCenter', 'PersonalCenter\PersonalCenterController@index')->name('personalCenter');
