@@ -11,8 +11,8 @@
                             所有题目
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="/online-tests/public/problems">所有题目</a>
-                            <a class="dropdown-item" href="/online-tests/public/problems/answered">重点题目</a>
+                            <a class="dropdown-item" href="/online-tests/public/autoTestPaper">所有题目</a>
+                            <a class="dropdown-item" href="/online-tests/public/autoTestPaper/used">重点题目</a>
                         </div>
                     </span>
                     <!-- | 分隔符 -->
@@ -26,7 +26,7 @@
 
                 <div class="col-md-4">
                     <div class="input-group ">
-                        <a href="http://localhost/online-tests/public/submit"><button type="button" class="btn btn-info">查看候选表单中题目</button></a>
+                        <a href="http://localhost/online-tests/public/autoTestPaper/submit"><button type="button" class="btn btn-info">查看候选表单中题目</button></a>
                     </div>
                 </div>
             </div>
@@ -59,7 +59,7 @@
                             @if($problem->type==1)
                             <td>{{ $problem->id }}</td>
                             <td>                   
-                                第{{ $problem->chapter }}章第{{ $problem->section }}节
+                                {{ $problem->classname }}：第{{ $problem->chapter }}章第{{ $problem->section }}节
                                 <br>
                                 判断题:{{ $problem->stem }}
                                 <?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
@@ -74,7 +74,7 @@
                             @elseif($problem->type==2)
                             <td>{{ $problem->id }}</td>
                             <td>                   
-                                第{{ $problem->chapter }}章第{{ $problem->section }}节
+                                {{ $problem->classname }}：第{{ $problem->chapter }}章第{{ $problem->section }}节
                                 <br>
                                 选择题:{{ $problem->stem }}
                                 <?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
@@ -89,12 +89,10 @@
                             @elseif($problem->type==3)
                             <td>{{ $problem->id }}</td>
                             <td>                   
-                                第{{ $problem->chapter }}章第{{ $problem->section }}节
+                                {{ $problem->classname }}：第{{ $problem->chapter }}章第{{ $problem->section }}节
                                 <br>
                                 填空题:{{ $problem->stem }}
                                 <?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
-                                <br>
-                                {{ $problem->answer }}
                                 <br>
                                 <br>
                                     答案:
@@ -106,7 +104,7 @@
                             @else
                             <td>{{ $problem->id }}</td>
                             <td>                   
-                                第{{ $problem->chapter }}章第{{ $problem->section }}节
+                                {{ $problem->classname }}：第{{ $problem->chapter }}章第{{ $problem->section }}节
                                 <br>
                                 简答题:{{ $problem->stem }}
                                 <?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
@@ -132,21 +130,23 @@
             @endforeach
             </table>
             <!-- pagination -->
-            {!! $problems->appends(['chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber])->links() !!}
+            {!! $problems->appends(['chapter'=>$chapter, 'section'=>$section, 'classname'=>$classname, 'pageNumber'=>$pageNumber])->links() !!}
         </div>
 
         <!-- 筛选 -->
         <div style="hight:1000px">
             <div class="card" style="width:240px;float:right;margin-left:40px;margin-top:45px;">
                 <div class="card-body">
-                <form method="get" action="/online-tests/public/problems">
+                <form method="get" action="/online-tests/public/autoTestPaper">
                     <div>
                         <label>每页显示
                             <input size="2" type="text" id="pageNumber" name="pageNumber" value="{{ $pageNumber }}" aria-controls="data-table"> 题目
                         </label>
                         <br>
                         <br>
-                        输入章节进行筛选
+                        输入课程信息进行筛选
+                            <input type="text" name=classname id="classname" value="{{ $classname }}" class="form-control" placeholder="课程名">
+                        <br>
                         <div class="input-group mb-3">
                             <input type="text" name=chapter id="chapter" value="{{ $chapter }}" class="form-control" placeholder="章">
                             <input type="text" name=section id="section" value="{{ $section }}" class="form-control" placeholder="节">
@@ -165,10 +165,6 @@
     <div>
 </div>
 
-<form action="/online-tests/public/problems" method="post" id="answer_submit">
-    {{ csrf_field() }}
-    <input type="hidden" value="" name="answer" id="answer">
-</form>
 @if(session('status'))
     <script>
         alert('{{session('status')}}');

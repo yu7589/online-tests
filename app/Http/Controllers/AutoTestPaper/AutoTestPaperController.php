@@ -19,10 +19,10 @@ class AutoTestPaperController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
     public function index(Request $request)
     {
-        //跳转到题库页面
+        //跳转到组卷页面
+        $classname = $request->input('classname');
         $chapter = $request->input('chapter');
         $section = $request->input('section');
         $pageNumber = 10;
@@ -30,23 +30,40 @@ class AutoTestPaperController extends Controller
             $pageNumber = $request->input('pageNumber');
         }
 
-        if($chapter != null && $section != null){
+        if($chapter != null && $section != null && $classname !== null){
+            $problems = Problem::where([['classname', '=', $classname], ['chapter', '=', $chapter], ['section', '=', $section]])->paginate($pageNumber);
+            $problemstates = ProblemState::all();
+            return view('autoTestPaper\autoTestPaper', ['problems'=>$problems, 'problemstates'=>$problemstates, 'classname'=>$classname, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
+        }else if($chapter != null && $section != null && $classname == null){
             $problems = Problem::where([['chapter', '=', $chapter], ['section', '=', $section]])->paginate($pageNumber);
             $problemstates = ProblemState::all();
-            return view('autoTestPaper\autoTestPaper', ['problems'=>$problems, 'problemstates'=>$problemstates, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
-        }else if($chapter != null && $section == null){
+            return view('autoTestPaper\autoTestPaper', ['problems'=>$problems, 'problemstates'=>$problemstates, 'classname'=>$classname, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
+        }else if($chapter != null && $section == null && $classname != null){
+            $problems = Problem::where([['classname', '=', $classname], ['chapter', '=', $chapter]])->paginate($pageNumber);
+            $problemstates = ProblemState::all();
+            return view('autoTestPaper\autoTestPaper', ['problems'=>$problems, 'problemstates'=>$problemstates, 'classname'=>$classname, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
+        }else if($chapter == null && $section != null && $classname != null){
+            $problems = Problem::where([['classname', '=', $classname], ['section', '=', $section]])->paginate($pageNumber);
+            $problemstates = ProblemState::all();
+            return view('autoTestPaper\autoTestPaper', ['problems'=>$problems, 'problemstates'=>$problemstates, 'classname'=>$classname, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
+        }else if($chapter != null && $section == null && $classname == null){
             $problems = Problem::where([['chapter', '=', $chapter]])->paginate($pageNumber);
             $problemstates = ProblemState::all();
-            return view('autoTestPaper\autoTestPaper', ['problems'=>$problems, 'problemstates'=>$problemstates, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
-        }else if($chapter == null && $section != null){
+            return view('autoTestPaper\autoTestPaper', ['problems'=>$problems, 'problemstates'=>$problemstates, 'classname'=>$classname, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
+        }else if($chapter == null && $section != null && $classname == null){
             $problems = Problem::where([['section', '=', $section]])->paginate($pageNumber);
             $problemstates = ProblemState::all();
-            return view('autoTestPaper\autoTestPaper', ['problems'=>$problems, 'problemstates'=>$problemstates, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
-        }else {
+            return view('autoTestPaper\autoTestPaper', ['problems'=>$problems, 'problemstates'=>$problemstates, 'classname'=>$classname, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
+        }else if($chapter == null && $section == null && $classname != null){
+            $problems = Problem::where([['classname', '=', $classname]])->paginate($pageNumber);
+            $problemstates = ProblemState::all();
+            return view('autoTestPaper\autoTestPaper', ['problems'=>$problems, 'problemstates'=>$problemstates, 'classname'=>$classname, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
+        }
+        else {
             //dd($problemComplete[0]->student_number);
             $problems = Problem::paginate($pageNumber);
             $problemstates = ProblemState::all();
-            return view('autoTestPaper\autoTestPaper', ['problems'=>$problems, 'problemstates'=>$problemstates, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
+            return view('autoTestPaper\autoTestPaper', ['problems'=>$problems, 'problemstates'=>$problemstates, 'classname'=>$classname, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
         }
     }
 
