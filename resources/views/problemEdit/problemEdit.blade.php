@@ -9,8 +9,9 @@
             <div class="col-md-8">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">输入章节进行筛选</span>
+                        <span class="input-group-text">输入课程信息进行筛选</span>
                     </div>
+                    <input type="text" name=classname id="classname" value="{{ $classname }}" class="form-control" placeholder="课程名">
                     <input type="text" id="chapter" value="{{ $chapter }}" name=chapter class="form-control" placeholder="章">
                     <input type="text" id="section" value="{{ $section }}" name=section class="form-control" placeholder="节">
                 </div>
@@ -38,7 +39,7 @@
                     @if($problem->type==1)
                     <td  name="Sid">{{ $problem->id }}</td>
                     <td  name="Sname">                   
-                            第{{ $problem->chapter }}章第{{ $problem->section }}节
+                            {{ $problem->classname }}：第{{ $problem->chapter }}章第{{ $problem->section }}节
                             <br>
                             判断题:{{ $problem->stem }}
                         <br>
@@ -54,7 +55,7 @@
                     @elseif($problem->type==2)
                     <td  name="Sid">{{ $problem->id }}</td>
                     <td  name="Sname">                   
-                            第{{ $problem->chapter }}章第{{ $problem->section }}节
+                            {{ $problem->classname }}：第{{ $problem->chapter }}章第{{ $problem->section }}节
                             <br>
                             选择题:{{ $problem->stem }}
                         <br>
@@ -71,7 +72,7 @@
                     @elseif($problem->type==3)
                     <td  name="Sid">{{ $problem->id }}</td>
                     <td  name="Sname">                   
-                            第{{ $problem->chapter }}章第{{ $problem->section }}节
+                            {{ $problem->classname }}：第{{ $problem->chapter }}章第{{ $problem->section }}节
                             <br>
                             填空题:{{ $problem->stem }}
                         <br>
@@ -88,7 +89,7 @@
                     @else
                     <td  name="Sid">{{ $problem->id }}</td>
                     <td  name="Sname">                   
-                            第{{ $problem->chapter }}章第{{ $problem->section }}节
+                            {{ $problem->classname }}：第{{ $problem->chapter }}章第{{ $problem->section }}节
                             <br>
                             简答题:{{ $problem->stem }}
                         <br>
@@ -106,7 +107,7 @@
                         <div class="container">
                             <div class="row">
                                 <!-- edit model -->
-                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#edit" onclick="editValue({{ $problem->id }}, {{ $problem->chapter }}, {{ $problem->section }},
+                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#edit" onclick="editValue({{ $problem->id }}, '{{ $problem->classname }}', {{ $problem->chapter }}, {{ $problem->section }},
                                 '{{ $problem->stem }}', '{{ $problem->answer }}', '{{ $problem->picture_url1 }}', '{{ $problem->picture_url2 }}', '{{ $problem->explanation }}', {{ $problem->type }}, {{ $problem->difficulty }},
                                 '{{ $problem->author }}')">编辑</button>
                                 <form method="post" action="/online-tests/public/problemEdit/update">
@@ -123,15 +124,21 @@
                                             <div class="modal-body">
                                                 <label class="text-center">题目修改</label>
                                                     <div class="form-group">
+                                                        <label for="firstname" class="col-sm-2 control-label">课程名</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control" id="classnametext" name="classnametext" value='' placeholder="请输入课程名" required="required">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
                                                         <label for="firstname" class="col-sm-2 control-label">章</label>
                                                         <div class="col-sm-10">
-                                                            <input type="text" class="form-control" id="chapter" name="chapter" value='' placeholder="请输入章" required="required">
+                                                            <input type="text" class="form-control" id="chaptertext" name="chaptertext" value='' placeholder="请输入章" required="required">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="firstname" class="col-sm-2 control-label">节</label>
                                                         <div class="col-sm-10">
-                                                            <input type="text" class="form-control" id="section" name="section" value='' placeholder="请输入节" required="required">
+                                                            <input type="text" class="form-control" id="sectiontext" name="sectiontext" value='' placeholder="请输入节" required="required">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
@@ -237,7 +244,7 @@
         </script>
     @endif
     <!-- pagination -->
-    {!! $problems->appends(['chapter'=>$chapter, 'section'=>$section])->links() !!}
+    {!! $problems->appends(['chapter'=>$chapter, 'section'=>$section, 'classname'=>$classname])->links() !!}
 </div>
 @endsection
 
@@ -246,10 +253,11 @@
 function values(id){
     $("#deleteID").val(id);
 }
-function editValue(id, chapter, section, stem, answer, picture_url1, picture_url2, explanation, type, difficulty, author){
+function editValue(id, classname, chapter, section, stem, answer, picture_url1, picture_url2, explanation, type, difficulty, author){
     $("#editID").val(id);
-    $("#chapter").val(chapter);
-    $("#section").val(section);
+    $("#classnametext").val(classname);
+    $("#chaptertext").val(chapter);
+    $("#sectiontext").val(section);
     $("#stem").val(stem);
     $("#answer").val(answer);
     $("#picture_url1").val(picture_url1);

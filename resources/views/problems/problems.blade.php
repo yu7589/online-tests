@@ -5,7 +5,7 @@
     <div class="row">
         <div class="card col-md-12">
             <div class="card-body row">
-                <div class="col-md-8">
+                <div class="col-md-5">
                     <span class="dropdown mr-2">
                         <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
                             未通过题目
@@ -22,6 +22,12 @@
                     <span class="text-success mt-1 " style="font-size:19px"> 
                         默认排序
                     </span>
+                </div>
+                
+                <div class="col-md-3">
+                    <div class="input-group ">
+                        <a href="http://localhost/online-tests/public/submit"><button type="button" class="btn btn-info">查看布置的作业</button></a>
+                    </div>
                 </div>
 
                 <div class="col-md-4">
