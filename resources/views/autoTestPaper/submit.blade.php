@@ -27,13 +27,39 @@
             @if($submit->problem_id == $problem->id)
             <tbody style="background-color:white">
                  <tr>
+                    @if($problem->type == 1)
                     <td  name="Sid">{{ $submit->problem_id }}</td>
                     <td  name="Sname">                   
                         {{ $problem->classname }}：第{{ $problem->chapter }}章第{{ $problem->section }}节
                         <br>
-                        题目:{{ $problem->stem }}
+                        判断题:{{ $problem->stem }}
                         <br>
                     </td>
+                    @elseif($problem->type == 2)
+                    <td  name="Sid">{{ $submit->problem_id }}</td>
+                    <td  name="Sname">                   
+                        {{ $problem->classname }}：第{{ $problem->chapter }}章第{{ $problem->section }}节
+                        <br>
+                        选择题:{{ $problem->stem }}
+                        <br>
+                    </td>
+                    @elseif($problem->type == 3)
+                    <td  name="Sid">{{ $submit->problem_id }}</td>
+                    <td  name="Sname">                   
+                        {{ $problem->classname }}：第{{ $problem->chapter }}章第{{ $problem->section }}节
+                        <br>
+                        填空题:{{ $problem->stem }}
+                        <br>
+                    </td>
+                    @else
+                    <td  name="Sid">{{ $submit->problem_id }}</td>
+                    <td  name="Sname">                   
+                        {{ $problem->classname }}：第{{ $problem->chapter }}章第{{ $problem->section }}节
+                        <br>
+                        简答题:{{ $problem->stem }}
+                        <br>
+                    </td>
+                    @endif
                     <td>
                         <div class="container">
                             <div class="row">

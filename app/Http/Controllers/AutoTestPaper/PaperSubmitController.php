@@ -71,6 +71,11 @@ class PaperSubmitController extends Controller
     public function show()
     {
         //
+        $judg = 0;
+        $select = 0;
+        $fill = 0;
+        $shortanswer = 0;
+
         $paperproblems = PaperProblem::all();
         $id = array();
         foreach($paperproblems as $paperproblem){
@@ -78,7 +83,7 @@ class PaperSubmitController extends Controller
         }
         
         $problems = Problem::whereIn('id', $id)->get();
-        return view('autoTestPaper\testPaper', ['problems'=>$problems]);
+        return view('autoTestPaper\testPaper', ['problems'=>$problems, 'judg'=>$judg, 'select'=>$select, 'fill'=>$fill, 'shortanswer'=>$shortanswer]);
     }
 
     public function delete(Request $request)
