@@ -49,7 +49,8 @@ Route::get('/autoTestPaper/usedProblem', 'AutoTestPaper\AutoTestPaperController@
 //组卷提交界面路由
 Route::get('/autoTestPaper/submit', 'AutoTestPaper\PaperSubmitController@index');
 Route::post('/autoTestPaper/submit/delete', 'AutoTestPaper\PaperSubmitController@delete');
-Route::get('/autoTestPaper/testPaper', 'AutoTestPaper\PaperSubmitController@show');
+Route::post('/autoTestPaper/testPaper', 'AutoTestPaper\PaperSubmitController@show');
+Route::post('/autoTestPaper/deleteAll', 'AutoTestPaper\PaperSubmitController@deleteAll');
 
 //个人中心界面路由
 Route::get('/personalCenter', 'PersonalCenter\PersonalCenterController@index')->name('personalCenter');

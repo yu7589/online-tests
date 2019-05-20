@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="card" style="width:650px; hight:978px;">
+        <div class="card" style="hight:978px; width:650px;">
             <div class="card-body">
                 <div style="border: 1px dashed black;font-size:12pt;">
                     <div style="text-align:center;">诚信保证</div>
@@ -22,18 +22,18 @@
                     编号：<input type='text' style='border:none; border-bottom:black solid 1px; width:80px;'>
                 </div>
                 <div>
-                    <div style="text-align:center; font-size:18pt;">西北工业大学考试试题（卷）</div>
-                    <div style="text-align:center; font-size:14pt; width:586px;">20  &nbsp;&nbsp;&nbsp;—20   &nbsp;&nbsp;&nbsp;&nbsp;学年第   &nbsp;&nbsp;&nbsp;&nbsp;学期</div>
+                    <div style="text-align:center; font-size:18pt;">{{ $schoolname }}考试试题（卷）</div>
+                    <div style="text-align:center; font-size:14pt; width:586px;">{{ $startyear }}&nbsp;&nbsp;&nbsp;—{{ $endyear }}&nbsp;&nbsp;&nbsp;&nbsp;学年第{{ $term }}学期</div>
                 </div>
                 <div>
-                    <div style="font-size:12pt;">开课学院<input type='text' style='border:none; border-bottom:black solid 1px; width:190px;'>
-                    课程<input type='text' style='border:none; border-bottom:black solid 1px; width:190px;'>
-                    学时<input type='text' style='border:none; border-bottom:black solid 1px; width:80px;'>
+                    <div style="font-size:12pt;">开课学院<input type='text' value="{{ $college }}" style='text-align:center; border:none; border-bottom:black solid 1px; width:190px;'>
+                    课程<input type='text' value="{{ $course }}" style='text-align:center; border:none; border-bottom:black solid 1px; width:190px;'>
+                    学时<input type='text' value="{{ $period }}" style='text-align:center; border:none; border-bottom:black solid 1px; width:80px;'>
                     </div>
                 </div>
                 <div>
-                    <div style="font-size:12pt;">考试日期<input type='text' style='border:none; border-bottom:black solid 1px; width:130px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    考试时间<input type='text' style='border:none; border-bottom:black solid 1px; width:60px;'>小时
+                    <div style="font-size:12pt;">考试日期<input type='text' value="{{ $testdate }}" style='text-align:center; border:none; border-bottom:black solid 1px; width:130px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    考试时间<input type='text' value="{{ $testtime }}" style='text-align:center; border:none; border-bottom:black solid 1px; width:60px;'>小时
                     &nbsp;&nbsp;&nbsp;
                     考试形式（$\begin{matrix} 开 \\ 闭 \end{matrix}$）（$\begin{matrix} A \\ B \end{matrix}$）卷
                     </div>

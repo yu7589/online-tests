@@ -3,18 +3,122 @@
 @section('content')
 <div class="container">
     <!-- 题目 -->
-    <form method="get" action="http://localhost/online-tests/public/autoTestPaper/testPaper">
-    {{ csrf_field() }}
+    <div class="col-md-12">
         <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-7">
             </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#edit">
+                        自定义卷子信息并预览
+                </button>  
+            </div>
+                <form method="post" action="http://localhost/online-tests/public/autoTestPaper/testPaper">
+                {{ csrf_field() }}
+                    <div class="modal fade" id="edit">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <!-- 模态框头部 -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">请确认</h4>
+                                </div>
+                            
+                                <!-- 模态框主体 -->
+                                <div class="modal-body">
+                                    <label class="text-center">题目修改</label>
+                                        <div class="form-group">
+                                            <label for="firstname" class="col-sm-2 control-label">学校名称</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="schoolname" name="schoolname" value='' placeholder="请输入学校名称" required="required">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="lastname" class="col-sm-2 control-label">起始学年</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="startyear" name="startyear" value='' placeholder="请输入起始学年" required="required">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="lastname" class="col-sm-2 control-label">结束学年</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="endyear" name="endyear" value='' placeholder="请输入结束学年" required="required">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="lastname" class="col-sm-2 control-label">学期</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="term" name="term" value='' placeholder="请输入学期" required="required">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="lastname" class="col-sm-2 control-label">开课学院</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="college" name="college" value='' placeholder="请输入开课学院" required="required">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="lastname" class="col-sm-2 control-label">课程</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="course" name="course" value='' placeholder="请输入课程" required="required">
+                                            </div>
+                                        </div>                                        <div class="form-group">
+                                            <label for="lastname" class="col-sm-2 control-label">学时</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="period" name="period" value='' placeholder="请输入学时" required="required">
+                                            </div>
+                                        </div>                                        <div class="form-group">
+                                            <label for="lastname" class="col-sm-2 control-label">考试日期</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="testdate" name="testdate" value='' placeholder="请输入考试日期" required="required">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="lastname" class="col-sm-2 control-label">考试时间</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="testtime" name="testtime" value='' placeholder="请输入考试时间" required="required">
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <!-- 模态框底部 -->
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-success" id="editID" name="problem_id" value="" >确定</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            
             <div class="col-md-2">
-            <button type="submit" class="btn btn-success">
-                    预览卷子
-            </button>  
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete">取消所有题目</button>
+                <form method="post" action="http://localhost/online-tests/public/autoTestPaper/deleteAll">
+                {{ csrf_field() }}
+                <div class="modal fade" id="delete">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <!-- 模态框头部 -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">请确认</h4>
+                            </div>
+                        
+                            <!-- 模态框主体 -->
+                            <div class="modal-body">
+                                确定要删除这些问题？
+                            </div>
+                        
+                            <!-- 模态框底部 -->
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success" id="deleteID" name="problem_id" value="" >确定</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </form>
             </div>
         </div>
-    </form>
+    </div>
 
     <table id="Tab" class="table table-bordered table-hover">
         <thead>
@@ -47,7 +151,7 @@
                     <td  name="Sid">{{ $submit->problem_id }}</td>
                     <td  name="Sname">                   
                         {{ $problem->classname }}：第{{ $problem->chapter }}章第{{ $problem->section }}节
-                        <br>
+                        <br> 
                         填空题:{{ $problem->stem }}
                         <br>
                     </td>
