@@ -137,7 +137,7 @@
         <div style="hight:1000px">
             <div class="card" style="width:240px;float:right;margin-left:40px;margin-top:45px;">
                 <div class="card-body">
-                <form method="get" action="/online-tests/public/homeworkAssignment">
+                <form method="get" action="/online-tests/public/homeworkAssignment/usedProblem">
                     <div>
                         <label>每页显示
                             <input size="2" type="text" id="pageNumber" name="pageNumber" value="{{ $pageNumber }}" aria-controls="data-table"> 题目
@@ -167,6 +167,7 @@
 
 <form action="/online-tests/public/homeworkAssignment" method="post" id="problem_submit">
     {{ csrf_field() }}
+    <input type="hidden" value="1" name="record" id="record">
     <input type="hidden" value="" name="paper" id="paper">
 </form>
 @if(session('status'))
@@ -199,7 +200,7 @@ function show(){
     var form = document.getElementById('problem_submit');
     console.log(form);
     form.submit();
-
+    
     alert("将把已选中的题目提交到候选表单中");
 }
 </script>
