@@ -56,6 +56,9 @@
                                         提交答案: {{ $complete->answer_save }}
                                         <br>
                                         正确答案: {{ $problem->answer}}
+                                        <br>
+                                        <br>
+                                        解释：{{ $problem->explanation }}
                                     </td>
                                     <!-- 类型2为选择题 -->
                                     @elseif($problem->type==2)
