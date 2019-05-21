@@ -25,6 +25,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/problems', 'Problems\ProblemsController@index')->name('problems');
 Route::post('/problems', 'Problems\ProblemsController@store')->name('problems');
 Route::get('/problems/answered','Problems\ProblemsController@show');
+Route::get('/problems/homework','Problems\ProblemsController@showHomework');
 
 //题目提交界面路由
 Route::get('/submit', 'Problems\SubmitController@index')->name('submit');
@@ -35,6 +36,11 @@ Route::post('/submit/update', 'Problems\SubmitController@update');
 Route::get('/problemImport', 'ProblemImport\ProblemImportController@index')->name('problemImport');
 Route::post('/problemImport/creating', 'ProblemImport\ProblemImportController@creating');
 Route::post('/problemImport/upload', 'ProblemImport\ProblemImportController@upload');
+
+//学生信息导入界面路由
+Route::get('/studentInfoImport', 'StudentInfoImport\StudentInfoImportController@index')->name('studentInfoImport');
+Route::post('/studentInfoImport/creating', 'StudentInfoImport\StudentInfoImportController@creating');
+Route::post('/studentInfoImport/upload', 'StudentInfoImport\StudentInfoImportController@upload');
 
 //题目编辑界面路由
 Route::get('/problemEdit', 'ProblemEdit\ProblemEditController@index')->name('problemEdit');
@@ -57,12 +63,16 @@ Route::get('/personalCenter', 'PersonalCenter\PersonalCenterController@index')->
 
 //作业布置界面路由
 Route::get('/homeworkAssignment', 'HomeworkAssignment\HomeworkAssignmentController@index')->name('homeworkAssignment');
+Route::post('/homeworkAssignment', 'HomeworkAssignment\HomeworkAssignmentController@store')->name('homeworkAssignment');
 Route::get('/homeworkAssignment/usedProblem', 'homeworkAssignment\HomeworkAssignmentController@show')->name('homeworkAssignment\usedProblem');
 
-//学生信息导入界面路由
-Route::get('/studentInfoImport', 'StudentInfoImport\StudentInfoImportController@index')->name('studentInfoImport');
-Route::post('/studentInfoImport/creating', 'StudentInfoImport\StudentInfoImportController@creating');
-Route::post('/studentInfoImport/upload', 'StudentInfoImport\StudentInfoImportController@upload');
+
+//作业布置提交界面路由
+Route::get('/homeworkAssignment/homeworkSubmit', 'HomeworkAssignment\HomeworkSubmitController@index');
+Route::post('/homeworkAssignment/deleteAll', 'HomeworkAssignment\HomeworkSubmitController@deleteAll');
+Route::post('/homeworkAssignment/homeworkSubmit/delete', 'HomeworkAssignment\HomeworkSubmitController@delete');
+Route::post('/homeworkAssignment/homeworkInfo', 'HomeworkAssignment\HomeworkSubmitController@show');
+
 
 //作业批改界面路由
 Route::get('/homeworkCorrecting', 'HomeworkCorrecting\HomeworkCorrectingController@index')->name('homeworkCorrecting');

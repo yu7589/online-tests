@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use App\PaperProblem;
 use App\User;
 use App\ProblemSubmit;
+use App\Homework;
 
 class HomeWorkAssignmentController extends Controller
 {
@@ -33,11 +34,11 @@ class HomeWorkAssignmentController extends Controller
 
         $judg = array();
         $count = 0;
-        $paperproblems = PaperProblem::all();
+        $homeworks = HomeWork::all();
         $problems = Problem::all();
         foreach($problems as $problem){
-            foreach($paperproblems as $paperproblem){
-                if($problem->id == $paperproblem->problem_id){
+            foreach($homeworks as $homework){
+                if($problem->id == $homework->problem_id){
                     $judg[$count] = $problem->id;
                     $count++;
                     continue;
@@ -85,15 +86,6 @@ class HomeWorkAssignmentController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -104,11 +96,28 @@ class HomeWorkAssignmentController extends Controller
     public function store(Request $request)
     {
         //
+        $homeworks = explode('_', $request->homework);
+        //dd($homeworks);
+
+        for($i=0; $i<count($homeworks)-1; $i++){
+            $homeworkproblem = new Homework;
+            $homeworkproblem->problem_id = $homeworks[$i];
+            $homeworkproblem->times = 0;
+            $homeworkproblem->classname = 0;
+            $homeworkproblem->endtime = '2008-12-29';
+            $homeworkproblem->save();
+        }
+
+        if($request->record != 1){
+            return redirect('homeworkAssignment')->with('status', '已提交');
+        }else{
+            return redirect('homeworkAssignment\usedProblem')->with('status', '已提交');
+        }
     }
 
     public function show(Request $request)
     {
-        //跳转到组卷页面
+        //跳转到作业布置中重点题目页面
         $classname = $request->input('classname');
         $chapter = $request->input('chapter');
         $section = $request->input('section');
@@ -119,11 +128,11 @@ class HomeWorkAssignmentController extends Controller
 
         $judg = array();
         $count = 0;
-        $paperproblems = PaperProblem::all();
+        $homeworks = HomeWork::all();
         $problems = Problem::all();
         foreach($problems as $problem){
-            foreach($paperproblems as $paperproblem){
-                if($problem->id == $paperproblem->problem_id){
+            foreach($homeworks as $homework){
+                if($problem->id == $homework->problem_id){
                     $judg[$count] = $problem->id;
                     $count++;
                     continue;
@@ -194,14 +203,4 @@ class HomeWorkAssignmentController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

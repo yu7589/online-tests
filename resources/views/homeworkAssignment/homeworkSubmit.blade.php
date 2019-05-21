@@ -9,10 +9,10 @@
             </div>
             <div class="col-md-3">
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#edit">
-                        自定义卷子信息并预览
+                        自定义作业信息
                 </button>  
             </div>
-                <form method="post" action="http://localhost/online-tests/public/autoTestPaper/testPaper">
+                <form method="post" action="http://localhost/online-tests/public/homeworkAssignment/homeworkInfo">
                 {{ csrf_field() }}
                     <div class="modal fade" id="edit">
                         <div class="modal-dialog modal-lg">
@@ -26,55 +26,21 @@
                                 <div class="modal-body">
                                     <label class="text-center">题目修改</label>
                                         <div class="form-group">
-                                            <label for="firstname" class="col-sm-2 control-label">学校名称</label>
+                                            <label for="lastname" class="col-sm-2 control-label">第几次作业</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="schoolname" name="schoolname" value='' placeholder="请输入学校名称" required="required">
+                                                <input type="text" class="form-control" id="times" name="times" value='' placeholder="请输入次数(1 或 2 或 ...)" required="required">
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="lastname" class="col-sm-2 control-label">起始学年</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="startyear" name="startyear" value='' placeholder="请输入起始学年" required="required">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="lastname" class="col-sm-2 control-label">结束学年</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="endyear" name="endyear" value='' placeholder="请输入结束学年" required="required">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="lastname" class="col-sm-2 control-label">学期</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="term" name="term" value='' placeholder="请输入学期" required="required">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="lastname" class="col-sm-2 control-label">开课学院</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="college" name="college" value='' placeholder="请输入开课学院" required="required">
-                                            </div>
-                                        </div>
+                                        </div>     
                                         <div class="form-group">
                                             <label for="lastname" class="col-sm-2 control-label">课程</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" id="course" name="course" value='' placeholder="请输入课程" required="required">
                                             </div>
-                                        </div>                                        <div class="form-group">
-                                            <label for="lastname" class="col-sm-2 control-label">学时</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="period" name="period" value='' placeholder="请输入学时" required="required">
-                                            </div>
-                                        </div>                                        <div class="form-group">
-                                            <label for="lastname" class="col-sm-2 control-label">考试日期</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="testdate" name="testdate" value='' placeholder="请输入考试日期" required="required">
-                                            </div>
-                                        </div>
+                                        </div>                                                                    
                                         <div class="form-group">
-                                            <label for="lastname" class="col-sm-2 control-label">考试时间</label>
+                                            <label for="lastname" class="col-sm-2 control-label">截止时间</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="testtime" name="testtime" value='' placeholder="请输入考试时间" required="required">
+                                                <input type="text" class="form-control" id="endtime" name="endtime" value='' placeholder="请输入截止时间（格式 2011-1-1）" required="required">
                                             </div>
                                         </div>
                                     </label>
@@ -92,7 +58,7 @@
             
             <div class="col-md-2">
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteAll">取消所有题目</button>
-                <form method="post" action="http://localhost/online-tests/public/autoTestPaper/deleteAll">
+                <form method="post" action="http://localhost/online-tests/public/homeworkAssignment/deleteAll">
                 {{ csrf_field() }}
                 <div class="modal fade" id="deleteAll">
                     <div class="modal-dialog">
@@ -126,7 +92,7 @@
             <th>题目</th>
             <th style="width:120px;">操作</th>
         </thead>
-    @foreach ($problemsubmit as $submit)
+    @foreach ($homeworksubmit as $submit)
         @foreach($problems as $problem)
             @if($submit->problem_id == $problem->id)
             <tbody style="background-color:white">
@@ -170,7 +136,7 @@
                                 <!-- delete model -->
                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete" onclick="deleteAnswer({{ $submit->id }})">取消本题</button>
                                 <!-- 模态框 -->
-                                <form method="post" action="/online-tests/public/autoTestPaper/submit/delete">
+                                <form method="post" action="/online-tests/public/homeworkAssignment/homeworkSubmit/delete">
                                 {{ csrf_field() }}
                                 <div class="modal fade" id="delete">
                                     <div class="modal-dialog">
@@ -203,7 +169,7 @@
         @endforeach
     @endforeach
     </table>
-    {{ $problemsubmit->links() }} 
+    {{ $homeworksubmit->links() }} 
 
 @if(session('status'))
     <script>

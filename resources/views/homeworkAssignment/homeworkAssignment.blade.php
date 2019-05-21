@@ -26,7 +26,7 @@
 
                 <div class="col-md-4">
                     <div class="input-group ">
-                        <a href="http://localhost/online-tests/public/homeworkAssignment/submit"><button type="button" class="btn btn-info">查看候选作业表单中题目</button></a>
+                        <a href="http://localhost/online-tests/public/homeworkAssignment/homeworkSubmit"><button type="button" class="btn btn-info">查看候选作业表单中题目</button></a>
                     </div>
                 </div>
             </div>
@@ -167,7 +167,7 @@
 
 <form action="/online-tests/public/homeworkAssignment" method="post" id="problem_submit">
     {{ csrf_field() }}
-    <input type="hidden" value="" name="paper" id="paper">
+    <input type="hidden" value="" name="homework" id="homework">
 </form>
 @if(session('status'))
     <script>
@@ -195,7 +195,7 @@ function show(){
     }
     //alert(str);
     
-    $("#paper").val(str);
+    $("#homework").val(str);
     var form = document.getElementById('problem_submit');
     console.log(form);
     form.submit();

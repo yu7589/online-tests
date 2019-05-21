@@ -3,43 +3,6 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="card col-md-12">
-            <div class="card-body row">
-                <div class="col-md-5">
-                    <span class="dropdown mr-2">
-                        <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
-                            未通过题目
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="/online-tests/public/problems">未通过题目</a>
-                            <a class="dropdown-item" href="/online-tests/public/problems/answered">已通过题目</a>
-                        </div>
-                    </span>
-                    <!-- | 分隔符 -->
-                    <span class="border-right mr-2">
-                    </span>
-
-                    <span class="text-success mt-1 " style="font-size:19px"> 
-                        默认排序
-                    </span>
-                </div>
-                
-                <div class="col-md-3">
-                    <div class="input-group ">
-                        <a href="http://localhost/online-tests/public/problems/homework"><button type="button" class="btn btn-info">查看布置的作业</button></a>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="input-group ">
-                        <a href="http://localhost/online-tests/public/submit"><button type="button" class="btn btn-info">查看提交表单中题目</button></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
         <!-- 题目 -->
         <div style="width:860px;float:left;">
             <table id="Tab" class="table table-bordered table-hover">
@@ -180,7 +143,7 @@
         <div style="hight:1000px">
             <div class="card" style="width:240px;float:right;margin-left:40px;margin-top:45px;">
                 <div class="card-body">
-                <form method="get" action="/online-tests/public/problems">
+                <form method="get" action="/online-tests/public/problems/homework">
                     <div>
                         <label>每页显示
                             <input size="2" type="text" id="pageNumber" name="pageNumber" value="{{ $pageNumber }}" aria-controls="data-table"> 题目
@@ -201,7 +164,7 @@
                         <br>
                     </div>
                     </form>
-                    <button type="submit" class="btn btn-info" onclick="show()">提交已作答题目</button>
+                    <button type="submit" class="btn btn-info" onclick="show()">提交作业</button>
                 </div>
             </div>
         </div>

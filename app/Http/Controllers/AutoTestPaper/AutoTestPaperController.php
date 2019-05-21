@@ -106,7 +106,7 @@ class AutoTestPaperController extends Controller
         }else{
             return redirect('autoTestPaper\usedProblem')->with('status', '已提交');
         }
-        
+
     }
 
     /*
