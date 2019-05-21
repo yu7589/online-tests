@@ -3,23 +3,52 @@
 @section('content')
 <div class="container">
     <div class="row">
+        <div class="card col-md-12">
+            <div class="card-body row">
+                <div class="col-md-5">
+                    <span class="dropdown mr-2">
+                        <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+                            未通过题目
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/online-tests/public/problems">未通过题目</a>
+                            <a class="dropdown-item" href="/online-tests/public/problems/answered">已通过题目</a>
+                        </div>
+                    </span>
+                    <!-- | 分隔符 -->
+                    <span class="border-right mr-2">
+                    </span>
+
+                    <span class="text-success mt-1 " style="font-size:19px"> 
+                        默认排序
+                    </span>
+                </div>
+                
+                <div class="col-md-3">
+                    <div class="input-group ">
+                        <a href="http://localhost/online-tests/public/problems/homework"><button type="button" class="btn btn-info">查看布置的作业</button></a>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="input-group ">
+                        <a href="http://localhost/online-tests/public/submit"><button type="button" class="btn btn-info">查看提交表单中题目</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
         <!-- 题目 -->
         <div style="width:860px;float:left;">
             <table id="Tab" class="table table-bordered table-hover">
                 <thead>
-                <!--暂时把全选的功能取消掉
-                                                      
-                            <input id="selectAll" type="checkbox" class="cb" onclick="selectAll()" style="width: 20px;
-                                height: 20px;
-                                border: 1px solid #c9c9c9;
-                                border-radius: 2px;
-                                ">
-                        
-                -->
-                        <th></th>
-                        <th style="width:60px;">序号</th>
-                        <th>题目</th>
-                        <th style="width:120px;"></th>
+                    <th></th>
+                    <th style="width:60px;">序号</th>
+                    <th style="width:60px;">次数</th>
+                    <th>题目</th>
+                    <th style="width:120px;"></th>
                 </thead>
             @foreach($homeworks as $homework)
             @foreach ($problems as $problem)
@@ -38,6 +67,7 @@
                             <!-- type=1 为判断题 -->
                             @if($problem->type==1)
                             <td>{{ $problem->id }}</td>
+                            <td>{{ $homework->times }}</td>
                             <td>                   
                                 {{ $problem->classname }}：第{{ $problem->chapter }}章第{{ $problem->section }}节
                                 <br>
@@ -140,7 +170,7 @@
             @endforeach
             </table>
             <!-- pagination -->
-            {!! $homeworks->appends(['pageNumber'=>$pageNumber])->links() !!}
+            {!! $homeworks->appends(['times'=>$times, 'classname'=>$classname, 'pageNumber'=>$pageNumber])->links() !!}
         </div>
 
         <!-- 筛选 -->
@@ -154,17 +184,15 @@
                         </label>
                         <br>
                         <br>
-                        输入课程信息进行筛选
-                            <input type="text" name=classname id="classname" value="{{ $classname }}" class="form-control" placeholder="课程名">
+                        输入作业信息进行筛选
+                            <input type="text" name='classname' id="classname" value="{{ $classname }}" class="form-control" placeholder="课程名">
                         <br>
-                        <div class="input-group mb-3">
-                            <input type="text" name=chapter id="chapter" value="{{ $chapter }}" class="form-control" placeholder="章">
-                            <input type="text" name=section id="section" value="{{ $section }}" class="form-control" placeholder="节">
-                            &nbsp;
+                            <input type="text" name='times' id="times" value="{{ $times }}" class="form-control" placeholder="作业次数(1 或 2 或 ...)">
+                        <br>
                             <button type="submit" class="btn btn-success">
                             确定
                             </button>  
-                        </div>
+                        
                         <br>
                     </div>
                     </form>
@@ -255,16 +283,4 @@ function show(){
     */
     alert("将把已勾选已作答的题目提交到已选中题目表单中");
 }
-/*
-全选,暂时取消
-
-function selectAll() {
-    var selectAll = document.getElementById("selectAll");
-    var trs = document.getElementsByClassName("cb");
-    for (var i = 1; i < trs.length; i++) {
-        trs[i].checked = selectAll.checked;
-    }
-    console.log(answered[1][2])
-}
-*/
 </script>
