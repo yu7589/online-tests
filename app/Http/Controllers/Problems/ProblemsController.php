@@ -209,8 +209,6 @@ class ProblemsController extends Controller
             $pageNumber = $request->input('pageNumber');
         }
 
-
-        $homeworks = Homework::all();
         //用于显示已完成的题目
         $judg = array();
         $count = 0;
@@ -230,39 +228,47 @@ class ProblemsController extends Controller
         }
 
         if($chapter != null && $section != null && $classname !== null){
-            $problems = Problem::where([['classname', '=', $classname], ['chapter', '=', $chapter], ['section', '=', $section]])->whereNotIn('id', $judg)->paginate($pageNumber);
+            $homeworks = Homework::paginate($pageNumber);
+            $problems = Problem::where([['classname', '=', $classname], ['chapter', '=', $chapter], ['section', '=', $section]])->whereNotIn('id', $judg);
             $problemstates = ProblemState::all();
-            return view('problems\homework', ['problems'=>$problems, 'problemstates'=>$problemstates, 'problemcomplete'=>$problemComplete, 'classname'=>$classname, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
+            return view('problems\homework', ['problems'=>$problems, 'problemstates'=>$problemstates, 'homeworks'=>$homeworks, 'problemcomplete'=>$problemComplete, 'classname'=>$classname, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
         }else if($chapter != null && $section != null && $classname == null){
-            $problems = Problem::where([['chapter', '=', $chapter], ['section', '=', $section]])->whereNotIn('id', $judg)->paginate($pageNumber);
+            $homeworks = Homework::paginate($pageNumber);
+            $problems = Problem::where([['chapter', '=', $chapter], ['section', '=', $section]])->whereNotIn('id', $judg);
             $problemstates = ProblemState::all();
-            return view('problems\homework', ['problems'=>$problems, 'problemstates'=>$problemstates, 'problemcomplete'=>$problemComplete, 'classname'=>$classname, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
+            return view('problems\homework', ['problems'=>$problems, 'problemstates'=>$problemstates, 'homeworks'=>$homeworks, 'problemcomplete'=>$problemComplete, 'classname'=>$classname, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
         }else if($chapter != null && $section == null && $classname != null){
-            $problems = Problem::where([['classname', '=', $classname], ['chapter', '=', $chapter]])->whereNotIn('id', $judg)->paginate($pageNumber);
+            $homeworks = Homework::paginate($pageNumber);
+            $problems = Problem::where([['classname', '=', $classname], ['chapter', '=', $chapter]])->whereNotIn('id', $judg);
             $problemstates = ProblemState::all();
-            return view('problems\homework', ['problems'=>$problems, 'problemstates'=>$problemstates, 'problemcomplete'=>$problemComplete, 'classname'=>$classname, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
+            return view('problems\homework', ['problems'=>$problems, 'problemstates'=>$problemstates, 'homeworks'=>$homeworks, 'problemcomplete'=>$problemComplete, 'classname'=>$classname, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
         }else if($chapter == null && $section != null && $classname != null){
-            $problems = Problem::where([['classname', '=', $classname], ['section', '=', $section]])->whereNotIn('id', $judg)->paginate($pageNumber);
+            $homeworks = Homework::paginate($pageNumber);
+            $problems = Problem::where([['classname', '=', $classname], ['section', '=', $section]])->whereNotIn('id', $judg);
             $problemstates = ProblemState::all();
-            return view('problems\homework', ['problems'=>$problems, 'problemstates'=>$problemstates, 'problemcomplete'=>$problemComplete, 'classname'=>$classname, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
+            return view('problems\homework', ['problems'=>$problems, 'problemstates'=>$problemstates, 'homeworks'=>$homeworks, 'problemcomplete'=>$problemComplete, 'classname'=>$classname, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
         }else if($chapter != null && $section == null && $classname == null){
-            $problems = Problem::where([['chapter', '=', $chapter]])->whereNotIn('id', $judg)->paginate($pageNumber);
+            $homeworks = Homework::paginate($pageNumber);
+            $problems = Problem::where([['chapter', '=', $chapter]])->whereNotIn('id', $judg);
             $problemstates = ProblemState::all();
-            return view('problems\homework', ['problems'=>$problems, 'problemstates'=>$problemstates, 'problemcomplete'=>$problemComplete, 'classname'=>$classname, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
+            return view('problems\homework', ['problems'=>$problems, 'problemstates'=>$problemstates, 'homeworks'=>$homeworks, 'problemcomplete'=>$problemComplete, 'classname'=>$classname, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
         }else if($chapter == null && $section != null && $classname == null){
-            $problems = Problem::where([['section', '=', $section]])->whereNotIn('id', $judg)->paginate($pageNumber);
+            $homeworks = Homework::paginate($pageNumber);
+            $problems = Problem::where([['section', '=', $section]])->whereNotIn('id', $judg);
             $problemstates = ProblemState::all();
-            return view('problems\homework', ['problems'=>$problems, 'problemstates'=>$problemstates, 'problemcomplete'=>$problemComplete, 'classname'=>$classname, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
+            return view('problems\homework', ['problems'=>$problems, 'problemstates'=>$problemstates, 'homeworks'=>$homeworks, 'problemcomplete'=>$problemComplete, 'classname'=>$classname, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
         }else if($chapter == null && $section == null && $classname != null){
-            $problems = Problem::where([['classname', '=', $classname]])->whereNotIn('id', $judg)->paginate($pageNumber);
+            $homeworks = Homework::paginate($pageNumber);
+            $problems = Problem::where([['classname', '=', $classname]])->whereNotIn('id', $judg);
             $problemstates = ProblemState::all();
-            return view('problems\homework', ['problems'=>$problems, 'problemstates'=>$problemstates, 'problemcomplete'=>$problemComplete, 'classname'=>$classname, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
+            return view('problems\homework', ['problems'=>$problems, 'problemstates'=>$problemstates, 'homeworks'=>$homeworks, 'problemcomplete'=>$problemComplete, 'classname'=>$classname, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
         }
         else {
             //dd($problemComplete[0]->student_number);
-            $problems = Problem::whereNotIn('id', $judg)->paginate($pageNumber);
+            $homeworks = Homework::paginate($pageNumber);
+            $problems = Problem::whereNotIn('id', $judg);
             $problemstates = ProblemState::all();
-            return view('problems\homework', ['problems'=>$problems, 'problemstates'=>$problemstates, 'problemcomplete'=>$problemComplete, 'classname'=>$classname, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
+            return view('problems\homework', ['problems'=>$problems, 'problemstates'=>$problemstates, 'homeworks'=>$homeworks, 'problemcomplete'=>$problemComplete, 'classname'=>$classname, 'chapter'=>$chapter, 'section'=>$section, 'pageNumber'=>$pageNumber]);
         }
     }
 

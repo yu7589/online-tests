@@ -21,7 +21,9 @@
                         <th>题目</th>
                         <th style="width:120px;"></th>
                 </thead>
+            @foreach($homeworks as $homework)
             @foreach ($problems as $problem)
+                @if($homework->problem_id == $problem->id)
                 @foreach ($problemstates as $problemstate)
                     @if($problem->id == $problemstate->problem_id)
                     <tbody style="background-color:#fff;">
@@ -133,10 +135,12 @@
                     </tbody>
                     @endif
                 @endforeach
+                @endif
+            @endforeach
             @endforeach
             </table>
             <!-- pagination -->
-            {!! $problems->appends(['chapter'=>$chapter, 'section'=>$section, 'classname'=>$classname, 'pageNumber'=>$pageNumber])->links() !!}
+            {!! $homeworks->appends(['pageNumber'=>$pageNumber])->links() !!}
         </div>
 
         <!-- 筛选 -->
