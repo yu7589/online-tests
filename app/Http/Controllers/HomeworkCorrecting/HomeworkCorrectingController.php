@@ -36,5 +36,19 @@ class HomeworkCorrectingController extends Controller
             return view('homeworkCorrecting\homeworkCorrecting', ['problems'=>$problems, 'problemCompletes'=>$problemCompletes, 'classname'=>$classname]);
         }
     }
+
+    public function store(Request $request){
+        $score = $request->answer_score;
+        $comment = $request->answer_comment;
+        $student_number = $request->student_number;
+        $problem_id = $request->problem_id;
+        
+        dd($comment);
+        $problemcomplete = ProblemComplete::where([['student_number', '=', $student_number]])->get();
+        foreach($problemcomplete as $complete){
+            dd($complete->problem_id);
+        }
+
+    }
 }
     

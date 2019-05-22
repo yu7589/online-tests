@@ -16,7 +16,7 @@
             </div>
             <div class="col-md-2">
             <button type="submit" class="btn btn-success">
-                    确定
+                确定
             </button>  
             </div>
         </div>
@@ -33,6 +33,7 @@
     @foreach ($problemCompletes as $problemComplete)
         @foreach($problems as $problem)
             @if($problem->id == $problemComplete->problem_id)
+
             <tbody style="background-color:white">
                  <tr>
                     @if($problemComplete->type == 3)
@@ -46,7 +47,7 @@
                             学生答案: {{ $problemComplete->answer_save }}  
                         <br>
                         <br>
-                            标准答案: aaaaa {{ $problem->answer }}  
+                            标准答案: {{ $problem->answer }}  
                     </td>
                     @else
                     <td  name="Sid">{{ $problemComplete->student_number }}</td>
@@ -61,25 +62,22 @@
                             标准答案: {{ $problem->answer }}  
                     </td>
                     @endif
-
                     <td>
-                        <input type="text" style="width:50px;" placeholder="0-5分">
+                        <input type="text" style="width:50px;" id="score" name="score" placeholder="0-5分" onmouseout="getScore(this.value)">
                     </td>
                     <td>                                
                         <div class="input-group col-md-10">
-                            <textarea class="form-control" style="width:140px;" rows="3" type="text" id="answer_textarea" name="answer_textarea"></textarea>
+                            <textarea class="form-control" style="width:140px;" rows="3" type="text" id="comment" name="comment" onmouseout="getComment(this.value)"></textarea>
                         </div>
                     </td>
                     <td>
-                        <div class="container">
-                            <div class="row">
-                                <!-- edit model -->
-                                <button type="button" style="width:60px;" class="btn btn-success btn-sm" data-toggle="modal" data-target="#edit">确定</button>
-                            </div>
-                        </div>
+                        <input type="hidden" id="student_number" name="student_number" value="{{ $problemComplete->student_number }}">
+                        <input type="hidden" id="problem_id" name="problem_id" value="{{ $problem->id }}">
+                        <button type="button" style="width:60px;" class="btn btn-success" onclick="formsubmit({{ $problemComplete->student_number }}, {{ $problem->id }})">确定</button>
                     </td>
                  </tr>
             </tbody>
+            
             @endif
         @endforeach
     @endforeach
@@ -91,28 +89,31 @@
     @endif
     <!-- pagination -->
     {!! $problemCompletes->appends(['classname'=>$classname])->links() !!}
+    <form action="/online-tests/public/homeworkCorrecting/store" method="post" id="submit">
+    {{ csrf_field() }}
+    <input type="hidden" value="" name="answer_score" id="answer_score">
+    <input type="hidden" value="" name="answer_comment" id="answer_comment">
+    <input type="hidden" value="" id="answer_number" name="answer_number">
+    <input type="hidden" value="" id="answer_id" name="answer_id">
+    </form>
 </div>
 @endsection
 
 <script>
-//将id的值保存在 id="deleteID" 的按钮中，然后传给后台
-function values(id){
-    $("#deleteID").val(id);
+function getScore(val){
+    $("#answer_score").val(val);
 }
-function editValue(id, classname, chapter, section, stem, answer, picture_url1, picture_url2, explanation, type, difficulty, author){
-    $("#editID").val(id);
-    $("#classnametext").val(classname);
-    $("#chaptertext").val(chapter);
-    $("#sectiontext").val(section);
-    $("#stem").val(stem);
-    $("#answer").val(answer);
-    $("#picture_url1").val(picture_url1);
-    $("#picture_url2").val(picture_url2);
-    $("#explanation").val(explanation);
-    $("#type").val(type);
-    $("#difficulty").val(difficulty);
-    $("#author").val(author);
+function getComment(val){
+    $("#answer_comment").val(val);
 }
+function formsubmit(number, id){
+    $("#answer_number").val(number);
+    $("#answer_id").val(id);
+    alert(number);
+    var form = document.getElementById('submit');
+    form.submit();
+}
+
 </script>
 
 

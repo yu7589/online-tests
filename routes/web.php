@@ -76,3 +76,4 @@ Route::post('/homeworkAssignment/homeworkInfo', 'HomeworkAssignment\HomeworkSubm
 
 //作业批改界面路由
 Route::get('/homeworkCorrecting', 'HomeworkCorrecting\HomeworkCorrectingController@index')->name('homeworkCorrecting');
+Route::post('/homeworkCorrecting/store', 'HomeworkCorrecting\HomeworkCorrectingController@store');
