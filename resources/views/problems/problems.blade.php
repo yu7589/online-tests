@@ -136,7 +136,7 @@
                                 {{ csrf_field() }}
                                     答案:
                                     <div class="input-group" style="width:280px;">
-                                        <input type="text" class="form-control" id="answer_text" value=" " placeholder="答案请用分号分隔，例：xx;xx;" name="answer_text"  onmouseout="record({{ $problem->id }}, this.value)">
+                                        <input type="text" class="form-control" id="answer_text" value=" " placeholder="答案请用分号分隔，例：xx;xx;" name="answer_text"  oninput="record({{ $problem->id }}, this.value)">
                                     </div>
                                 </form>
                             </td>
@@ -154,7 +154,7 @@
                                 {{ csrf_field() }}
                                 答案:                  
                                 <div class="input-group col-md-10">
-                                    <textarea class="form-control" rows="3" type="text" id="answer_textarea" name="answer_textarea" onmouseout="record({{ $problem->id }}, this.value)"></textarea>
+                                    <textarea class="form-control" rows="3" type="text" id="answer_textarea" name="answer_textarea" oninput="record({{ $problem->id }}, this.value)"></textarea>
                                 </div>
                                 </form>
                             </td>

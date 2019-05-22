@@ -32,8 +32,7 @@
         </thead>
     @foreach ($problemCompletes as $problemComplete)
         @foreach($problems as $problem)
-            @if($problem->id == $problemComplete->problem_id)
-
+            @if($problem->id == $problemComplete->problem_id && $problemComplete->rightness = 100)
             <tbody style="background-color:white">
                  <tr>
                     @if($problemComplete->type == 3)
@@ -63,11 +62,11 @@
                     </td>
                     @endif
                     <td>
-                        <input type="text" style="width:50px;" id="score" name="score" placeholder="0-5分" onmouseout="getScore(this.value)">
+                        <input type="text" style="width:50px;" id="score" name="score" placeholder="0-5分" oninput="getScore(this.value)">
                     </td>
                     <td>                                
                         <div class="input-group col-md-10">
-                            <textarea class="form-control" style="width:140px;" rows="3" type="text" id="comment" name="comment" onmouseout="getComment(this.value)"></textarea>
+                            <textarea class="form-control" style="width:180px;" rows="3" type="text" id="comment" name="comment" oninput="getComment(this.value)"></textarea>
                         </div>
                     </td>
                     <td>
@@ -90,26 +89,30 @@
     <!-- pagination -->
     {!! $problemCompletes->appends(['classname'=>$classname])->links() !!}
     <form action="/online-tests/public/homeworkCorrecting/store" method="post" id="submit">
-    {{ csrf_field() }}
-    <input type="hidden" value="" name="answer_score" id="answer_score">
-    <input type="hidden" value="" name="answer_comment" id="answer_comment">
-    <input type="hidden" value="" id="answer_number" name="answer_number">
-    <input type="hidden" value="" id="answer_id" name="answer_id">
+        {{ csrf_field() }}
+        <input type="hidden" value="" name="answer" id="answer">
     </form>
 </div>
 @endsection
 
 <script>
+var answers = new Array();
+answers[0] = 0;
+answers[1] = 0;
+answers[2] = 0;
+answers[3] = 0;
 function getScore(val){
-    $("#answer_score").val(val);
+    answers[0] = val;
 }
 function getComment(val){
-    $("#answer_comment").val(val);
+    answers[1] = val;
 }
 function formsubmit(number, id){
-    $("#answer_number").val(number);
-    $("#answer_id").val(id);
-    alert(number);
+    answers[2] = number;
+    answers[3] = id;
+    var str = answers[0] + '_' + answers[1] + '_' + answers[2] + '_' + answers[3];
+    //alert(str);
+    $('#answer').val(str);
     var form = document.getElementById('submit');
     form.submit();
 }

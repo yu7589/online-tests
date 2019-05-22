@@ -38,17 +38,24 @@ class HomeworkCorrectingController extends Controller
     }
 
     public function store(Request $request){
-        $score = $request->answer_score;
-        $comment = $request->answer_comment;
-        $student_number = $request->student_number;
-        $problem_id = $request->problem_id;
+        $answer = $request->answer;
         
-        dd($comment);
-        $problemcomplete = ProblemComplete::where([['student_number', '=', $student_number]])->get();
-        foreach($problemcomplete as $complete){
-            dd($complete->problem_id);
-        }
+        //dd($answer);
 
+        $values = explode('_', $answer);
+        //dd($values);
+        $student_number = $values[2];
+        $problem_id = $values[3];
+        $rightness = $values[0];
+        $comment = $values[1];
+
+        $problemcomplete = ProblemComplete::where([['student_number', '=', $student_number], ['problem_id', '=', $problem_id]])->get();
+        foreach($problemcomplete as $complete){
+            $complete->comment = $comment;
+            $complete->rightness = $rightness;
+            $complete->save();
+        }
+        return redirect('homeworkCorrecting');
     }
 }
     
