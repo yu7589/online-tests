@@ -27,7 +27,7 @@
         <thead>
             <th style="width:60px;">学号</th>
             <th>题目</th>
-            <th style="width:40px;">打分</th>
+            <th style="width:50px;">打分</th>
             <th style="width:60px;">评语</th>
             <th style="width:60px;">操作</th>
         </thead>
@@ -45,7 +45,7 @@
                             答案: {{ $problem->answer }}  
                     </td>
                     <td>
-                        <input type="text" style="width:40px;">
+                        <input type="text" style="width:50px;" placeholder="0-5分">
                     </td>
                     <td>                                
                         <div class="input-group col-md-10">

@@ -136,7 +136,7 @@
                                 {{ csrf_field() }}
                                     答案:
                                     <div class="input-group" style="width:280px;">
-                                        <input type="text" class="form-control" id="answer_text" placeholder="答案请用分号分隔，例：xx;xx;" name="answer_text">
+                                        <input type="text" class="form-control" id="answer_text" value=" " placeholder="答案请用分号分隔，例：xx;xx;" name="answer_text"  onmouseout="record({{ $problem->id }}, this.value)">
                                     </div>
                                 </form>
                             </td>
@@ -154,7 +154,7 @@
                                 {{ csrf_field() }}
                                 答案:                  
                                 <div class="input-group col-md-10">
-                                    <textarea class="form-control" rows="3" type="text" id="answer_textarea" name="answer_textarea"></textarea>
+                                    <textarea class="form-control" rows="3" type="text" id="answer_textarea" name="answer_textarea" onmouseout="record({{ $problem->id }}, this.value)"></textarea>
                                 </div>
                                 </form>
                             </td>
@@ -233,22 +233,24 @@ answered[1][0] = 'stem';
 for(var i=1; i<=50; i++){
     answered[1][i] = 'null';
 }
-var count = 1;
+
 /*
 记录选中的问题
 */
 function record(id, str){
-    var i=1
+
+    var i=1;
     for(; i<=50; i++){
         if(answered[0][i] == id){
             answered[1][i] = str;
             break;
         }
-        else{
-            answered[0][count] = id;
-            answered[1][count] = str;
-            count++;
+        else if(answered[0][i] == 999999){
+            answered[0][i] = id;
+            answered[1][i] = str;
             break;
+        }else {
+            continue;
         }
     }
     
@@ -275,6 +277,7 @@ function show(){
             }
         }
     }
+    //alert(str);
     $("#answer").val(str);
     var form = document.getElementById('answer_submit');
     console.log(form);
@@ -288,16 +291,8 @@ function show(){
     */
     alert("将把已勾选已作答的题目提交到已选中题目表单中");
 }
-/*
-全选,暂时取消
 
-function selectAll() {
-    var selectAll = document.getElementById("selectAll");
-    var trs = document.getElementsByClassName("cb");
-    for (var i = 1; i < trs.length; i++) {
-        trs[i].checked = selectAll.checked;
-    }
-    console.log(answered[1][2])
+function test(val){
+    alert(val);
 }
-*/
 </script>
