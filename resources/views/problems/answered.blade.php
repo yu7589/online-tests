@@ -105,6 +105,8 @@
                                                 }
                                                 echo $letter;
                                             ?>
+                                            <br><br>
+                                            解释：{{ $problem->explanation }}
                                     </td>
                                     <!-- 类型3为填空题 -->
                                     @elseif($problem->type==3)
@@ -115,16 +117,12 @@
                                         填空题:{{ $problem->stem }}
                                         <?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
                                         <br>
-                                        {{ $problem->answer }}
                                         <br>
+                                            提交答案：&nbsp;{{ $complete->answer_save }}
                                         <br>
-                                        <form method="post" action="/online-tests/public/problems">
-                                        {{ csrf_field() }}
-                                            答案:
-                                            <div class="input-group" style="width:280px;">
-                                                <input type="text" class="form-control" id="answer_text" name="answer_text">
-                                            </div>
-                                        </form>
+                                            正确答案：{{ $problem->answer }}
+                                        <br><br>
+                                        解释：{{ $problem->explanation }}
                                     </td>
                                     <!-- 类型4 为简答题 -->
                                     @else
@@ -136,13 +134,11 @@
                                         <?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
                                         <br>
                                         <br>
-                                        <form method="post" action="/online-tests/public/problems">
-                                        {{ csrf_field() }}
-                                        答案:                  
-                                        <div class="input-group col-md-10">
-                                            <textarea class="form-control" rows="3" type="text" id="answer_textarea" name="answer_textarea"></textarea>
-                                        </div>
-                                        </form>
+                                            提交答案：&nbsp;{{ $complete->answer_save }}
+                                        <br>
+                                            正确答案：{{ $problem->answer }}
+                                        <br><br>
+                                        解释：{{ $problem->explanation }}
                                     </td>
                                     @endif
                                     <td>

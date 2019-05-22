@@ -45,11 +45,13 @@ class HomeworkSubmitController extends Controller
 
         $homeworks = Homework::all();
         foreach($homeworks as $homework){
-            if($homework->classname == 0){
+            if($homework->classname == 0 && $homework->times == 0){
                 $homework->times = $times;
                 $homework->classname =$course;
                 $homework->endtime = $endtime;
                 $homework->save();
+            }else{
+                continue;
             }
         }
 

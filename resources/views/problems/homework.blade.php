@@ -51,122 +51,125 @@
                     <th style="width:120px;"></th>
                 </thead>
             @foreach($homeworks as $homework)
-            @foreach ($problems as $problem)
-                @if($homework->problem_id == $problem->id)
-                @foreach ($problemstates as $problemstate)
-                    @if($problem->id == $problemstate->problem_id)
-                    <tbody style="background-color:#fff;">
-                         <tr>
-                            <td>
-                                <input id="answer_check" name="answer_check" type="checkbox" class="cb" style="width: 20px;
-                                height: 20px;
-                                border: 1px solid #c9c9c9;
-                                border-radius: 2px;"
-                                value='{{$problem->id}}'>
-                            </td>
-                            <!-- type=1 为判断题 -->
-                            @if($problem->type==1)
-                            <td>{{ $problem->id }}</td>
-                            <td>{{ $homework->times }}</td>
-                            <td>                   
-                                {{ $problem->classname }}：第{{ $problem->chapter }}章第{{ $problem->section }}节
-                                <br>
-                                判断题:{{ $problem->stem }}
-                                <?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
-                                <br>
-                                <br>
-                                <form method="post" action="/online-tests/public/problems">
-                                {{ csrf_field() }}
-                                    答案:
-                                    <div class="row">
-                                        <div style="padding-left:20px; padding-top:5px">
-                                            <input type="radio" name="radio1" id="true" onclick="record({{ $problem->id }}, 'T')">
-                                            <label style="padding-left:8px">
-                                                T
-                                            </label>
+                @foreach ($problems as $problem)
+                    @if($homework->problem_id == $problem->id)
+                        @foreach ($problemstates as $problemstate)
+                            @if($problemstate->problem_id == $homework->problem_id)
+                            <tbody style="background-color:#fff;">
+                                 <tr>
+                                    <td>
+                                        <input id="answer_check" name="answer_check" type="checkbox" class="cb" style="width: 20px;
+                                        height: 20px;
+                                        border: 1px solid #c9c9c9;
+                                        border-radius: 2px;"
+                                        value='{{$problem->id}}'>
+                                    </td>
+                                    <!-- type=1 为判断题 -->
+                                    @if($problem->type==1)
+                                    <td>{{ $problem->id }}</td>
+                                    <td>{{ $homework->times }}</td>
+                                    <td>                   
+                                        {{ $problem->classname }}：第{{ $problem->chapter }}章第{{ $problem->section }}节
+                                        <br>
+                                        判断题:{{ $problem->stem }}
+                                        <?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
+                                        <br>
+                                        <br>
+                                        <form method="post" action="/online-tests/public/problems">
+                                        {{ csrf_field() }}
+                                            答案:
+                                            <div class="row">
+                                                <div style="padding-left:20px; padding-top:5px">
+                                                    <input type="radio" name="radio1" id="true" onclick="record({{ $problem->id }}, 'T')">
+                                                    <label style="padding-left:8px">
+                                                        T
+                                                    </label>
+                                                </div>
+                                                <div style="padding-left:15px; padding-top:5px" onclick="record({{ $problem->id }}, 'F')">
+                                                    <input type="radio" name="radio1" id="false">
+                                                    <label style="padding-left:8px">
+                                                        F
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </td>
+                                    <!-- 类型2为选择题 -->
+                                    @elseif($problem->type==2)
+                                    <td>{{ $problem->id }}</td>
+                                    <td>{{ $homework->times }}</td>
+                                    <td>                   
+                                        {{ $problem->classname }}：第{{ $problem->chapter }}章第{{ $problem->section }}节
+                                        <br>
+                                        选择题:{{ $problem->stem }}
+                                        <?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
+                                        <br>
+                                        <br>
+                                        <form method="post" action="/online-tests/public/problems">
+                                        {{ csrf_field() }}
+                                            答案:
+                                            <input name="selectradio" type="radio" class="cb" onclick="record({{ $problem->id }}, 'A')">
+                                            &nbsp;A.{{ explode(";", str_replace('*', '', $problem->answer), 4)[0] }}
+                                            <input name="selectradio" type="radio" class="cb" onclick="record({{ $problem->id }}, 'B')">
+                                            &nbsp;B.{{ explode(";", str_replace('*', '', $problem->answer), 4)[1] }}
+                                            <input name="selectradio" type="radio" class="cb" onclick="record({{ $problem->id }}, 'C')">
+                                            &nbsp;C.{{ explode(";", str_replace('*', '', $problem->answer), 4)[2] }}
+                                            <input name="selectradio" type="radio" class="cb" onclick="record({{ $problem->id }}, 'D')">
+                                            &nbsp;D.{{ explode(";", str_replace('*', '', $problem->answer), 4)[3] }}
+                                        </form>
+                                    </td>
+                                    <!-- 类型3为填空题 -->
+                                    @elseif($problem->type==3)
+                                    <td>{{ $problem->id }}</td>
+                                    <td>{{ $homework->times }}</td>
+                                    <td>                   
+                                        {{ $problem->classname }}：第{{ $problem->chapter }}章第{{ $problem->section }}节
+                                        <br>
+                                        填空题:{{ $problem->stem }}
+                                        <?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
+                                        <br>
+                                        <br>
+                                        <form method="post" action="/online-tests/public/problems">
+                                        {{ csrf_field() }}
+                                            答案:
+                                            <div class="input-group" style="width:280px;">
+                                                <input type="text" class="form-control" id="answer_text" value=" " placeholder="答案请用分号分隔，例：xx;xx;" name="answer_text"  onmouseout="record({{ $problem->id }}, this.value)">
+                                            </div>
+                                        </form>
+                                    </td>
+                                    <!-- 类型4 为简答题 -->
+                                    @else
+                                    <td>{{ $problem->id }}</td>
+                                    <td>{{ $homework->times }}</td>
+                                    <td>                   
+                                        {{ $problem->classname }}：第{{ $problem->chapter }}章第{{ $problem->section }}节
+                                        <br>
+                                        简答题:{{ $problem->stem }}
+                                        <?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
+                                        <br>
+                                        <br>
+                                        <form method="post" action="/online-tests/public/problems">
+                                        {{ csrf_field() }}
+                                        答案:                  
+                                        <div class="input-group col-md-10">
+                                            <textarea class="form-control" rows="3" type="text" id="answer_textarea" name="answer_textarea" onmouseout="record({{ $problem->id }}, this.value)"></textarea>
                                         </div>
-                                        <div style="padding-left:15px; padding-top:5px" onclick="record({{ $problem->id }}, 'F')">
-                                            <input type="radio" name="radio1" id="false">
-                                            <label style="padding-left:8px">
-                                                F
-                                            </label>
-                                        </div>
-                                    </div>
-                                </form>
-                            </td>
-                            <!-- 类型2为选择题 -->
-                            @elseif($problem->type==2)
-                            <td>{{ $problem->id }}</td>
-                            <td>                   
-                                {{ $problem->classname }}：第{{ $problem->chapter }}章第{{ $problem->section }}节
-                                <br>
-                                选择题:{{ $problem->stem }}
-                                <?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
-                                <br>
-                                <br>
-                                <form method="post" action="/online-tests/public/problems">
-                                {{ csrf_field() }}
-                                    答案:
-                                    <input name="selectradio" type="radio" class="cb" onclick="record({{ $problem->id }}, 'A')">
-                                    &nbsp;A.{{ explode(";", str_replace('*', '', $problem->answer), 4)[0] }}
-                                    <input name="selectradio" type="radio" class="cb" onclick="record({{ $problem->id }}, 'B')">
-                                    &nbsp;B.{{ explode(";", str_replace('*', '', $problem->answer), 4)[1] }}
-                                    <input name="selectradio" type="radio" class="cb" onclick="record({{ $problem->id }}, 'C')">
-                                    &nbsp;C.{{ explode(";", str_replace('*', '', $problem->answer), 4)[2] }}
-                                    <input name="selectradio" type="radio" class="cb" onclick="record({{ $problem->id }}, 'D')">
-                                    &nbsp;D.{{ explode(";", str_replace('*', '', $problem->answer), 4)[3] }}
-                                </form>
-                            </td>
-                            <!-- 类型3为填空题 -->
-                            @elseif($problem->type==3)
-                            <td>{{ $problem->id }}</td>
-                            <td>                   
-                                {{ $problem->classname }}：第{{ $problem->chapter }}章第{{ $problem->section }}节
-                                <br>
-                                填空题:{{ $problem->stem }}
-                                <?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
-                                <br>
-                                <br>
-                                <form method="post" action="/online-tests/public/problems">
-                                {{ csrf_field() }}
-                                    答案:
-                                    <div class="input-group" style="width:280px;">
-                                        <input type="text" class="form-control" id="answer_text" placeholder="答案请用分号分隔，例：xx;xx;" name="answer_text">
-                                    </div>
-                                </form>
-                            </td>
-                            <!-- 类型4 为简答题 -->
-                            @else
-                            <td>{{ $problem->id }}</td>
-                            <td>                   
-                                {{ $problem->classname }}：第{{ $problem->chapter }}章第{{ $problem->section }}节
-                                <br>
-                                简答题:{{ $problem->stem }}
-                                <?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
-                                <br>
-                                <br>
-                                <form method="post" action="/online-tests/public/problems">
-                                {{ csrf_field() }}
-                                答案:                  
-                                <div class="input-group col-md-10">
-                                    <textarea class="form-control" rows="3" type="text" id="answer_textarea" name="answer_textarea"></textarea>
-                                </div>
-                                </form>
-                            </td>
+                                        </form>
+                                    </td>
+                                    @endif
+                                    <td>
+                                        通过率：{{ $problemstate->passing_rate }} 
+                                        <br>
+                                        正确提交：{{ $problemstate->correct_submit }} 
+                                        <br>
+                                        总提交：{{ $problemstate->all_submit }}
+                                    </td>
+                                 </tr>
+                            </tbody>
                             @endif
-                            <td>
-                                通过率：{{ $problemstate->passing_rate }} 
-                                <br>
-                                正确提交：{{ $problemstate->correct_submit }} 
-                                <br>
-                                总提交：{{ $problemstate->all_submit }}
-                            </td>
-                         </tr>
-                    </tbody>
+                        @endforeach
                     @endif
                 @endforeach
-                @endif
-            @endforeach
             @endforeach
             </table>
             <!-- pagination -->
@@ -228,22 +231,24 @@ answered[1][0] = 'stem';
 for(var i=1; i<=50; i++){
     answered[1][i] = 'null';
 }
-var count = 1;
+
 /*
 记录选中的问题
 */
 function record(id, str){
-    var i=1
+
+    var i=1;
     for(; i<=50; i++){
         if(answered[0][i] == id){
             answered[1][i] = str;
             break;
         }
-        else{
-            answered[0][count] = id;
-            answered[1][count] = str;
-            count++;
+        else if(answered[0][i] == 999999){
+            answered[0][i] = id;
+            answered[1][i] = str;
             break;
+        }else {
+            continue;
         }
     }
     
@@ -270,6 +275,7 @@ function show(){
             }
         }
     }
+    //alert(str);
     $("#answer").val(str);
     var form = document.getElementById('answer_submit');
     console.log(form);
@@ -283,4 +289,9 @@ function show(){
     */
     alert("将把已勾选已作答的题目提交到已选中题目表单中");
 }
+
+function test(val){
+    alert(val);
+}
 </script>
+

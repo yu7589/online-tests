@@ -182,7 +182,22 @@ class SubmitController extends Controller
 
                                     break;
                                 case 3:
-                                    dd("wu");
+                                    $problemstate->all_submit = $problemstate->all_submit + 1;
+
+                                    $problemcomplete = new ProblemComplete;
+                                    $problemcomplete->completed = 1;
+                                    $problemcomplete->student_number = $submit->student_number;
+                                    $problemcomplete->problem_id = $submit->problem_id;
+                                    $problemcomplete->classname = $problem->classname;
+                                    $problemcomplete->chapter = $problem->chapter;
+                                    $problemcomplete->section = $problem->section;               
+                                    $problemcomplete->type = 3;
+                                    $problemcomplete->answer_save = $submit->student_answer;
+                                    $problemcomplete->rightness = 100;
+                                    $problemcomplete->save();
+
+                                    $problemstate->save();
+                                break;
                                     break;
                                 case 4:
                                     $problemstate->all_submit = $problemstate->all_submit + 1;
@@ -196,7 +211,7 @@ class SubmitController extends Controller
                                     $problemcomplete->section = $problem->section;               
                                     $problemcomplete->type = 4;
                                     $problemcomplete->answer_save = $submit->student_answer;
-                                    $problemcomplete->rightness = 1;
+                                    $problemcomplete->rightness = 100;
                                     $problemcomplete->save();
 
                                     $problemstate->save();
