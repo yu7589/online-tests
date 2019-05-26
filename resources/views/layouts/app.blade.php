@@ -59,7 +59,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                            @if(Auth::user()->type == 'student')
+                            @if(Auth::user()->identity == 'student')
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('problems') }}">学生题库</a>
                             </li>

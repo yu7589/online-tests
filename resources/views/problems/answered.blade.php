@@ -119,8 +119,12 @@
                                         <br>
                                         <br>
                                             提交答案：&nbsp;{{ $complete->answer_save }}
-                                        <br>
+                                            <br>
                                             正确答案：{{ $problem->answer }}
+                                        @if($complete->comment != null)
+                                            <br><br>
+                                            评语：{{ $complete->comment }}
+                                        @endif
                                         <br><br>
                                         解释：{{ $problem->explanation }}
                                     </td>
@@ -137,6 +141,10 @@
                                             提交答案：&nbsp;{{ $complete->answer_save }}
                                         <br>
                                             正确答案：{{ $problem->answer }}
+                                        @if($complete->comment != null)
+                                            <br><br>
+                                            评语：{{ $complete->comment }}
+                                        @endif
                                         <br><br>
                                         解释：{{ $problem->explanation }}
                                     </td>
