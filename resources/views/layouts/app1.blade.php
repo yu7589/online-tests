@@ -59,14 +59,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                            @if(Auth::user()->type == 'student')
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('problems') }}">学生题库</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('personalCenter') }}">个人中心</a>
-                            </li>
-                            @else
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('problemEdit') }}">题目编辑</a>
                             </li>
@@ -85,7 +80,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('homeworkCorrecting') }}">作业批改</a>
                             </li>
-                            @endif
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('personalCenter') }}">个人中心</a>
+                            </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
