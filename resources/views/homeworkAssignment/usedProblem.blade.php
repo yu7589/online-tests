@@ -8,7 +8,7 @@
                 <div class="col-md-8">
                     <span class="dropdown mr-2">
                         <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
-                            所有题目
+                            重点题目
                         </button>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="/online-tests/public/homeworkAssignment">所有题目</a>
