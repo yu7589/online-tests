@@ -25,7 +25,7 @@ class StudentInfoImportController extends Controller
     public function index()
     {
         //
-        return view('studentInfoImport\studentInfoImport');
+        return view('studentInfoImport/studentInfoImport');
     }
 
     /**
