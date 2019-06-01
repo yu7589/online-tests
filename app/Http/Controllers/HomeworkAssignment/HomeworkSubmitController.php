@@ -25,7 +25,7 @@ class HomeworkSubmitController extends Controller
         //
         $homeworksubmit = Homework::where([['times', '=', 0]])->paginate(10);
         $problems = Problem::all();
-        return view('homeworkAssignment\homeworkSubmit', ['homeworksubmit'=>$homeworksubmit, 'problems'=>$problems]);
+        return view('homeworkAssignment/homeworkSubmit', ['homeworksubmit'=>$homeworksubmit, 'problems'=>$problems]);
     }
 
     public function delete(Request $request)
@@ -33,7 +33,7 @@ class HomeworkSubmitController extends Controller
         //DB::table('problems')->where('id', '=', $request->problem_id)->delete();
         //dd($request->problem_id);
         $data = Homework::find($request->problem_id)->Delete();
-        return redirect('homeworkAssignment\homeworkSubmit')->with('status', '取消成功');
+        return redirect('homeworkAssignment/homeworkSubmit')->with('status', '取消成功');
     }
 
     public function show(Request $request)
@@ -55,7 +55,7 @@ class HomeworkSubmitController extends Controller
             }
         }
 
-        return redirect('homeworkAssignment\homeworkSubmit')->with('status', '布置作业成功');
+        return redirect('homeworkAssignment/homeworkSubmit')->with('status', '布置作业成功');
     }
 
     public function deleteAll(Request $request)
@@ -66,6 +66,6 @@ class HomeworkSubmitController extends Controller
         foreach($datas as $data){
             $data->delete();
         } 
-        return redirect('homeworkAssignment\homeworkSubmit')->with('status', '取消成功');
+        return redirect('homeworkAssignment/homeworkSubmit')->with('status', '取消成功');
     }
 }

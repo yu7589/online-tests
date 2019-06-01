@@ -32,12 +32,12 @@ class HomeworkCorrectingController extends Controller
 
         if($classname != null){
             $problemCompletes = ProblemComplete::where([['classname', '=', $classname], ['rightness', '=', 100]])->whereIn('type', $judg)->paginate(10);
-            return view('homeworkCorrecting\homeworkCorrecting', ['problems'=>$problems, 'problemCompletes'=>$problemCompletes, 'classname'=>$classname]);
+            return view('homeworkCorrecting/homeworkCorrecting', ['problems'=>$problems, 'problemCompletes'=>$problemCompletes, 'classname'=>$classname]);
         }
         else {
             //dd($problemComplete[0]->student_number);
             $problemCompletes = ProblemComplete::where([['rightness', '=', 100]])->whereIn('type', $judg)->paginate(10);
-            return view('homeworkCorrecting\homeworkCorrecting', ['problems'=>$problems, 'problemCompletes'=>$problemCompletes, 'classname'=>$classname]);
+            return view('homeworkCorrecting/homeworkCorrecting', ['problems'=>$problems, 'problemCompletes'=>$problemCompletes, 'classname'=>$classname]);
         }
     }
 

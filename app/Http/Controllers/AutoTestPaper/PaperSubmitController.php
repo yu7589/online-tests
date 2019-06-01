@@ -24,7 +24,7 @@ class PaperSubmitController extends Controller
         //跳转到组卷页面
         $problemsubmit = DB::table('paperproblems')->paginate(10);
         $problems = Problem::all();
-        return view('autoTestPaper\submit', ['problemsubmit'=>$problemsubmit, 'problems'=>$problems]);
+        return view('autoTestPaper/submit', ['problemsubmit'=>$problemsubmit, 'problems'=>$problems]);
     }
 
     /**
@@ -88,7 +88,7 @@ class PaperSubmitController extends Controller
         }
         
         $problems = Problem::whereIn('id', $id)->get();
-        return view('autoTestPaper\testPaper', ['problems'=>$problems, 'schoolname'=>$schoolname, 'startyear'=>$startyear, 'endyear'=>$endyear, 
+        return view('autoTestPaper/testPaper', ['problems'=>$problems, 'schoolname'=>$schoolname, 'startyear'=>$startyear, 'endyear'=>$endyear, 
         'term'=>$term, 'college'=>$college, 'course'=>$course, 'period'=>$period, 'testdate'=>$testdate, 'testtime'=>$testtime ]);
     }
 
@@ -96,7 +96,7 @@ class PaperSubmitController extends Controller
     {
         //DB::table('problems')->where('id', '=', $request->problem_id)->delete();
         $data = PaperProblem::find($request->problem_id)->Delete();
-        return redirect('autoTestPaper\submit')->with('status', '取消成功');
+        return redirect('autoTestPaper/submit')->with('status', '取消成功');
     }
 
     public function deleteAll(Request $request)
@@ -106,6 +106,6 @@ class PaperSubmitController extends Controller
         foreach($datas as $data){
             $data->delete();
         } 
-        return redirect('autoTestPaper\submit')->with('status', '取消成功');
+        return redirect('autoTestPaper/submit')->with('status', '取消成功');
     }
 }

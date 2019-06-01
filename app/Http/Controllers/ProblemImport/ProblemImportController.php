@@ -23,7 +23,7 @@ class ProblemImportController extends Controller
     public function index()
     {
         //
-        return view('problemImport\problemImport');
+        return view('problemImport/problemImport');
     }
 
     /**
