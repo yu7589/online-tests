@@ -15,16 +15,12 @@ class CreateProblemsTable extends Migration
     {
         Schema::create('problems', function (Blueprint $table) {
             $table->bigIncrements('id')->unique();
-            $table->string('classname');
             $table->string('chapter');
             $table->string('section');
             $table->string('stem');
             $table->string('picture_url');
-            $table->string('picture_ur2');
             $table->string('answer');
-            $table->string('explanation');
             $table->string('type');
-            $table->string('used');
             $table->float('difficulty', 4, 2);
             $table->string('author');
             $table->timestamps();

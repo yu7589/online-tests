@@ -20,13 +20,6 @@ class CreateProblemcompleteTable extends Migration
             $table->foreign('student_number')->references('student_number')->on('users')->onDelete('cascade');
             $table->bigInteger('problem_id')->unsigned();
             $table->foreign('problem_id')->references('id')->on('problems')->onDelete('cascade');
-            $table->string('classname');
-            $table->string('chapter');
-            $table->string('section');
-            $table->string('type');
-            $table->string('answer_save');
-            $table->string('rightness');
-            $table->string('comment');
             $table->timestamps();
         });
     }
