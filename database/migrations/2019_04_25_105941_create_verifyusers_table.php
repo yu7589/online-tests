@@ -15,7 +15,9 @@ class CreateVerifyusersTable extends Migration
     {
         Schema::create('verifyusers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('student_number');
+            $table->string('number');
+            $table->string('name');
+            $table->string('class');
             $table->string('identity');
             $table->timestamps();
         });

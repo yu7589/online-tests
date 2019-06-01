@@ -18,8 +18,6 @@ class CreateProblemsubmitTable extends Migration
             $table->string('student_number');
             $table->foreign('student_number')->references('student_number')->on('users')->onDelete('cascade');
             $table->string('problem_id');
-            $table->string('chapter');
-            $table->string('section');
             $table->string('student_answer');
             $table->timestamps();
         });
