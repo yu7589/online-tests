@@ -75,11 +75,11 @@ class ProblemEditController extends Controller
      */
     public function update(Request $request)
     {
-        //dd($request->problem_id);
+        //dd($request->classnametext);
         $problem = Problem::find($request->problem_id);
-        $problem->classname = $request->classname;
-        $problem->chapter = $request->chapter;
-        $problem->section = $request->section;
+        $problem->classname = $request->classnametext;
+        $problem->chapter = $request->chaptertext;
+        $problem->section = $request->sectiontext;
         $problem->stem = $request->stem;
         $problem->answer = $request->answer;
         $problem->picture_url1 = $request->picture_url1;
