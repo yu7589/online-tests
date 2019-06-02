@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <form class="form-horizontal" method="POST" action="/online-tests/public/studentInfoImport/upload" enctype="multipart/form-data">
+                            <form class="form-horizontal" method="POST" action="{{ route('studentInfoImport.upload') }}" enctype="multipart/form-data">
                                 {{ csrf_field() }}           
                                 <label for="file">从.csv格式文件导入学生信息</label>
                                 <div class="col-sm-10">
@@ -26,7 +26,7 @@
                         </li>
                         <li class="list-group-item">
                             <label class="text-center">添加学生信息</label>
-                            <form class="form-horizontal" method="post" action="/online-tests/public/studentInfoImport/creating" autocomplete="off">
+                            <form class="form-horizontal" method="post" action="{{ route('studentInfoImport.creating') }}" autocomplete="off">
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <label for="firstname" class="col-sm-2 control-label">学号</label>
