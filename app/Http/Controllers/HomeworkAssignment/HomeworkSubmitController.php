@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 use App\PaperProblem;
 use App\User;
 use App\ProblemSubmit;
-use App\HomeWork;
+use App\Homework;
 
 class HomeworkSubmitController extends Controller
 {
