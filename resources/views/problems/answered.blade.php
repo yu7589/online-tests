@@ -11,8 +11,8 @@
                             已通过题目
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="/online-tests/public/problems">未通过题目</a>
-                            <a class="dropdown-item" href="/online-tests/public/problems/answered">已通过题目</a>
+                            <a class="dropdown-item" href="{{ route('problems') }}">未通过题目</a>
+                            <a class="dropdown-item" href="{{ route('problems.show') }}">已通过题目</a>
                         </div>
                     </span>
                     <!-- | 分隔符 -->
@@ -70,7 +70,7 @@
                                         <?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
                                         <br>
                                         <br>
-                                        <form method="post" action="/online-tests/public/problems">
+                                        <form method="post" action="{{ route('problems.store') }}">
                                         {{ csrf_field() }}
                                             选项:
                                             &nbsp;A.{{ explode(";", str_replace('*', '', $problem->answer), 4)[0] }}
@@ -172,7 +172,7 @@
         <div style="hight:1000px">
             <div class="card" style="width:240px;float:right;margin-left:40px;margin-top:45px;">
                 <div class="card-body">
-                <form method="get" action="/online-tests/public/problems/answered">
+                <form method="get" action="{{ route('problems.show') }}">
                     <div>
                         <label>每页显示
                             <input size="2" type="text" id="pageNumber" name="pageNumber" value="{{ $pageNumber }}" aria-controls="data-table"> 题目
@@ -198,7 +198,7 @@
     <div>
 </div>
 
-<form action="/online-tests/public/problems" method="post" id="answer_submit">
+<form action="{{ route('problems.store') }}" method="post" id="answer_submit">
     {{ csrf_field() }}
     <input type="hidden" value="" name="answer" id="answer">
 </form>

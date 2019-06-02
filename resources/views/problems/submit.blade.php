@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <!-- 题目 -->
-    <form method="post" action="/online-tests/public/submit/update">
+    <form method="post" action="{{ route('submit.update') }}">
     {{ csrf_field() }}
         <div class="row">
             <div class="col-md-10">
@@ -42,7 +42,7 @@
                                 <!-- delete model -->
                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete" onclick="deleteAnswer({{ $submit->id }})">取消提交</button>
                                 <!-- 模态框 -->
-                                <form method="post" action="/online-tests/public/submit/delete">
+                                <form method="post" action="{{ route('submit.delete') }}">
                                 {{ csrf_field() }}
                                 <div class="modal fade" id="delete">
                                     <div class="modal-dialog">

@@ -64,7 +64,7 @@ Route::get('/personalCenter', 'PersonalCenter\PersonalCenterController@index')->
 //作业布置界面路由
 Route::get('/homeworkAssignment', 'HomeworkAssignment\HomeworkAssignmentController@index')->name('homeworkAssignment');
 Route::post('/homeworkAssignment', 'HomeworkAssignment\HomeworkAssignmentController@store')->name('homeworkAssignment.store');
-Route::get('/homeworkAssignment/usedProblem', 'homeworkAssignment\HomeworkAssignmentController@show')->name('homeworkAssignment,show');
+Route::get('/homeworkAssignment/usedProblem', 'homeworkAssignment\HomeworkAssignmentController@show')->name('homeworkAssignment.show');
 
 
 //作业布置提交界面路由

@@ -12,7 +12,7 @@
                         自定义作业信息
                 </button>  
             </div>
-                <form method="post" action="http://localhost/online-tests/public/homeworkAssignment/homeworkInfo">
+                <form method="post" action="{{ route('homeworksubmit.show') }}">
                 {{ csrf_field() }}
                     <div class="modal fade" id="edit">
                         <div class="modal-dialog modal-lg">
@@ -58,7 +58,7 @@
             
             <div class="col-md-2">
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteAll">取消所有题目</button>
-                <form method="post" action="http://localhost/online-tests/public/homeworkAssignment/deleteAll">
+                <form method="post" action="{{ route('homeworksubmit.deleteAll') }}">
                 {{ csrf_field() }}
                 <div class="modal fade" id="deleteAll">
                     <div class="modal-dialog">
@@ -136,7 +136,7 @@
                                 <!-- delete model -->
                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete" onclick="deleteAnswer({{ $submit->id }})">取消本题</button>
                                 <!-- 模态框 -->
-                                <form method="post" action="/online-tests/public/homeworkAssignment/homeworkSubmit/delete">
+                                <form method="post" action="{{ route('homeworksubmit.delete') }}">
                                 {{ csrf_field() }}
                                 <div class="modal fade" id="delete">
                                     <div class="modal-dialog">

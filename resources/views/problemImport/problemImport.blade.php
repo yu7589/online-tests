@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <form class="form-horizontal" method="POST" action="/online-tests/public/problemImport/upload" enctype="multipart/form-data">
+                            <form class="form-horizontal" method="POST" action="{{ route('problemImport.upload') }}" enctype="multipart/form-data">
                                 {{ csrf_field() }}           
                                 <label for="file">从.md格式文件导入题库</label>
                                 <div class="form-group">
@@ -31,7 +31,7 @@
                             </form>
                         </li>
                         <li class="list-group-item">
-                            <form class="form-horizontal" method="POST" action="/online-tests/public/problemImport/upload" enctype="multipart/form-data">
+                            <form class="form-horizontal" method="POST" action="{{ route('problemImport.upload') }}" enctype="multipart/form-data">
                                 {{ csrf_field() }}           
                                 <label for="file">图片上传</label>
                                 <div class="col-sm-10">
@@ -47,7 +47,7 @@
                         </li>
                         <li class="list-group-item">
                             <label class="text-center">添加试题</label>
-                            <form class="form-horizontal" method="post" action="/online-tests/public/problemImport/creating" autocomplete="off">
+                            <form class="form-horizontal" method="post" action="{{ route('problemImport.creating') }}" autocomplete="off">
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <label for="firstname" class="col-sm-2 control-label">课程名</label>

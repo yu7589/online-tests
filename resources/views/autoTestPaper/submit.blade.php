@@ -12,7 +12,7 @@
                         自定义卷子信息并预览
                 </button>  
             </div>
-                <form method="post" action="http://localhost/online-tests/public/autoTestPaper/testPaper">
+                <form method="post" action="{{ route('papersubmit.show') }}">
                 {{ csrf_field() }}
                     <div class="modal fade" id="edit">
                         <div class="modal-dialog modal-lg">
@@ -92,7 +92,7 @@
             
             <div class="col-md-2">
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteAll">取消所有题目</button>
-                <form method="post" action="http://localhost/online-tests/public/autoTestPaper/deleteAll">
+                <form method="post" action="{{ route('papersubmit.deleteAll') }}">
                 {{ csrf_field() }}
                 <div class="modal fade" id="deleteAll">
                     <div class="modal-dialog">
@@ -170,7 +170,7 @@
                                 <!-- delete model -->
                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete" onclick="deleteAnswer({{ $submit->id }})">取消本题</button>
                                 <!-- 模态框 -->
-                                <form method="post" action="/online-tests/public/autoTestPaper/submit/delete">
+                                <form method="post" action="{{ route('papersubmit.delete') }}">
                                 {{ csrf_field() }}
                                 <div class="modal fade" id="delete">
                                     <div class="modal-dialog">

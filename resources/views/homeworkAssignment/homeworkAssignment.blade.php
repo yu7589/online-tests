@@ -11,8 +11,8 @@
                             所有题目
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="/online-tests/public/homeworkAssignment">所有题目</a>
-                            <a class="dropdown-item" href="/online-tests/public/homeworkAssignment/usedProblem">重点题目</a>
+                            <a class="dropdown-item" href="{{ route('homeworkAssignment') }}">所有题目</a>
+                            <a class="dropdown-item" href="{{ route('homeworkAssignment.show') }}">重点题目</a>
                         </div>
                     </span>
                     <!-- | 分隔符 -->
@@ -26,7 +26,7 @@
 
                 <div class="col-md-4">
                     <div class="input-group ">
-                        <a href="http://localhost/online-tests/public/homeworkAssignment/homeworkSubmit"><button type="button" class="btn btn-info">查看候选作业表单中题目</button></a>
+                        <a href="{{ route('homeworksubmit') }}"><button type="button" class="btn btn-info">查看候选作业表单中题目</button></a>
                     </div>
                 </div>
             </div>
@@ -137,7 +137,7 @@
         <div style="hight:1000px">
             <div class="card" style="width:240px;float:right;margin-left:40px;margin-top:45px;">
                 <div class="card-body">
-                <form method="get" action="/online-tests/public/homeworkAssignment">
+                <form method="get" action="{{ route('homeworkAssignment') }}">
                     <div>
                         <label>每页显示
                             <input size="2" type="text" id="pageNumber" name="pageNumber" value="{{ $pageNumber }}" aria-controls="data-table"> 题目
@@ -165,7 +165,7 @@
     <div>
 </div>
 
-<form action="/online-tests/public/homeworkAssignment" method="post" id="problem_submit">
+<form action="{{ route('homeworkAssignment.store') }}" method="post" id="problem_submit">
     {{ csrf_field() }}
     <input type="hidden" value="" name="homework" id="homework">
 </form>

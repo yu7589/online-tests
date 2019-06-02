@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <!-- 题目 -->
-    <form method="get" action="/online-tests/public/problemEdit">
+    <form method="get" action="{{ route('problemEdit') }}">
     {{ csrf_field() }}
         <div class="row">
             <div class="col-md-8">
@@ -110,7 +110,7 @@
                                 <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#edit" onclick="editValue({{ $problem->id }}, '{{ $problem->classname }}', {{ $problem->chapter }}, {{ $problem->section }},
                                 '{{ $problem->stem }}', '{{ $problem->answer }}', '{{ $problem->picture_url1 }}', '{{ $problem->picture_url2 }}', '{{ $problem->explanation }}', {{ $problem->type }}, {{ $problem->difficulty }},
                                 '{{ $problem->author }}')">编辑</button>
-                                <form method="post" action="/online-tests/public/problemEdit/update">
+                                <form method="post" action="{{ route('problemEdit.update') }}">
                                 {{ csrf_field() }}
                                 <div class="modal fade" id="edit">
                                     <div class="modal-dialog modal-lg">
@@ -205,7 +205,7 @@
                                 <!-- delete model -->
                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete" onclick="values({{ $problem->id }})">删除</button>
                                 <!-- 模态框 -->
-                                <form method="post" action="/online-tests/public/problemEdit/delete">
+                                <form method="post" action="{{ route('problemEdit.delete') }}">
                                 {{ csrf_field() }}
                                 <div class="modal fade" id="delete">
                                     <div class="modal-dialog">

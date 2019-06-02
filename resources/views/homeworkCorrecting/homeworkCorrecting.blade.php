@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <!-- 题目 -->
-    <form method="get" action="/online-tests/public/homeworkCorrecting">
+    <form method="get" action="{{ route('homeworkCorrecting') }}">
     {{ csrf_field() }}
         <div class="row">
             <div class="col-md-8">
@@ -88,7 +88,7 @@
     @endif
     <!-- pagination -->
     {!! $problemCompletes->appends(['classname'=>$classname])->links() !!}
-    <form action="/online-tests/public/homeworkCorrecting/store" method="post" id="submit">
+    <form action="{{ route('homeworkCorrecting.store') }}" method="post" id="submit">
         {{ csrf_field() }}
         <input type="hidden" value="" name="answer" id="answer">
     </form>

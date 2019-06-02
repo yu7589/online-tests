@@ -11,8 +11,8 @@
                             未通过题目
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="/online-tests/public/problems">未通过题目</a>
-                            <a class="dropdown-item" href="/online-tests/public/problems/answered">已通过题目</a>
+                            <a class="dropdown-item" href="{{ route('problems') }}">未通过题目</a>
+                            <a class="dropdown-item" href="{{ route('problems.show') }}">已通过题目</a>
                         </div>
                     </span>
                     <!-- | 分隔符 -->
@@ -26,13 +26,13 @@
                 
                 <div class="col-md-3">
                     <div class="input-group ">
-                        <a href="http://localhost/online-tests/public/problems/homework"><button type="button" class="btn btn-info">查看布置的作业</button></a>
+                        <a href="{{ route('problems.showHomework') }}"><button type="button" class="btn btn-info">查看布置的作业</button></a>
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="input-group ">
-                        <a href="http://localhost/online-tests/public/submit"><button type="button" class="btn btn-info">查看提交表单中题目</button></a>
+                        <a href="{{ route('submit') }}"><button type="button" class="btn btn-info">查看提交表单中题目</button></a>
                     </div>
                 </div>
             </div>
@@ -80,7 +80,7 @@
                                 <?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
                                 <br>
                                 <br>
-                                <form method="post" action="/online-tests/public/problems">
+                                <form method="post" action="{{ route('problems.store') }}">
                                 {{ csrf_field() }}
                                     答案:
                                     <div class="row">
@@ -109,7 +109,7 @@
                                 <?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
                                 <br>
                                 <br>
-                                <form method="post" action="/online-tests/public/problems">
+                                <form method="post" action="{{ route('problems.store') }}">
                                 {{ csrf_field() }}
                                     答案:
                                     <input name="selectradio" type="radio" class="cb" onclick="record({{ $problem->id }}, 'A')">
@@ -132,7 +132,7 @@
                                 <?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
                                 <br>
                                 <br>
-                                <form method="post" action="/online-tests/public/problems">
+                                <form method="post" action="{{ route('problems.store') }}">
                                 {{ csrf_field() }}
                                     答案:
                                     <div class="input-group" style="width:280px;">
@@ -150,7 +150,7 @@
                                 <?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
                                 <br>
                                 <br>
-                                <form method="post" action="/online-tests/public/problems">
+                                <form method="post" action="{{ route('problems.store') }}">
                                 {{ csrf_field() }}
                                 答案:                  
                                 <div class="input-group col-md-10">
@@ -180,7 +180,7 @@
         <div style="hight:1000px">
             <div class="card" style="width:240px;float:right;margin-left:40px;margin-top:45px;">
                 <div class="card-body">
-                <form method="get" action="/online-tests/public/problems">
+                <form method="get" action="{{ route('problems') }}">
                     <div>
                         <label>每页显示
                             <input size="2" type="text" id="pageNumber" name="pageNumber" value="{{ $pageNumber }}" aria-controls="data-table"> 题目
@@ -208,7 +208,7 @@
     <div>
 </div>
 
-<form action="/online-tests/public/problems" method="post" id="answer_submit">
+<form action="{{ route('problems.store') }}" method="post" id="answer_submit">
     {{ csrf_field() }}
     <input type="hidden" value="" name="answer" id="answer">
 </form>

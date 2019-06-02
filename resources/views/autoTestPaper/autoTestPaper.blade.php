@@ -11,8 +11,8 @@
                             所有题目
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="/online-tests/public/autoTestPaper">所有题目</a>
-                            <a class="dropdown-item" href="/online-tests/public/autoTestPaper/usedProblem">重点题目</a>
+                            <a class="dropdown-item" href="{{ route('autoTestPaper') }}">所有题目</a>
+                            <a class="dropdown-item" href="{{ route('autoTestPaper.show') }}">重点题目</a>
                         </div>
                     </span>
                     <!-- | 分隔符 -->
@@ -26,7 +26,7 @@
 
                 <div class="col-md-4">
                     <div class="input-group ">
-                        <a href="http://localhost/online-tests/public/autoTestPaper/submit"><button type="button" class="btn btn-info">查看候选表单中题目</button></a>
+                        <a href="{{ route('papersubmit') }}"><button type="button" class="btn btn-info">查看候选表单中题目</button></a>
                     </div>
                 </div>
             </div>
@@ -137,7 +137,7 @@
         <div style="hight:1000px">
             <div class="card" style="width:240px;float:right;margin-left:40px;margin-top:45px;">
                 <div class="card-body">
-                <form method="get" action="/online-tests/public/autoTestPaper">
+                <form method="get" action="{{ route('autoTestPaper') }}">
                     <div>
                         <label>每页显示
                             <input size="2" type="text" id="pageNumber" name="pageNumber" value="{{ $pageNumber }}" aria-controls="data-table"> 题目
@@ -165,7 +165,7 @@
     <div>
 </div>
 
-<form action="/online-tests/public/autoTestPaper" method="post" id="problem_submit">
+<form action="{{ route('autoTestPaper.store') }}" method="post" id="problem_submit">
     {{ csrf_field() }}
     <input type="hidden" value="" name="paper" id="paper">
 </form>
