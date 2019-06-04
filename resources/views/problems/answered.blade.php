@@ -121,7 +121,7 @@
                                             提交答案：&nbsp;{{ $complete->answer_save }}
                                             <br>
                                             正确答案：{{ $problem->answer }}
-                                        @if($complete->comment != 0)
+                                        @if($complete->comment != null)
                                             <br><br>
                                             评语：{{ $complete->comment }}
                                         @endif
@@ -141,7 +141,7 @@
                                             提交答案：&nbsp;{{ $complete->answer_save }}
                                         <br>
                                             正确答案：{{ $problem->answer }}
-                                        @if($complete->comment != 0)
+                                        @if($complete->comment != null)
                                             <br><br>
                                             评语：{{ $complete->comment }}
                                         @endif
