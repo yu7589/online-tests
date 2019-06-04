@@ -121,7 +121,10 @@
                                             提交答案：&nbsp;{{ $complete->answer_save }}
                                             <br>
                                             正确答案：{{ $problem->answer }}
-                                        @if($complete->comment != null)
+                                        @if($problem->picture_url2 != null)
+                                        <?php echo EndaEditor::MarkDecode($problem->picture_url2) ?>
+                                        @endif
+                                        @if($complete->comment != 0)
                                             <br><br>
                                             评语：{{ $complete->comment }}
                                         @endif
@@ -141,7 +144,10 @@
                                             提交答案：&nbsp;{{ $complete->answer_save }}
                                         <br>
                                             正确答案：{{ $problem->answer }}
-                                        @if($complete->comment != null)
+                                        @if($problem->picture_url2 != null)
+                                        <?php echo EndaEditor::MarkDecode($problem->picture_url2) ?>
+                                        @endif
+                                        @if($complete->comment != 0)
                                             <br><br>
                                             评语：{{ $complete->comment }}
                                         @endif
