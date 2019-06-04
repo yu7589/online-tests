@@ -14,7 +14,7 @@ use App\User;
 use App\ProblemSubmit;
 use App\Homework;
 
-class HomeWorkAssignmentController extends Controller
+class HomeworkAssignmentController extends Controller
 {
     public function __construct()
     {
