@@ -25,7 +25,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/problems', 'Problems\ProblemsController@index')->name('problems');
 Route::post('/problems', 'Problems\ProblemsController@store')->name('problems.store');
 Route::get('/answered','Problems\ProblemsController@show')->name('problems.show');
-Route::get('/problems/homework','Problems\ProblemsController@showHomework')->name('problems.showHomework');
+Route::get('/problems_homework','Problems\ProblemsController@showHomework')->name('problems.showHomework');
 
 //题目提交界面路由
 Route::get('/submit', 'Problems\SubmitController@index')->name('submit');
@@ -50,7 +50,7 @@ Route::post('problemEdit/update', 'ProblemEdit\ProblemEditController@update')->n
 //组卷界面路由
 Route::get('/autoTestPaper', 'AutoTestPaper\AutoTestPaperController@index')->name('autoTestPaper');
 Route::post('/autoTestPaper', 'AutoTestPaper\AutoTestPaperController@store')->name('autoTestPaper.store');
-Route::get('/autoTestPaper/usedProblem', 'AutoTestPaper\AutoTestPaperController@show')->name('autoTestPaper.show');
+Route::get('/autoTestPaper_usedProblem', 'AutoTestPaper\AutoTestPaperController@show')->name('autoTestPaper.show');
 
 //组卷提交界面路由
 Route::get('/autoTestPaper/submit', 'AutoTestPaper\PaperSubmitController@index')->name('papersubmit');
@@ -64,7 +64,7 @@ Route::get('/personalCenter', 'PersonalCenter\PersonalCenterController@index')->
 //作业布置界面路由
 Route::get('/homeworkAssignment', 'HomeworkAssignment\HomeworkAssignmentController@index')->name('homeworkAssignment');
 Route::post('/homeworkAssignment', 'HomeworkAssignment\HomeworkAssignmentController@store')->name('homeworkAssignment.store');
-Route::get('/homeworkAssignment/usedProblem', 'HomeworkAssignment\HomeworkAssignmentController@show')->name('homeworkAssignment.show');
+Route::get('/homeworkAssignment_usedProblem', 'HomeworkAssignment\HomeworkAssignmentController@show')->name('homeworkAssignment.show');
 
 
 //作业布置提交界面路由

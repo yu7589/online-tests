@@ -115,7 +115,7 @@ class HomeworkAssignmentController extends Controller
         if($request->record != 1){
             return redirect('homeworkAssignment')->with('status', '已提交');
         }else{
-            return redirect('homeworkAssignment/usedProblem')->with('status', '已提交');
+            return redirect('homeworkAssignment_usedProblem')->with('status', '已提交');
         }
     }
 
