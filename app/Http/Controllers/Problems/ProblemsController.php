@@ -126,7 +126,7 @@ class ProblemsController extends Controller
         return redirect('problems')->with('status', '已提交');
     }
 
-    public function showAnswered(Request $request)
+    public function show(Request $request)
     {
         //跳转到已做答题目题库页面
         $student_number = $request->user()->student_number;
