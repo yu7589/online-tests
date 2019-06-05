@@ -75,10 +75,10 @@ class StudentInfoImportController extends Controller
                     $data = explode("\n", $str);
                     //dd($data);
 
-                    for($i=1; $i<count($data)-1; $i++){
+                    for($i=0; $i<count($data)-1; $i++){
                         //dd(explode(",", $data[$i]));
                         $newstudent = explode(",", $data[$i]);
-
+                        //dd($newstudent);
                         $verifyuser = new VerifyUser;
                         //dd($newstudent[1]);
                         $verifyuser->number = $newstudent[0];

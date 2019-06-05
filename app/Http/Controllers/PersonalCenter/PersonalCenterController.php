@@ -69,16 +69,16 @@ class PersonalCenterController extends Controller
                         }
                     break;
                     case 3:
-                        $fillblankCount = $fillblankCount + 1;
                         if($complete->rightness>=0 && $complete->rightness<=5){
+                            $fillblankCount = $fillblankCount + 1;
                             $fillblankRight = $fillblankRight + $complete->rightness;
                         }else{
                             break;
                         }
                         break;
                     case 4:
-                        $shortanswerCount = $shortanswerCount + 1;
                         if($complete->rightness>=0 && $complete->rightness<=5){
+                            $shortanswerCount = $shortanswerCount + 1;
                             $shortanswerRight = $shortanswerRight + $complete->rightness;
                         }
                         else{

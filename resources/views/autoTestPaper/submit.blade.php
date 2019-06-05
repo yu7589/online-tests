@@ -28,53 +28,53 @@
                                         <div class="form-group">
                                             <label for="firstname" class="col-sm-2 control-label">学校名称</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="schoolname" name="schoolname" value='' placeholder="请输入学校名称" required="required">
+                                                <input type="text" class="form-control" id="schoolname" name="schoolname" value='西北工业大学' required="required">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="lastname" class="col-sm-2 control-label">起始学年</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="startyear" name="startyear" value='' placeholder="请输入起始学年" required="required">
+                                                <input type="text" class="form-control" id="startyear" name="startyear" value='2019' required="required">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="lastname" class="col-sm-2 control-label">结束学年</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="endyear" name="endyear" value='' placeholder="请输入结束学年" required="required">
+                                                <input type="text" class="form-control" id="endyear" name="endyear" value='2019' required="required">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="lastname" class="col-sm-2 control-label">学期</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="term" name="term" value='' placeholder="请输入学期" required="required">
+                                                <input type="text" class="form-control" id="term" name="term" value='1' required="required">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="lastname" class="col-sm-2 control-label">开课学院</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="college" name="college" value='' placeholder="请输入开课学院" required="required">
+                                                <input type="text" class="form-control" id="college" name="college" value='软件学院' required="required">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="lastname" class="col-sm-2 control-label">课程</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="course" name="course" value='' placeholder="请输入课程" required="required">
+                                                <input type="text" class="form-control" id="course" name="course" value='C++' required="required">
                                             </div>
                                         </div>                                        <div class="form-group">
                                             <label for="lastname" class="col-sm-2 control-label">学时</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="period" name="period" value='' placeholder="请输入学时" required="required">
+                                                <input type="text" class="form-control" id="period" name="period" value='64' required="required">
                                             </div>
                                         </div>                                        <div class="form-group">
                                             <label for="lastname" class="col-sm-2 control-label">考试日期</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="testdate" name="testdate" value='' placeholder="请输入考试日期" required="required">
+                                                <input type="text" class="form-control" id="testdate" name="testdate" value='2019-1-1' required="required">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="lastname" class="col-sm-2 control-label">考试时间</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="testtime" name="testtime" value='' placeholder="请输入考试时间" required="required">
+                                                <input type="text" class="form-control" id="testtime" name="testtime" value='2' required="required">
                                             </div>
                                         </div>
                                     </label>

@@ -97,10 +97,6 @@
                         </div>
                         <br>
                         <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
                         <div>
                         二、选择题<br>
                             @foreach ($problems as $problem)
@@ -117,10 +113,6 @@
                             @endforeach
                         </div>
                         <div>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
                         <br>
                         <br>
                         三、填空题<br>
