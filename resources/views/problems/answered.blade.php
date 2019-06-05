@@ -204,10 +204,6 @@
     <div>
 </div>
 
-<form action="{{ route('problems.store') }}" method="post" id="answer_submit">
-    {{ csrf_field() }}
-    <input type="hidden" value="" name="answer" id="answer">
-</form>
 @if(session('status'))
     <script>
         alert('{{session('status')}}');
@@ -217,71 +213,3 @@
 
 <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script>
 
-<script>    
-var answered = new Array(2);
-answered[0] = new Array();
-answered[0][0] = 'id';
-for(var i=1; i<=50; i++){
-    answered[0][i] = 999999;
-}
-answered[1] = new Array();
-answered[1][0] = 'stem';
-for(var i=1; i<=50; i++){
-    answered[1][i] = 'null';
-}
-var count = 1;
-/*
-记录选中的问题
-*/
-function record(id, str){
-    var i=1
-    for(; i<=50; i++){
-        if(answered[0][i] == id){
-            answered[1][i] = str;
-            break;
-        }
-        else{
-            answered[0][count] = id;
-            answered[1][count] = str;
-            count++;
-            break;
-        }
-    }
-    
-    console.log(answered);
-}
-
-function show(){
-    var str='';
-    obj = document.getElementsByName("answer_check");
-    check_val = [];
-    //记录选中的chekbox
-    for(k in obj){
-        if(obj[k].checked)
-            check_val.push(obj[k].value);
-    }
-    //交叉查询checkbox和之前记录的答案数组，如果id相同，则需要提交，将其id和答案一起记录在字符串中
-    for(k in check_val){
-        for(let i=1; i<=50; i++){
-            if(check_val[k] == answered[0][i]){
-                str = str + answered[0][i] + '_' + answered[1][i] + '_';
-            }
-            else{
-                continue;
-            }
-        }
-    }
-    $("#answer").val(str);
-    var form = document.getElementById('answer_submit');
-    console.log(form);
-    form.submit();
-    /*
-    $.post('http://localhost/online-tests/public/submit/answer',{'_token':'{{csrf_token()}}','answer': str},function(data){
-        //验证成功后实现跳转
-        console.log(str);
-        window.location.href = 'http://localhost/online-tests/public/submit';
-    }),
-    */
-    alert("将把已作答的题目提交到已选中题目表单中");
-}
-</script>
