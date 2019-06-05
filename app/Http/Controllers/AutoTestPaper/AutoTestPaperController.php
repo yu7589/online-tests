@@ -108,7 +108,7 @@ class AutoTestPaperController extends Controller
         if($request->record != 1){
             return redirect('autoTestPaper')->with('status', '已提交');
         }else{
-            return redirect('autoTestPaper_usedProblem')->with('status', '已提交');
+            return redirect('autoTestPaper/usedProblem')->with('status', '已提交');
         }
 
     }
