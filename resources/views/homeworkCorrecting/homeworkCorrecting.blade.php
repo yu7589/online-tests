@@ -41,12 +41,14 @@
                             {{ $problem->classname }}：第{{ $problem->chapter }}章第{{ $problem->section }}节
                             <br>
                             填空题:{{ $problem->stem }}
+                            <?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
                         <br>
                         <br>
                             学生答案: {{ $problemComplete->answer_save }}  
                         <br>
                         <br>
                             标准答案: {{ $problem->answer }}  
+                            <?php echo EndaEditor::MarkDecode($problem->picture_url2) ?>
                     </td>
                     @else
                     <td  name="Sid">{{ $problemComplete->student_number }}</td>
@@ -54,11 +56,13 @@
                             {{ $problem->classname }}：第{{ $problem->chapter }}章第{{ $problem->section }}节
                             <br>
                             简答题:{{ $problem->stem }}
+                            <?php echo EndaEditor::MarkDecode($problem->picture_url1) ?>
                         <br><br>
                             学生答案: {{ $problemComplete->answer_save }}  
                         <br>
                         <br>
                             标准答案: {{ $problem->answer }}  
+                            <?php echo EndaEditor::MarkDecode($problem->picture_url2) ?>
                     </td>
                     @endif
                     <td>
