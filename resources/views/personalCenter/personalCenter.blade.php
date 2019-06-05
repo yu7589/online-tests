@@ -35,24 +35,36 @@
                                 <td>{{ $state[3] }}</td>
                                 <td>{{ $state[4] }}</td>
                                 <td>{{ $state[5] }}</td>
-                            </tr>
-                            <tr>
-                                <td>填空题</td>
-                                <td>{{ $state[6] }}</td>
-                                <td>{{ $state[7] }}</td>
-                                <td>{{ $state[8] }}</td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td>判断题</td>
                                 <td>{{ $state[0] }}</td>
                                 <td>{{ $state[1] }}</td>
                                 <td>{{ $state[2] }}</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>题型</th>
+                                <th>答题数</th>
+                                <th>平均分</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>填空题</td>
+                                <td>{{ $state[6] }}</td>
+                                <td>{{ $state[7] }}</td>
                             </tr>
                             <tr>
                                 <td>简答题</td>
                                 <td>{{ $state[9] }}</td>
                                 <td>{{ $state[10] }}</td>
-                                <td>{{ $state[11] }}</td>
                             </tr>
                         </tbody>
                     </table>

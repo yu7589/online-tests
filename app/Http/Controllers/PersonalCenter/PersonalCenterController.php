@@ -70,22 +70,19 @@ class PersonalCenterController extends Controller
                     break;
                     case 3:
                         $fillblankCount = $fillblankCount + 1;
-                        if($complete->rightness == 1){
-                            $fillblankRight = $fillblankRight + 1;
-                            $fillblankRate = round($fillblankRight/$fillblankCount, 3);
-                        }
-                        else{
-                            $fillblankRate = round($fillblankRight/$fillblankCount, 3);
+                        if($complete->rightness>=0 && $complete->rightness<=5){
+                            $fillblankRight = $fillblankRight + $complete->rightness;
+                        }else{
+                            break;
                         }
                         break;
                     case 4:
                         $shortanswerCount = $shortanswerCount + 1;
-                        if($complete->rightness == 1){
-                            $shortanswerRight = $shortanswerRight + 1;
-                            $shortanswerRate = round($shortanswerRight/$shortanswerCount, 3);
+                        if($complete->rightness>=0 && $complete->rightness<=5){
+                            $shortanswerRight = $shortanswerRight + $complete->rightness;
                         }
                         else{
-                            $shortanswerRate = round($shortanswerRight/$shortanswerCount, 3);
+                            break;
                         }
                         break;
                 }
@@ -94,6 +91,8 @@ class PersonalCenterController extends Controller
                 continue;
             }
         }
+        $fillblankRight = round($fillblankRight/5, 3);
+        $shortanswerRight = round($shortanswerRight/5, 3);
         $state = array($judgmentCount, $judgmentRight, $judgmentRate, $selectCount, $selectRight, $selectRate, $fillblankCount, $fillblankRight, $fillblankRate, $shortanswerCount, $shortanswerRight, $shortanswerRate);
         return view('personalCenter/personalCenter', ['state'=>$state]);
     }
